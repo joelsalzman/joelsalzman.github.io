@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>Geographic Distribution of Voting Power</title>
+
+        <link rel="stylesheet" href="./theme.css" type="text/css">
+
+        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <head>
+
+    <body style="overflow: hidden;">
+
+         <!-- Header -->
+         <header class="header">
+
+            <!-- Return to homepage -->
+            <a class="button button-main" id="button-back" href="./index"> < </a>
+
+            <!-- Tooltip -->
+            <div class="button" id="tooltip"><span>Open Tooltip</span></div>
+
+            <!-- GitHub Repo -->
+            <a class="button button-main" href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
+
+        </header>
+
+        <!-- Map -->
+        <div id="gdvp-map"></div>
+        <script src="./gdvp.js"></script>
+
+    </body>
+
+</html>
