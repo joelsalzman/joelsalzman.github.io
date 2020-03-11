@@ -8,8 +8,17 @@ var divs         = [education, experience, skills, portfolio]
 var buttons      = divs.map(el => document.getElementById("button-" + el.id.toLowerCase()));
 
 // Ensure correct heights of divs
-window.onload    = divs.forEach(el => {el.style.height = el.offsetHeight + 100 + "px";});
-window.onresize  = divs.forEach(el => {el.style.height = el.offsetHeight + 100 + "px";});
+var vh = $(window).height();
+var toScale = [education, experience, skills, document.getElementById("small-gradient"), document.getElementById("small-gradient-2")]
+divHeight = function() {
+  toScale.forEach(el => {
+    el.style.height = el.offsetHeight + vh + "px";
+    document.getElementById(el.id + "-window").style.height = el.style.height;
+  });
+  portfolio.style.height = (0.9 * vh) + "px";
+}
+window.onload    = function() {divHeight();}
+window.onresize  = function() {divHeight();}
 
 // Store offsets from top
 var headerOffset = stickyHeader.offsetTop;
@@ -52,21 +61,38 @@ window.onscroll = function() {
 
 };
 
-// BSL for the modal popup
-const bodyScrollLock    = require('body-scroll-lock');
-const disableBodyScroll = bodyScrollLock.disableBodyScroll;
-const enableBodyScroll  = bodyScrollLock.enableBodyScroll;
+// Toggle site card text
+var siteCard  = document.getElementById("site-card");
+var cardText  = document.getElementById("card-text");
+var clicked   = false;
+siteCardChange = function(type) {
+  if (type == "click") {clicked = !clicked;}
+  if (type != "enter" && !clicked) {
+    $(cardText).fadeOut(500);
+    $(siteCard).css("background-color", "rgb(0, 0, 0, 0)");
+  } else {
+    window.timeout = setTimeout(function() {
+      $(cardText).fadeIn(500);
+      $(siteCard).css("background-color", "#88f9a9");
+    }, 500);
+    siteCard.onmouseout = function() {
+      clearTimeout(window.timeout);
+    };
+  }
+}
+siteCard.onmouseenter = function() {siteCardChange("enter");}
+siteCard.onmouseleave = function() {siteCardChange("leave");}
+siteCard.onclick      = function() {siteCardChange("click");}
 
 // Open the aquaculture maps
-var popup    = document.getElementById("map-popup");
-var barrier  = document.getElementById("barrier");
-var flipCard = document.getElementById("aquaculture");
-var mapImg   = document.getElementById("suitability");
-flipCard.onclick = function() {
+var popup   = document.getElementById("map-popup");
+var barrier = document.getElementById("barrier");
+var aqCard  = document.getElementById("aquaculture");
+var mapImg  = document.getElementById("suitability");
+aqCard.onclick = function() {
   popup.style.display = "block";
   let w = document.body.width;
   mapImg.style.maxHeight = window.innerHeight + "px";
-  disableBodyScroll(popup);
   barrier.style.width = w - document.body.width;
   barrier.style.display = "block";
 }
@@ -76,6 +102,5 @@ var box = document.getElementById("map-popup");
 box.onclick = function() {
   popup.style.display = "none";
   barrier.style.display = "none";
-  enableBodyScroll(popup);
   window.scrollTo(portfolio);
 }

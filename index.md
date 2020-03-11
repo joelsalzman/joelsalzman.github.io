@@ -17,7 +17,7 @@
 
     <!-- Initial view -->
     <div class="main-image">
-      <div id="main-gradient"></div>
+      <div class="gradient" id="main-gradient"></div>
       <div class="main-text">
         <h1 class="home" id="joel">Joel Salzman</h1>
         <h2 class="home">Geospatial Developer & Analyst</h2>
@@ -44,7 +44,8 @@
     <div class="content">
 
       <!-- Transition -->
-      <div class="small-gradient"></div>
+      <div class="gradient" id="small-gradient"></div>
+      <div class="window" id="small-gradient-window"></div>
         
       <!-- Informational sections -->
       <div class="info" id="Education">
@@ -106,6 +107,7 @@
               about leadership, self-reliance, and spiders (not to mention how to read a map).
           </span>
       </div>
+      <div class="window" id="Education-window"></div>
 
       <div class="info" id="Experience">
         <h2>SeaSketch</h2>
@@ -149,6 +151,7 @@
               optimize my algorithms.
           </span>
       </div>
+      <div class="window" id="Experience-window"></div>
       
       <div class="info" id="Skills">
         <table>
@@ -214,49 +217,31 @@
         </table>
 
       </div>
+      <div class="window" id="Skills-window"></div>
 
       <!-- Another transition -->
-      <div class="small-gradient-2"></div>
+      <div class="gradient" id="small-gradient-2"></div>
+      <div class="window" id="small-gradient-2-window"></div>
 
       <!-- Flip cards for portfolio items -->
       <div class="flex-container" id="Portfolio">
 
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="pics/gdvp_snapshot.png" alt="GDVP" class="flip-img">
-            </div>
-            <a href="./gdvp.html">
-              <div class="flip-card-back">
-                <h2>Geographic Distribution of Voting Power</h2>
-                <p>An interactive map of where votes have mattered most in US federal elections in the past twenty years.</p>
-              </div>
-            </a>
+        <a href="./gdvp.html">
+          <div class="card">
+            <img src="pics/gdvp_snapshot.png" alt="GDVP" class="card-img">
+          </div> 
+        </a>
+
+        <div class="card" id="site-card">
+          <div id="card-text">
+            <h2>This website</h2>
+            <p>I created this interactive CV almost entirely from scratch.</p>
+            <p>If you look closely, you might be able to tell that I thought of the template while hiking.</p>
           </div>
         </div> 
 
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front"></div>
-            <div class="flip-card-back">
-              <h2 class="flip-title">This website</h2>
-              <p>I wrote this website from scratch with HTML, CSS, and JavaScript (including node.js and JQuery).</p>
-              <p>I thought of the template while hiking. Can you tell?</p>
-            </div>
-          </div>
-        </div> 
-
-        <div class="flip-card">
-          <div class="flip-card-inner">
-            <div class="flip-card-front">
-              <img src="pics/kelp.jpg" alt="M. Pyrifera (pic from NOAA Photo Library)" class="flip-img">
-            </div>
-            <div class="flip-card-back" id="aquaculture">
-              <h2>Aquaculture Suitability</h2>
-              <p>Where to grow giant kelp off the coast of Southern California. Created for Primary Ocean Producers.</p>
-              <p>I made the basemap from a NOAA DEM and mocked up the final maps using ArcGIS Pro and GIMP.</p>
-            </div>
-          </div>
+        <div class="card" id="aquaculture">
+          <img src="pics/kelp.jpg" alt="M. Pyrifera (pic from NOAA Photo Library)" class="card-img">
         </div>
 
       </div>
@@ -270,7 +255,8 @@
 
   </body>
 
-  <!-- Load custom JavaScript -->
+  <!-- Load the JavaScript -->
   <script src="./index.js"></script>
+  <script src="node_modules/body-scroll-lock/lib/bodyScrollLock.js"></script>
 
 </html>

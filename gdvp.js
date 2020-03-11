@@ -1,33 +1,39 @@
-import Map from 'ol/Map';
-import GeoJSON from 'ol/format/GeoJSON';
-import VectorLayer from 'ol/layer/Vector';
-import View from 'ol/View';
-import OSM from 'ol/source/OSM';
-import TileLayer from 'ol/layer/Tile';
 
-const path = require('path');
-const fs = require('fs');
+var map = L.map('gdvp-map').setView([51.505, -0.09], 13);
+var gdvp = document.getElementById("gdvp-map");
 
 /* Get data */
-var gdvpData = new Array();
-fs.readdir(path.join(__dirname, 'final_by_state')).map(file => {
-  gdvpData.push(new ol.source.Vector({
-    url: file,
-    format: new GeoJSON()
-  }));
-  console.log(file);
-});
-console.log(gdvpData);
+var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+ 'District of Columbia', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas',
+  'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri', 
+  'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina', 
+  'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota', 
+  'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming']
 
-/* Create the map */
-new Map({
-  layers: [
-    new TileLayer({source: new OSM()}),
-    new VectorLayer({source: gdvpData})
-  ],
-  view: new View({
-    center: [0, 0],
-    zoom: 5
-  }),/*.fit(gdvpData),*/
-  target: 'gdvp-map'
+states.forEach(st => {
+  $.ajax({
+    dataType: "json",
+    url: "./final_by_state/" + st + ".js",
+    success: function(data) {
+      $(data.features).each(function(key, data) {
+        let feat = new L.geoJSON(data).addTo(map);
+      });
+    }
+  })
 });
+
+/* Toggle the tooltip */
+var tooltipButton = document.getElementById("button-tooltip");
+var btnText = document.getElementById("button-tooltip-text");
+var tooltip = document.getElementById("tooltip");
+tooltipButton.onclick = function() {
+  if (tooltip.style.width != "30%") {
+    gdvp.style.width = "70vw";
+    tooltip.style.width = "30%";
+    btnText.innerText = "Close Tooltip";
+  } else {
+    gdvp.style.width = "100vw";
+    tooltip.style.width = "0%";
+    btnText.innerText = "Open Tooltip";
+  }
+};
