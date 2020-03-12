@@ -256,11 +256,11 @@ a {
 .card {
     width: 20vw;
     height: 27vw;
-    background-color: "#88f9a9";
+    background-color: "rgb(0, 0, 0, 0)";
     color: black;
     border: 1.5vh solid black;
     contain: strict;
-    transition: 1s;
+    transition: .5s;
 }
 
 .card:hover {
@@ -273,10 +273,6 @@ a {
     width: 100%;
     padding-left: .5vw;
     contain: strict;
-}
-
-#site-card:hover {
-    transition-delay: .5s;
 }
 
 .card h2, p {

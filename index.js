@@ -12,8 +12,9 @@ var vh = $(window).height();
 var toScale = [education, experience, skills, document.getElementById("small-gradient"), document.getElementById("small-gradient-2")]
 divHeight = function() {
   toScale.forEach(el => {
-    el.style.height = el.offsetHeight + vh + "px";
-    document.getElementById(el.id + "-window").style.height = el.style.height;
+    let h = el.offsetHeight + vh + "px";
+    el.style.height = h;
+    document.getElementById(el.id + "-window").style.height = h;
   });
   portfolio.style.height = (0.9 * vh) + "px";
 }
@@ -84,7 +85,7 @@ siteCard.onmouseenter = function() {siteCardChange("enter");}
 siteCard.onmouseleave = function() {siteCardChange("leave");}
 siteCard.onclick      = function() {siteCardChange("click");}
 
-// Open the aquaculture maps
+// Open the aquaculture map
 var popup   = document.getElementById("map-popup");
 var barrier = document.getElementById("barrier");
 var aqCard  = document.getElementById("aquaculture");
@@ -97,7 +98,7 @@ aqCard.onclick = function() {
   barrier.style.display = "block";
 }
 
-// Close the aquaculture maps
+// Close the aquaculture map
 var box = document.getElementById("map-popup");
 box.onclick = function() {
   popup.style.display = "none";
