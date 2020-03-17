@@ -1,3 +1,5 @@
+import { prototype } from "parcel-bundler";
+
 // Useful variables
 var stickyHeader = document.getElementById("sticky-header");
 var education    = document.getElementById("Education");
@@ -24,11 +26,12 @@ var vw = $(window).width();
 divWidth = function() {
   if (vh > vw) {
     document.getElementsByClassName("window").forEach(el => {
-      el.style.width = "100%";
+      el.style.width = "0%";
     });
     divs.forEach(el => {
       el.style.width = "100%";
     });
+    portfolio.style.flexFlow = "column wrap";
   }
 }
 

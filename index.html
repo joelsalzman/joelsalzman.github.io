@@ -13,7 +13,7 @@
 
   <!---------------------------------------------------------------------------------->
 
-  <body>
+  <body style="background-color: #88f9a9;">
 
     <!-- Initial view -->
     <div class="main-image">

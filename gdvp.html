@@ -18,9 +18,9 @@
         <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <head>
+    </head>
 
-    <body style="overflow: hidden;">
+    <body style="overflow: hidden; background-color: white;">
 
          <!-- Header -->
          <header class="header">

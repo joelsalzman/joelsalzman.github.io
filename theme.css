@@ -14,7 +14,6 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    background-color: #88f9a9;
 }
 
 h1 {
@@ -267,7 +266,7 @@ a {
 
 /* Portfolio */
 
-.flex-container {
+#Portfolio {
     height: 0vh;
     width: 80vw;
     padding-right: 10vw;

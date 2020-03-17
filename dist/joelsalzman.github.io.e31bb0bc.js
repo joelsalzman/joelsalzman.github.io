@@ -117,12 +117,156 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"theme.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
+})({"index.js":[function(require,module,exports) {
+// Useful variables
+var stickyHeader = document.getElementById("sticky-header");
+var education = document.getElementById("Education");
+var experience = document.getElementById("Experience");
+var skills = document.getElementById("Skills");
+var portfolio = document.getElementById("Portfolio");
+var divs = [education, experience, skills, portfolio];
+var buttons = divs.map(function (el) {
+  return document.getElementById("button-" + el.id.toLowerCase());
+}); // Ensure correct heights of divs
 
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./pics\\topomap.jpg":[["topomap.a5b05332.jpg","pics/topomap.jpg"],"pics/topomap.jpg"],"./pics\\GitHub.png":[["GitHub.38aab82b.png","pics/GitHub.png"],"pics/GitHub.png"],"./pics\\GitHub_gray.png":[["GitHub_gray.7431ad8d.png","pics/GitHub_gray.png"],"pics/GitHub_gray.png"],"./pics\\LinkedIn.jpg":[["LinkedIn.582c3687.jpg","pics/LinkedIn.jpg"],"pics/LinkedIn.jpg"],"./pics\\LinkedIn_gray.jpg":[["LinkedIn_gray.06b64b2e.jpg","pics/LinkedIn_gray.jpg"],"pics/LinkedIn_gray.jpg"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+var vh = $(window).height();
+var toScale = [education, experience, skills, document.getElementById("small-gradient"), document.getElementById("small-gradient-2")];
+
+divHeight = function divHeight() {
+  toScale.forEach(function (el) {
+    var h = el.offsetHeight + vh + "px";
+    el.style.height = h;
+    document.getElementById(el.id + "-window").style.height = h;
+  });
+  portfolio.style.height = 0.9 * vh + "px";
+}; // Eliminate windows if on mobile
+
+
+var vw = $(window).width();
+
+divWidth = function divWidth() {
+  if (vh > vw) {
+    document.getElementsByClassName("window").forEach(function (el) {
+      el.style.width = "100%";
+    });
+    divs.forEach(function (el) {
+      el.style.width = "100%";
+    });
+  }
+};
+
+window.onload = function () {
+  divHeight();
+  divWidth();
+};
+
+window.onresize = function () {
+  divHeight();
+}; // Store offsets from top
+
+
+var headerOffset = stickyHeader.offsetTop;
+var divOffsets = divs.map(function (el) {
+  return el.offsetTop - 200;
+});
+
+setButtons = function setButtons(id) {
+  buttons.forEach(function (bt) {
+    if (bt.id == id) {
+      bt.classList.add("button-active");
+    } else if (!("button" in bt.classList)) {
+      bt.classList.remove("button-active");
+    }
+  });
+}; // What to do when scrolling
+
+
+window.onscroll = function () {
+  var off = window.pageYOffset; // Sticky header
+
+  if (off > headerOffset) {
+    stickyHeader.classList.add("sticky");
+  } else {
+    stickyHeader.classList.remove("sticky");
+  } // Buttons
+
+
+  if (off >= divOffsets[3]) {
+    setButtons("button-portfolio");
+  } else if (off >= divOffsets[2]) {
+    setButtons("button-skills");
+  } else if (off >= divOffsets[1]) {
+    setButtons("button-experience");
+  } else if (off >= divOffsets[0]) {
+    setButtons("button-education");
+  } else {
+    setButtons();
+  }
+}; // Toggle site card text
+
+
+var siteCard = document.getElementById("site-card");
+var cardText = document.getElementById("card-text");
+var clicked = false;
+
+siteCardChange = function siteCardChange(type) {
+  if (type == "click") {
+    clicked = !clicked;
+  }
+
+  if (type != "enter" && !clicked) {
+    $(cardText).fadeOut(500);
+    $(siteCard).css("background-color", "rgb(0, 0, 0, 0)");
+  } else {
+    window.timeout = setTimeout(function () {
+      $(cardText).fadeIn(500);
+      $(siteCard).css("background-color", "#88f9a9");
+    }, 500);
+
+    siteCard.onmouseout = function () {
+      clearTimeout(window.timeout);
+    };
+  }
+};
+
+siteCard.onmouseenter = function () {
+  siteCardChange("enter");
+};
+
+siteCard.onmouseleave = function () {
+  siteCardChange("leave");
+};
+
+siteCard.onclick = function () {
+  siteCardChange("click");
+}; // Open the aquaculture map
+
+
+var popup = document.getElementById("map-popup");
+var barrier = document.getElementById("barrier");
+var aqCard = document.getElementById("aquaculture");
+var mapImg = document.getElementById("suitability");
+
+aqCard.onclick = function () {
+  popup.style.display = "block";
+  var w = document.body.width;
+  mapImg.style.maxHeight = window.innerHeight + "px";
+  barrier.style.width = w - document.body.width;
+  barrier.style.display = "block";
+}; // Close the aquaculture map
+
+
+var box = document.getElementById("map-popup");
+
+box.onclick = function () {
+  popup.style.display = "none";
+  barrier.style.display = "none";
+  window.scrollTo(portfolio);
+}; // Notice
+
+
+window.alert("This website is still under construction. I have finals, okay? -Joel");
+},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -326,144 +470,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}],"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
-var getBundleURL = require('./bundle-url').getBundleURL;
-
-function loadBundlesLazy(bundles) {
-  if (!Array.isArray(bundles)) {
-    bundles = [bundles];
-  }
-
-  var id = bundles[bundles.length - 1];
-
-  try {
-    return Promise.resolve(require(id));
-  } catch (err) {
-    if (err.code === 'MODULE_NOT_FOUND') {
-      return new LazyPromise(function (resolve, reject) {
-        loadBundles(bundles.slice(0, -1)).then(function () {
-          return require(id);
-        }).then(resolve, reject);
-      });
-    }
-
-    throw err;
-  }
-}
-
-function loadBundles(bundles) {
-  return Promise.all(bundles.map(loadBundle));
-}
-
-var bundleLoaders = {};
-
-function registerBundleLoader(type, loader) {
-  bundleLoaders[type] = loader;
-}
-
-module.exports = exports = loadBundlesLazy;
-exports.load = loadBundles;
-exports.register = registerBundleLoader;
-var bundles = {};
-
-function loadBundle(bundle) {
-  var id;
-
-  if (Array.isArray(bundle)) {
-    id = bundle[1];
-    bundle = bundle[0];
-  }
-
-  if (bundles[bundle]) {
-    return bundles[bundle];
-  }
-
-  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
-  var bundleLoader = bundleLoaders[type];
-
-  if (bundleLoader) {
-    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
-      if (resolved) {
-        module.bundle.register(id, resolved);
-      }
-
-      return resolved;
-    }).catch(function (e) {
-      delete bundles[bundle];
-      throw e;
-    });
-  }
-}
-
-function LazyPromise(executor) {
-  this.executor = executor;
-  this.promise = null;
-}
-
-LazyPromise.prototype.then = function (onSuccess, onError) {
-  if (this.promise === null) this.promise = new Promise(this.executor);
-  return this.promise.then(onSuccess, onError);
-};
-
-LazyPromise.prototype.catch = function (onError) {
-  if (this.promise === null) this.promise = new Promise(this.executor);
-  return this.promise.catch(onError);
-};
-},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js":[function(require,module,exports) {
-module.exports = function loadJSBundle(bundle) {
-  return new Promise(function (resolve, reject) {
-    var script = document.createElement('script');
-    script.async = true;
-    script.type = 'text/javascript';
-    script.charset = 'utf-8';
-    script.src = bundle;
-
-    script.onerror = function (e) {
-      script.onerror = script.onload = null;
-      reject(e);
-    };
-
-    script.onload = function () {
-      script.onerror = script.onload = null;
-      resolve();
-    };
-
-    document.getElementsByTagName('head')[0].appendChild(script);
-  });
-};
-},{}],0:[function(require,module,exports) {
-var b=require("node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("js",require("node_modules/parcel-bundler/src/builtins/loaders/browser/js-loader.js"));b.load([]);
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
-//# sourceMappingURL=/theme.f91554c8.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+//# sourceMappingURL=/joelsalzman.github.io.e31bb0bc.js.map

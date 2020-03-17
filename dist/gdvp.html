@@ -7,7 +7,11 @@
 
         <link rel="stylesheet" href="/theme.f91554c8.css" type="text/css">
 
-        <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.2.1/build/ol.js"></script>
+        <!-- Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+        <!-- JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <head>
@@ -17,19 +21,41 @@
          <!-- Header -->
          <header class="header">
 
-            <!-- Return to homepage -->
-            <a class="button button-main" id="button-back" href="./index"> < </a>
+            <!-- Buttons -->
+            <a class="button button-main gdvp-header" id="button-back" href="./index"> Home </a>
+            <a class="button button-main gdvp-header" id="gdvp-explanation" href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
 
-            <!-- Tooltip -->
-            <div class="button" id="tooltip"><span>Open Tooltip</span></div>
+            <!-- Info -->
+            <div id="gdvp-info"><h3>Individual Voting Power</h3></div>
 
-            <!-- GitHub Repo -->
-            <a class="button button-main" href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
+            <!-- Tooltip Open/Close -->
+            <a class="button button-main gdvp-header" id="button-tooltip">Toggle Tooltip</a>
 
         </header>
 
-        <!-- Map -->
-        <div id="gdvp-map"></div>
+        <!-- Body -->
+        <div class="body-container">
+
+            <!-- Map -->
+            <div id="gdvp-map"></div>
+
+            <!-- Tooltip -->
+            <div id="tooltip">
+                <div class="option gdvp-tooltip" id="display-field">
+                    Display Single Field
+                </div>
+                <div class="option gdvp-tooltip" id="display-state">
+                    Individual State
+                </div>
+                <div class="option gdvp-tooltip" id="display-election">
+                    Display Election (type, year)
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Load the JavaScript -->
         <script src="/gdvp.b4be5b50.js"></script>
 
     </body>
