@@ -25,14 +25,16 @@
          <!-- Header -->
          <header class="header">
 
-            <!-- Return to homepage -->
-            <a class="button button-main" id="button-back" href="./index"> < </a>
+            <!-- Buttons -->
+            <a class="button button-main gdvp-header" id="button-back" href="./index"> Home </a>
+            <a class="button button-main gdvp-header" id="gdvp-explanation"
+                href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
+
+            <!-- Info -->
+            <div id="gdvp-info"><h3>Individual Voting Power</h3></div>
 
             <!-- Tooltip Open/Close -->
-            <div class="button" id="button-tooltip"><span id="button-tooltip-text">Open Tooltip</span></div>
-
-            <!-- GitHub Repo -->
-            <a class="button button-main" href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
+            <a class="button button-main gdvp-header" id="button-tooltip">Toggle Tooltip</a>
 
         </header>
 
@@ -44,15 +46,16 @@
 
             <!-- Tooltip -->
             <div id="tooltip">
-                <div class="option">
-                    Individual State
-                </div>
-                <div class="option">
+                <div class="option gdvp-tooltip" id="display-field">
                     Display Single Field
                 </div>
-                <div class="option">
+                <div class="option gdvp-tooltip" id="display-state">
+                    Individual State
+                </div>
+                <div class="option gdvp-tooltip" id="display-election">
                     Display Election (type, year)
                 </div>
+
             </div>
 
         </div>

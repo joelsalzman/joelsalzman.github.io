@@ -112,6 +112,16 @@ a {
     background-attachment: fixed;
     overflow-x: hidden;
 }
+
+.content a {
+    color: black;
+    font-weight: bold;
+    transition-duration: 0.2s;
+}
+
+.content a:hover {
+    color: #584800;
+}
   
 .sticky + .content {
     margin-top: 10vh;
@@ -168,6 +178,11 @@ a {
 #button-hire {
     float: right;
     margin-right: 1.5vw;
+    padding-bottom: 1vh;
+}
+
+.button-bordered {
+    height: 6vh;
     padding: 2vh 1.5vw;
     border: .5vh solid black;
     border-radius: 1vh;
@@ -219,10 +234,21 @@ a {
 }
 
 .skillImg img {
-    height: 10vh;
     margin-top: 1vh;
     margin-left: 3.2vw;
     margin-bottom: 3vh;
+}
+
+.skill_1 img {
+    height: 12vh;
+}
+
+.skill_2 img {  
+    height: 10vh;
+}
+
+.skill_3 img {
+    height: 8vh;
 }
 
 .skillImg:hover {
@@ -281,6 +307,10 @@ a {
     text-align: center;
 }
 
+.card {
+    font-size: 2.7vh;
+}
+
 .card-img {
     width: 20vw;
     height: 27vw;
@@ -333,19 +363,29 @@ a {
 
 #button-back {
     width: 5vw;
+    margin-left: 1.5vw;
+    padding-right: 2vw;
     float: left;
+    text-align: center;
+}
+
+#gdvp-explanation {
+    float: left;
+    margin-right: 1.5vw;
+}
+
+#gdvp-info {
+    display: inline-block;
+    text-align: center;
+    height: 9vh;
+    border: .5vh solid black;
+    border-radius: 1vh;
 }
 
 #button-tooltip {
-    height: 10vh;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
     float: right;
-}
-
-#button-tooltip-text {
-    float: right;
-    font-size: 4vh;
-    margin-top: 2.5vh;
-    margin-right: 2vw;
 }
 
 .body-container {
@@ -358,6 +398,25 @@ a {
     height: 90vh;
     overflow: hidden;
     float: left;
+}
+
+#legend-container {
+    background-color: white;
+    opacity: 0.7;
+    height: 30vh;
+    width: 20vh;
+}
+
+#legend-bar {
+    height: 90%;
+    width: 50%;
+    float: left;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+#legend-key {
+    font-size: 2.5vh;
 }
 
 #tooltip {

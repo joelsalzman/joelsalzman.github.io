@@ -18,8 +18,25 @@ divHeight = function() {
   });
   portfolio.style.height = (0.9 * vh) + "px";
 }
-window.onload    = function() {divHeight();}
-window.onresize  = function() {divHeight();}
+
+// Eliminate windows if on mobile
+var vw = $(window).width();
+divWidth = function() {
+  if (vh > vw) {
+    document.getElementsByClassName("window").forEach(el => {
+      el.style.width = "100%";
+    });
+    divs.forEach(el => {
+      el.style.width = "100%";
+    });
+  }
+}
+
+window.onload = function() {
+  divHeight();
+  divWidth();
+}
+window.onresize = function() {divHeight();}
 
 // Store offsets from top
 var headerOffset = stickyHeader.offsetTop;
@@ -105,3 +122,6 @@ box.onclick = function() {
   barrier.style.display = "none";
   window.scrollTo(portfolio);
 }
+
+// Notice
+window.alert("This website is still under construction. I have finals, okay? -Joel");

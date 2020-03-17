@@ -1,7 +1,5 @@
-import { strict } from "assert";
-
 /* Set up the map */
-var map = L.map('gdvp-map').setView([42, -100], 4);
+var map = L.map('gdvp-map').setView([38, -100], 5);
 var gdvp = document.getElementById("gdvp-map");
 
 /* Symbologies */
@@ -28,14 +26,76 @@ function colorize(val, scheme) {
   return "rgb(" + String(r) + ", " + String(g) + ", " + String(b) + ")";
 }
 
+/* Fields */
+var fieldDict = {
+  "rawUtility": {
+    name: "Individual Voting Power",
+    display: function(val) { return String(val).slice(0, 6); }
+  },
+  "decUtility": {
+    name: "Proportional Voting Power",
+    display: function(val) { return String(val).slice(0, 6); }
+  },
+  "changes": {
+    name: "Number of Times Redistricted",
+    display: function(val) { return val; }
+  }
+}
+var field = "rawUtility";
+
+/* Map information */
+var info = document.getElementById("gdvp-info");
+var headerButtons = document.getElementsByClassName("gdvp-header");
+sizeInfoDiv = function() {
+  var w = $(window).width() * 0.935;
+  for (var i = 0; i < headerButtons.length; i++) { 
+    w -= headerButtons[i].offsetWidth; 
+  }
+  info.style.width = w + "px";
+}
+window.onload   = function() {sizeInfoDiv();}
+window.onresize = function() {sizeInfoDiv();}
+info.update = function(properties) {
+  info.innerHTML = "<h3>" + fieldDict[field].name + (properties ? ": " + fieldDict[field].display(properties[field]) : "") + "</h3>";
+  if (document.getElementsByClassName("header")[0].offsetHeight > $(window).height() / 10) {
+    sizeInfoDiv();}
+}
+
+/* Interactions */
 function styleLayers(feat) {
   return {
-    fillColor: colorize(feat.properties.rawUtility, "black-ryg"),
+    fillColor: colorize(feat.properties[field], "black-ryg"),
     weight: 1,
     opacity: 1,
     color: 'black',
-    fillOpacity: 0.9
+    fillOpacity: 0.75
   };
+}
+
+function onEachFeature(feat, layer) {
+  layer.on({
+    mouseover: function(e) {
+      var layer = e.target;
+      layer.setStyle({
+        weight: 2.5,
+        fillOpacity: 1
+      });
+      info.update(layer.feature.properties);
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
+    },
+    mouseout: function(e) {
+      e.target.setStyle({
+        weight: 1,
+        fillOpacity: 0.75
+      });
+      info.update();
+    },
+    click: function(e) {
+      map.fitBounds(e.target.getBounds());
+    }
+  })
 }
 
 /* Add the basemap */
@@ -55,36 +115,36 @@ var lyrs = {'Alabama':'', 'Alaska':'', 'Arizona':'', 'Arkansas':'', 'California'
 for (let st in lyrs) {
   $.getJSON("https://raw.githubusercontent.com/joelsalzman/joelsalzman.github.io/master/final_by_state/" + st + ".js", function(data) {
     let feat = new L.geoJSON(data, {
-      style: styleLayers
+      style: styleLayers,
+      onEachFeature: onEachFeature
     }).addTo(map);
     lyrs[st] = feat;
   })
 };
 
-/* Interactions */
-function onEachFeature(feature, layer) {
-  layer.on({
-    mouseover: function (e) {
-      e.target.setStyle({
-        weight: 2.5,
-        fillOpacity: 1
-      });
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-      }
-    },
-    mouseout: function (e) {
-      layer.resetStyle(e.target);
-    }
-  })
-}
+/* Legend */
+var legend = L.control({position: "bottomleft"});
 
-for (let st in lyrs) {
-  let newFeature = L.geoJSON(lyrs[st], {
-    style: styleLayers,
-    onEachFeature: onEachFeature
-  }).addTo(map);
-};
+setLegend = function(scheme) {
+  var bar = document.getElementById("legend-bar");
+  var key = document.getElementById("legend-container");
+
+  // Set the scheme and key
+  if (scheme == "black-ryg") {
+    bar.style.backgroundColor = 
+    "linear-gradient(to bottom, rgb(0, 0, 0), rgb(0, 0, 0), rgb(0, 0, 0), rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0));"
+    key.innerHTML = "1<br>0";
+  }
+  else {}
+  
+}
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend-container");
+  div.innerHTML = '<div id="legend-bar"></div> <div id="legend-key"></div>';
+  return div;
+}
+legend.addTo(map);
+setLegend(document.getElementById("black-ryg"));
 
 /* Toggle the tooltip */
 var tooltipButton = document.getElementById("button-tooltip");
@@ -94,12 +154,20 @@ tooltipButton.onclick = function() {
   if (tooltip.style.width != "30%") {
     gdvp.style.width = "70vw";
     tooltip.style.width = "30%";
-    btnText.innerText = "Close Tooltip";
   } else {
     gdvp.style.width = "100vw";
     tooltip.style.width = "0%";
-    btnText.innerText = "Open Tooltip";
   }
 };
+tooltipButton.onmouseenter = function() {
+  tooltipButton.style.backgroundColor = "#DBDBDB";
+}
+tooltipButton.onmouseleave = function() {
+  tooltipButton.style.backgroundColor = "#FFFFFF";
+}
 
 /* The tooltip */
+var displayField = document.getElementById("display-field");
+var displayState = document.getElementById("display-state");
+var displayElect = document.getElementById("display-election");
+

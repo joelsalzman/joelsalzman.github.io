@@ -35,7 +35,7 @@
       <a class="button button-main" id="button-portfolio" href="#Portfolio">Portfolio</a>
       
       <!-- Links -->
-      <a class="button" id="button-hire" href="mailto:joelkevlessalzman@gmail.com">CONTACT</a>
+      <a class="button button-bordered" id="button-hire" href="mailto:joelkevlessalzman@gmail.com">CONTACT</a>
       <a class="button-social" id="button-GitHub" href="http://github.com/joelsalzman" style="margin-right: 1.5vw;"></a>
       <a class="button-social" id="button-LinkedIn" href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
     </header>
@@ -64,23 +64,20 @@
           <span>
             My degree in "Where?"
             </br></br>
-            I've pursued two research topics. The first is voting. 
+            I have pursued two topics of research. The first is voting. 
               I performed an analysis of where votes matter most, which you can see <a href="#Portfolio">below</a>.
-              I'm also working on an algorithm to identify precincts with diluted voting power
-                to use as evidence of gerrymandering. That paper will be out before I graduate.
-              The second is indoor cartography. Our lab is building 3D models of indoor spaces from LIDAR scans
-                using deep learning and we're working on programatically generating millimeter-accurate models.
+              I'm also developing an algorithm to identify precincts with inordinately diluted voting power
+                for use as potential evidence of gerrymandering.
+              The second is indoor cartography. Our lab built 3D models of indoor spaces from LIDAR scans using deep 
+              learning classification techniques and we're working on programatically generating millimeter-accurate models.
           </span>
         
         <h3>Philosophy (Ethics and Public Policy)</h3>
           <span> 
             My degree in "Why?"
             </br></br>
-            My interests are primarily in political ethics and metaphysics.
-            I spent four years asking questions that spanned from 
-              "What is the least problematic normative theory that can be applied to the American criminal 
-              justice system given the pervasiveness of societal inequities, the need to satisfactorily 
-              balance incommensurate values, and the desire to maximize social good?" to "What is?"
+            My interests primarily regard political ethics and metaphysics.
+            My coursework has related to GIS through my studies of spatial ontology, logic, and data ethics.
           </span>
 
         <h2>Abroad</h2>
@@ -93,8 +90,8 @@
           </br>
             During the Fall of 2019, I studied abroad at King's College London, where I took advanced modules in 
               computer science and philosophy. It was an interesting time to be there since my stay coincided 
-              with a Brexit deadline that was blown past and an election that resulted in the following Brexit 
-              deadline being met. I gained a real appreciation for tea and crumpets.
+              with a Brexit deadline (though I fortunately left before covid-19 struck). 
+              I gained a real appreciation for tea and crumpets as well.
           </span>
 
         <h2>Troop 52</h2>
@@ -102,9 +99,9 @@
             Boy Scouts was a big part of my life growing up. I was an avid camper and climber as a
               teenager. My freshman year of high school, I was the Patrol Leader of the Flying Bagels and
               was awarded Scout of the Year by my troop. My Eagle Scout project was to rebuild a staircase 
-              that was falling apart on a trail near my house, which we miraculously did in just one weekend. I
-              include Boy Scouts in the Education section because it's where I learned a lot of what I know 
-              about leadership, self-reliance, and spiders (not to mention how to read a map).
+              that was falling apart on a trail near my house, which we miraculously finished in just one 
+              weekend. I include Boy Scouts in the Education section because it's where I learned a lot of 
+              what I know about leadership, self-reliance, and spiders (not to mention how to read a map).
           </span>
       </div>
       <div class="window" id="Education-window"></div>
@@ -112,13 +109,14 @@
       <div class="info" id="Experience">
         <h2>SeaSketch</h2>
           <span>
-            I just started at SeaSketch so I can't really say much about it.
+            <a href="https://www.seasketch.org/about/">SeaSketch</a> is a 
           </span>
         
         <h2>Apex Clean Energy</h2>
           <span>
-            Apex Clean Energy is a wind and solar developer based out of Charlottesville, Virginia. My role 
-              at Apex was to determine where to site new utility-scale facilities.
+            <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a> is a wind and solar developer based 
+              out of Charlottesville, Virginia. My role at Apex was to determine where to site new utility-scale 
+              facilities.
             </br></br>
             As an intern in the New Markets division, I dove deep into potential markets, found relevant data, 
               and presented my findings to members of the New Markets, GIS, and Business Development teams.
@@ -137,9 +135,9 @@
         
         <h2>Primary Ocean Producers</h2>
           <span>
-            Primary Ocean Producers is an aquaculture startup. They were awarded a contract by the ARPA-E 
-              MARINER program to determine the most suitable regions in federal and state waters to grow giant 
-              kelp (<i>Macrocystis pyrifera</i>). 
+            <a href="http://www.primaryocean.com/">Primary Ocean Producers</a> is an aquaculture startup. 
+            They were awarded a contract by the ARPA-E MARINER program to determine the most suitable regions 
+              in federal and state waters to grow giant kelp (<i>Macrocystis pyrifera</i>). 
             </br></br>
             My role as the GIS Specialist was to handle all of the non-binary siting factors and generate
               presentable seasonal and annual suitability maps for the Southern California region. 
@@ -161,8 +159,8 @@
             <td class="skillName">Spanish</td>
           </tr>
           <tr>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Native" title="Native"></td>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Fluent" title="Fluent"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Native" title="Native"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Fluent" title="Fluent"></td>
           </tr>
 
           <tr><td colspan=3><h2>Robot Languages</h2></td></tr>
@@ -172,9 +170,9 @@
             <td class="skillName">SQL</td>
           </tr>
           <tr>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Amazing" title="Amazing"></td>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
           </tr>
           <tr>
             <td class="skillName">HTML</td>
@@ -182,9 +180,9 @@
             <td class="skillName">JavaScript</td>
           </tr>
           <tr>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Amazing" title="Amazing"></td>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Amazing" title="Amazing"></td>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
           </tr>
           <tr>
             <td class="skillName">C++ </td>
@@ -192,9 +190,9 @@
             <td class="skillName">Scala</td>
           </tr>
           <tr>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
-            <td class="skillImg"><img src="./pics/good.svg" alt="Good" title="Good"></td>
-            <td class="skillImg"><img src="./pics/good.svg" alt="Good" title="Good"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
+            <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
           </tr>
 
           <tr><td colspan=3><h2>Applications</h2></td></tr>
@@ -204,9 +202,9 @@
             <td class="skillName">ENVI</td>
           </tr>
           <tr>
-            <td class="skillImg"><img src="./pics/amazing.svg" alt="Amazing" title="Amazing"></td>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
-            <td class="skillImg"><img src="./pics/great.svg" alt="Great" title="Great"></td>
+            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
           </tr>
           <tr>
             <td class="skillName"></td>
@@ -236,7 +234,7 @@
           <div id="card-text">
             <h2>This website</h2>
             <p>I created this interactive CV almost entirely from scratch.</p>
-            <p>If you look closely, you might be able to tell that I thought of the template while hiking.</p>
+            <p>If you look closely, you might find a very subtle hint implying that I thought of the template while hiking.</p>
           </div>
         </div> 
 
