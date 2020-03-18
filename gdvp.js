@@ -1,5 +1,8 @@
+/* See if the user is on mobile */
+var mobile = $(window).height() > $(window).width();
+
 /* Set up the map */
-var map = L.map('gdvp-map').setView([38, -100], 5);
+var map = L.map('gdvp-map').setView([38, -100], 4);
 var gdvp = document.getElementById("gdvp-map");
 
 /* Symbologies */
@@ -7,7 +10,7 @@ function colorize(val, scheme) {
   var r = 0;
   var g = 0;
   var b = 0;
-  if (val == undefined) return "rgb(0, 0, 0, 0)";
+  if (!val) { return "rgba(0, 0, 0, 0)"; }
   if (scheme == "black-ryg") {
     if (val > .8) {
       r = ((.8 - val) * 1275) + 255;
@@ -72,28 +75,40 @@ function styleLayers(feat) {
   };
 }
 
+function showData(e) {
+  var layer = e.target;
+  layer.setStyle({
+    weight: 2.5,
+    fillOpacity: 1
+  });
+  info.update(layer.feature.properties);
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+}
+
+function hideData(e) {
+  e.target.setStyle({
+    weight: 1,
+    fillOpacity: 0.75
+  });
+  info.update();
+}
+
+var featureClicked = false;
 function onEachFeature(feat, layer) {
   layer.on({
-    mouseover: function(e) {
-      var layer = e.target;
-      layer.setStyle({
-        weight: 2.5,
-        fillOpacity: 1
-      });
-      info.update(layer.feature.properties);
-      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-        layer.bringToFront();
-      }
-    },
-    mouseout: function(e) {
-      e.target.setStyle({
-        weight: 1,
-        fillOpacity: 0.75
-      });
-      info.update();
-    },
+    mouseover: showData,
+    mouseout: hideData,
     click: function(e) {
-      map.fitBounds(e.target.getBounds());
+      if (mobile) {
+        if (featureClicked) { showData; }
+        else { hideData; }
+        featureClicked = !featureClicked;
+      }
+      else {
+        map.fitBounds(e.target.getBounds());
+      }
     }
   })
 }

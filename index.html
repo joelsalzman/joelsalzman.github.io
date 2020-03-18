@@ -109,7 +109,10 @@
       <div class="info" id="Experience">
         <h2>SeaSketch</h2>
           <span>
-            <a href="https://www.seasketch.org/about/">SeaSketch</a> is a 
+            <a href="https://www.seasketch.org/">SeaSketch</a> is a GIS application developed by
+              <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for marine spatial planning.
+              My job consists of wrangling data with our partners across the world to visualize projects
+              and assisting with the JavaScript development of SeaSketch 2.0.
           </span>
         
         <h2>Apex Clean Energy</h2>
@@ -255,6 +258,5 @@
 
   <!-- Load the JavaScript -->
   <script src="./index.js"></script>
-  <script src="node_modules/body-scroll-lock/lib/bodyScrollLock.js"></script>
 
 </html>

@@ -1,5 +1,3 @@
-import { prototype } from "parcel-bundler";
-
 // Useful variables
 var stickyHeader = document.getElementById("sticky-header");
 var education    = document.getElementById("Education");
@@ -90,7 +88,7 @@ siteCardChange = function(type) {
   if (type == "click") {clicked = !clicked;}
   if (type != "enter" && !clicked) {
     $(cardText).fadeOut(500);
-    $(siteCard).css("background-color", "rgb(0, 0, 0, 0)");
+    $(siteCard).css("background-color", "rgba(0, 0, 0, 0)");
   } else {
     window.timeout = setTimeout(function() {
       $(cardText).fadeIn(500);
