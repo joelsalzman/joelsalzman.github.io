@@ -16,7 +16,7 @@
   <body style="background-color: #88f9a9;">
 
     <!-- Initial view -->
-    <div class="main-image">
+    <div class="main-image" id="homepage-image">
       <div class="gradient" id="main-gradient"></div>
       <div class="main-text">
         <h1 class="home" id="joel">Joel Salzman</h1>
@@ -27,204 +27,218 @@
     <!-- Sticky header -->
     <header id="sticky-header">
 
-      <!-- Homepage tabs -->
-      <a class="button button-main" id="button-top" href="#"></a>
-      <a class="button button-main" id="button-education" href="#Education">Education</a>
-      <a class="button button-main" id="button-experience" href="#Experience">Experience</a>
-      <a class="button button-main" id="button-skills" href="#Skills">Skills</a>
-      <a class="button button-main" id="button-portfolio" href="#Portfolio">Portfolio</a>
-      
       <!-- Links -->
-      <a class="button button-bordered" id="button-hire" href="mailto:joelkevlessalzman@gmail.com">CONTACT</a>
-      <a class="button-social" id="button-GitHub" href="http://github.com/joelsalzman" style="margin-right: 1.5vw;"></a>
-      <a class="button-social" id="button-LinkedIn" href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
+      <div class="header-container" id="main-right">
+        <a class="button button-bordered" id="button-hire" href="mailto:joelkevlessalzman@gmail.com">CONTACT</a>
+        <a class="button-social" id="button-LinkedIn" href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
+        <a class="button-social" id="button-GitHub" href="http://github.com/joelsalzman"></a>
+      </div>
+
+      <!-- Homepage tabs -->
+      <div class="header-container"   id="main-left">
+        <a class="button button-main" id="button-top" href="#"></a>
+        <a class="button button-main" id="button-education" href="#Education">Education</a>
+        <a class="button button-main" id="button-experience" href="#Experience">Experience</a>
+        <a class="button button-main" id="button-skills" href="#Skills">Skills</a>
+        <a class="button button-main" id="button-portfolio" href="#Portfolio">Portfolio</a>
+      </div>
+      
     </header>
 
     <!-- The important stuff -->
     <div class="content">
 
       <!-- Transition -->
-      <div class="gradient" id="small-gradient"></div>
-      <div class="window" id="small-gradient-window"></div>
-        
+      <div class="content-container">
+        <div class="gradient" id="wg-gradient"></div>
+      </div>
+
       <!-- Informational sections -->
-      <div class="info" id="Education">
-        <h2>University of California,</br>Santa Barbara</h2>
-          <span>
-            I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
-              I finished my Geography requirements last spring (the same term I was inducted into Phi Beta Kappa)
-              and am finishing my Philosophy degree this term.
-              While in college, I've competed as part of the UCSB Climbing Team, 
-              worked in the wilderness with UCSB Adventure Programs,
-              and eaten lots of bagels with the Santa Barbara Hillel. 
-              I don't surf though; please stop asking.
-          </span>
-        
-        <h3>Geography (Geographic Information Science)</h3>
-          <span>
-            My degree in "Where?"
-            </br></br>
-            I have pursued two topics of research. The first is voting. 
-              I performed an analysis of where votes matter most, which you can see <a href="#Portfolio">below</a>.
-              I'm also developing an algorithm to identify precincts with inordinately diluted voting power
-                for use as potential evidence of gerrymandering.
-              The second is indoor cartography. Our lab built 3D models of indoor spaces from LIDAR scans using deep 
-              learning classification techniques and we're working on programatically generating millimeter-accurate models.
-          </span>
-        
-        <h3>Philosophy (Ethics and Public Policy)</h3>
-          <span> 
-            My degree in "Why?"
-            </br></br>
-            My interests primarily regard political ethics and metaphysics.
-            My coursework has related to GIS through my studies of spatial ontology, logic, and data ethics.
-          </span>
+      <div class="content-container">
+          
+        <div class="info" id="Education">
+          <span><br><br></span>
+          <h2>University of California,</br>Santa Barbara</h2>
+            <span>
+              I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
+                I finished my Geography requirements last spring (the same term I was inducted into Phi Beta Kappa)
+                and am finishing my Philosophy degree this term.
+                While in college, I've competed as part of the UCSB Climbing Team, 
+                worked in the wilderness with UCSB Adventure Programs,
+                and eaten lots of bagels with the Santa Barbara Hillel. 
+                I don't surf though; please stop asking.
+            </span>
+          
+          <h3>Geography (Geographic Information Science)</h3>
+            <span>
+              My degree in "Where?"
+              </br></br>
+              I have pursued two topics of research. The first is voting. 
+                I performed an analysis of where votes matter most, which you can see <a href="#Portfolio">below</a>.
+                I'm also developing an algorithm to identify precincts with inordinately diluted voting power
+                  for use as potential evidence of gerrymandering.
+                The second is indoor cartography. Our lab built 3D models of indoor spaces from LIDAR scans using deep 
+                learning classification techniques and we're working on programatically generating millimeter-accurate models.
+            </span>
+          
+          <h3>Philosophy (Ethics and Public Policy)</h3>
+            <span> 
+              My degree in "Why?"
+              </br></br>
+              My interests primarily regard political ethics and metaphysics.
+              My coursework has related to GIS through my studies of spatial ontology, logic, and data ethics.
+            </span>
 
-        <h2>Abroad</h2>
-          <span>
-            I took a gap year during which I worked and then backpacked independently around South America for
-              about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
-              WWOOF, and I took classes on local cuisine. I also did lots of hiking.
-          </span>
-          <span>
-          </br>
-            During the Fall of 2019, I studied abroad at King's College London, where I took advanced modules in 
-              computer science and philosophy. It was an interesting time to be there since my stay coincided 
-              with a Brexit deadline (though I fortunately left before covid-19 struck). 
-              I gained a real appreciation for tea and crumpets as well.
-          </span>
+          <h2>Abroad</h2>
+            <span>
+              I took a gap year during which I worked and then backpacked independently around South America for
+                about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
+                WWOOF, and I took classes on local cuisine. I also did lots of hiking.
+            </span>
+            <span>
+            </br>
+              During the Fall of 2019, I studied abroad at King's College London, where I took advanced modules in 
+                computer science and philosophy. It was an interesting time to be there since my stay coincided 
+                with a Brexit deadline (though I fortunately left before covid-19 struck). 
+                I gained a real appreciation for tea and crumpets as well.
+            </span>
 
-        <h2>Troop 52</h2>
-          <span>
-            Boy Scouts was a big part of my life growing up. I was an avid camper and climber as a
-              teenager. My freshman year of high school, I was the Patrol Leader of the Flying Bagels and
-              was awarded Scout of the Year by my troop. My Eagle Scout project was to rebuild a staircase 
-              that was falling apart on a trail near my house, which we miraculously finished in just one 
-              weekend. I include Boy Scouts in the Education section because it's where I learned a lot of 
-              what I know about leadership, self-reliance, and spiders (not to mention how to read a map).
-          </span>
+          <h2>Troop 52</h2>
+            <span>
+              Boy Scouts was a big part of my life growing up. I was an avid camper and climber as a
+                teenager. My freshman year of high school, I was the Patrol Leader of the Flying Bagels and
+                was awarded Scout of the Year by my troop. My Eagle Scout project was to rebuild a staircase 
+                that was falling apart on a trail near my house, which we miraculously finished in just one 
+                weekend. I include Boy Scouts in the Education section because it's where I learned a lot of 
+                what I know about leadership, self-reliance, and spiders (not to mention how to read a map).
+            </span>
+        </div>
       </div>
-      <div class="window" id="Education-window"></div>
 
-      <div class="info" id="Experience">
-        <h2>SeaSketch</h2>
-          <span>
-            <a href="https://www.seasketch.org/">SeaSketch</a> is a GIS application developed by
-              <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for marine spatial planning.
-              My job consists of wrangling data with our partners across the world to visualize projects
-              and assisting with the JavaScript development of SeaSketch 2.0.
-          </span>
-        
-        <h2>Apex Clean Energy</h2>
-          <span>
-            <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a> is a wind and solar developer based 
-              out of Charlottesville, Virginia. My role at Apex was to determine where to site new utility-scale 
-              facilities.
-            </br></br>
-            As an intern in the New Markets division, I dove deep into potential markets, found relevant data, 
-              and presented my findings to members of the New Markets, GIS, and Business Development teams.
-              The types of research that I conducted included opposition analysis,
-              estimating the siting criteria of downstream industries, 
-              and strategies for optimizing energy storage.
-              I ultimately presented the results of one research project directly to the CEO. 
-            </br></br>
-            Since I was the GIS intern for New Markets, my research often relied on geospatial data. 
-              I created numerous Python tools to assist both the New Markets and dedicated GIS teams, 
-              including geocoders, web scrapers, and geometric manipulation scripts. 
-              Many of my deliverables were service layers that were published to the company web map.
-              I also started a collaborative Python package, <i>Apyx</i>, to increase efficiency across teams by
-                generalizing common geoprocessing workflows.
-          </span>
-        
-        <h2>Primary Ocean Producers</h2>
-          <span>
-            <a href="http://www.primaryocean.com/">Primary Ocean Producers</a> is an aquaculture startup. 
-            They were awarded a contract by the ARPA-E MARINER program to determine the most suitable regions 
-              in federal and state waters to grow giant kelp (<i>Macrocystis pyrifera</i>). 
-            </br></br>
-            My role as the GIS Specialist was to handle all of the non-binary siting factors and generate
-              presentable seasonal and annual suitability maps for the Southern California region. 
-              Some of these maps can be found in my public <a href="#Portfolio">Portfolio</a>.
-              I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
-            </br></br>
-            This was my first opportunity to manipulate massive amounts of data. A lot of the datasets we used 
-              contained tens of millions of values, and processing hundreds of these helped me learn how to 
-              optimize my algorithms.
-          </span>
+      <div class="content-container">
+        <div class="info" id="Experience">
+          <span><br><br></span>
+          <h2>SeaSketch</h2>
+            <span>
+              <a href="https://www.seasketch.org/">SeaSketch</a> is a GIS application developed by
+                <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for marine spatial planning.
+                My job consists of wrangling data with our partners across the world to visualize projects
+                and assisting with the JavaScript development of SeaSketch 2.0.
+            </span>
+          
+          <h2>Apex Clean Energy</h2>
+            <span>
+              <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a> is a wind and solar developer based 
+                out of Charlottesville, Virginia. My role at Apex was to determine where to site new utility-scale 
+                facilities.
+              </br></br>
+              As an intern in the New Markets division, I dove deep into potential markets, found relevant data, 
+                and presented my findings to members of the New Markets, GIS, and Business Development teams.
+                The types of research that I conducted included opposition analysis,
+                estimating the siting criteria of downstream industries, 
+                and strategies for optimizing energy storage.
+                I ultimately presented the results of one research project directly to the CEO. 
+              </br></br>
+              Since I was the GIS intern for New Markets, my research often relied on geospatial data. 
+                I created numerous Python tools to assist both the New Markets and dedicated GIS teams, 
+                including geocoders, web scrapers, and geometric manipulation scripts. 
+                Many of my deliverables were service layers that were published to the company web map.
+                I also started a collaborative Python package, <i>Apyx</i>, to increase efficiency across teams by
+                  generalizing common geoprocessing workflows.
+            </span>
+          
+          <h2>Primary Ocean Producers</h2>
+            <span>
+              <a href="http://www.primaryocean.com/">Primary Ocean Producers</a> is an aquaculture startup. 
+              They were awarded a contract by the ARPA-E MARINER program to determine the most suitable regions 
+                in federal and state waters to grow giant kelp (<i>Macrocystis pyrifera</i>). 
+              </br></br>
+              My role as the GIS Specialist was to handle all of the non-binary siting factors and generate
+                presentable seasonal and annual suitability maps for the Southern California region. 
+                Some of these maps can be found <a href="#Portfolio">below</a>.
+                I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
+              </br></br>
+              This was my first opportunity to manipulate massive amounts of data. A lot of the datasets we used 
+                contained tens of millions of values, and processing hundreds of these helped me learn how to 
+                optimize my algorithms.
+            </span>
+        </div>
       </div>
-      <div class="window" id="Experience-window"></div>
       
-      <div class="info" id="Skills">
-        <table>
-          <tr><td colspan=3><h2>Human Languages</h2></td></tr>
-          <tr>
-            <td class="skillName">English</td>
-            <td class="skillName">Spanish</td>
-          </tr>
-          <tr>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Native" title="Native"></td>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Fluent" title="Fluent"></td>
-          </tr>
+      <div class="content-container">
+        <div class="info" id="Skills">
+          <span><br><br></span>
+          <table>
+            <tr><td colspan=3><h2>Human Languages</h2></td></tr>
+            <tr>
+              <td class="skillName">English</td>
+              <td class="skillName">Spanish</td>
+            </tr>
+            <tr>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Native" title="Native"></td>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Fluent" title="Fluent"></td>
+            </tr>
 
-          <tr><td colspan=3><h2>Robot Languages</h2></td></tr>
-          <tr>
-            <td class="skillName">Python</td>
-            <td class="skillName">R</td>
-            <td class="skillName">SQL</td>
-          </tr>
-          <tr>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-          </tr>
-          <tr>
-            <td class="skillName">HTML</td>
-            <td class="skillName">CSS</td>
-            <td class="skillName">JavaScript</td>
-          </tr>
-          <tr>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-          </tr>
-          <tr>
-            <td class="skillName">C++ </td>
-            <td class="skillName">Java</td>
-            <td class="skillName">Scala</td>
-          </tr>
-          <tr>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-            <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
-            <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
-          </tr>
+            <tr><td colspan=3><h2>Robot Languages</h2></td></tr>
+            <tr>
+              <td class="skillName">Python</td>
+              <td class="skillName">R</td>
+              <td class="skillName">SQL</td>
+            </tr>
+            <tr>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            </tr>
+            <tr>
+              <td class="skillName">HTML</td>
+              <td class="skillName">CSS</td>
+              <td class="skillName">JavaScript</td>
+            </tr>
+            <tr>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            </tr>
+            <tr>
+              <td class="skillName">C++ </td>
+              <td class="skillName">Java</td>
+              <td class="skillName">Scala</td>
+            </tr>
+            <tr>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+              <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
+              <td class="skillImg skill_3"><img src="./pics/good.svg" alt="Intermediate" title="Intermediate"></td>
+            </tr>
 
-          <tr><td colspan=3><h2>Applications</h2></td></tr>
-          <tr>
-            <td class="skillName">ESRI</td>
-            <td class="skillName">QGIS</td>
-            <td class="skillName">ENVI</td>
-          </tr>
-          <tr>
-            <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-            <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
-          </tr>
-          <tr>
-            <td class="skillName"></td>
-          </tr>
-          <tr>
-            <td class="skillImg"></td>
-          </tr>
-        </table>
+            <tr><td colspan=3><h2>Applications</h2></td></tr>
+            <tr>
+              <td class="skillName">ESRI</td>
+              <td class="skillName">QGIS</td>
+              <td class="skillName">ENVI</td>
+            </tr>
+            <tr>
+              <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+              <td class="skillImg skill_2"><img src="./pics/great.svg" alt="Adept" title="Adept"></td>
+            </tr>
+            <tr>
+              <td class="skillName"></td>
+            </tr>
+            <tr>
+              <td class="skillImg"></td>
+            </tr>
+          </table>
 
+        </div>
       </div>
-      <div class="window" id="Skills-window"></div>
 
       <!-- Another transition -->
-      <div class="gradient" id="small-gradient-2"></div>
-      <div class="window" id="small-gradient-2-window"></div>
+      <div class="content-container">
+        <div class="gradient" id="ga-gradient"></div>
+      </div>
 
-      <!-- Flip cards for portfolio items -->
+      <!-- Cards for portfolio items -->
       <div class="flex-container" id="Portfolio">
 
         <a href="./gdvp.html">
@@ -234,10 +248,10 @@
         </a>
 
         <div class="card" id="site-card">
-          <div id="card-text">
-            <h2>This website</h2>
-            <p>I created this interactive CV almost entirely from scratch.</p>
-            <p>If you look closely, you might find a very subtle hint implying that I thought of the template while hiking.</p>
+          <div id="card-text-container">
+            <h2 class="card-text" id="card-text-header">This website</h2>
+            <p class="card-text">I created this interactive CV almost entirely from scratch.</p>
+            <p class="card-text">If you look closely, you might find a very subtle hint implying that I thought of the template while hiking.</p>
           </div>
         </div> 
 

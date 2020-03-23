@@ -92,7 +92,7 @@ a {
 
 #sticky-header {
     background-color: #ffffff;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 1;
 }
 
@@ -102,28 +102,17 @@ a {
     width: 100%;
 }
 
-.content {
-    margin: 0px;
-    background-image: url("./pics/topomap.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow-x: hidden;
+.header-container {
+    height: 10vh;
+    overflow: hidden;
 }
 
-.content a {
-    color: black;
-    font-weight: bold;
-    transition-duration: 0.2s;
+#main-left {
+    float: left;
 }
 
-.content a:hover {
-    color: #584800;
-}
-  
-.sticky + .content {
-    margin-top: 10vh;
+#main-right {
+    float: right;
 }
 
 .button {
@@ -141,16 +130,15 @@ a {
 
 .button-main {
     float: left;
-    padding: 2.5vh 1.5vw;
+    padding: 2.5vh 1.5vw 3.5vh;
 }
 
 .button-social {
     float: right;
     height: 6vh;
+    width: 6vh;
     background-size: contain;
     background-repeat: no-repeat;
-    padding-left: 1.5vw;
-    padding-right: 1.5vw;
     margin-top: 2vh;
     transition-duration: 0.4s;
 }
@@ -158,7 +146,6 @@ a {
 #button-GitHub {
     background-image: url("./pics/GitHub.png");
     margin-right: 3vw;
-    padding-right: 3vw;
 }
 
 #button-GitHub:hover {
@@ -199,19 +186,37 @@ a {
 
 /* Body */
 
-#small-gradient {
-    background-image: linear-gradient(#ffffff, #88f9a9);
-    height: 80vh;
-    width: 50vw;
-    float: left;
+.content {
+    margin: 0px;
+    background-image: url("./pics/topomap.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-.window {
-    height: 100vh;
-    width: 30vw;
-    background-color: rgb(0, 0, 0, 0);
-    float: right;
-    overflow: hidden;
+.content a {
+    color: black;
+    font-weight: bold;
+    transition-duration: 0.2s;
+}
+
+.content a:hover {
+    color: #584800;
+}
+  
+.sticky + .content {
+    margin-top: 10vh;
+}
+
+#wg-gradient {
+    background-image: linear-gradient(#ffffff, #88f9a9);
+    height: 80vh;
+    width: 45vw;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    float: left;
 }
 
 .info {
@@ -255,7 +260,7 @@ a {
     transition-duration: 0.5s;
 }
 
-#small-gradient-2 {
+#ga-gradient {
     height: 30vh;
     width: 45vw;
     background-image:linear-gradient(#88f9a9, rgb(0, 0, 0, 0));
@@ -269,8 +274,7 @@ a {
 #Portfolio {
     height: 0vh;
     width: 80vw;
-    padding-right: 10vw;
-    padding-left: 10vw;
+    padding: 0 10vw;
     float: right;
     display: flex;
     flex-flow: row wrap;
@@ -292,12 +296,13 @@ a {
     border: 1.5vh solid white;
 }
 
-#card-text {
+#card-text-container {
     display: none;
     height: 100%;
     width: 100%;
     padding-left: .5vw;
     contain: strict;
+    overflow-y: auto;
 }
 
 .card h2, p {
@@ -357,15 +362,16 @@ a {
 .header {
     background: white;
     width: 100vw;
-    height: 10vh;
 }
 
 #button-back {
-    width: 5vw;
     margin-left: 1.5vw;
-    padding-right: 2vw;
     float: left;
     text-align: center;
+}
+
+.gdvp-header {
+    position: relative;
 }
 
 #gdvp-explanation {
@@ -379,6 +385,8 @@ a {
     height: 9vh;
     border: .5vh solid black;
     border-radius: 1vh;
+    z-index: 1;
+    position: absolute;
 }
 
 #button-tooltip {
@@ -419,8 +427,24 @@ a {
 }
 
 #tooltip {
-    width: 0%;
+    display: none;
+    width: 0;
     height: 90vh;
     float: right;
     background-color: white;
+    overflow-y: auto;
+}
+
+.option {
+    padding: 3vh 3vh 0;
+    margin-top: 3vh;
+}
+
+.check-container {
+    height: 20vh;
+    margin: 3vh 3vh;
+    contain: strict;
+    overflow: auto;
+    display: none;
+    border: 1px solid black;
 }

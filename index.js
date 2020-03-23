@@ -4,45 +4,67 @@ var education    = document.getElementById("Education");
 var experience   = document.getElementById("Experience");
 var skills       = document.getElementById("Skills");
 var portfolio    = document.getElementById("Portfolio");
-var divs         = [education, experience, skills, portfolio]
-var buttons      = divs.map(el => document.getElementById("button-" + el.id.toLowerCase()));
-
-// Ensure correct heights of divs
+var divs    = [education, experience, skills, portfolio]
+var toScale = [education, experience, skills, document.getElementById("wg-gradient"), document.getElementById("ga-gradient")]
+var buttons = divs.map(el => document.getElementById("button-" + el.id.toLowerCase()));
 var vh = $(window).height();
-var toScale = [education, experience, skills, document.getElementById("small-gradient"), document.getElementById("small-gradient-2")]
-divHeight = function() {
-  toScale.forEach(el => {
-    let h = el.offsetHeight + vh + "px";
-    el.style.height = h;
-    document.getElementById(el.id + "-window").style.height = h;
-  });
-  portfolio.style.height = (0.9 * vh) + "px";
-}
-
-// Eliminate windows if on mobile
 var vw = $(window).width();
-divWidth = function() {
-  if (vh > vw) {
-    document.getElementsByClassName("window").forEach(el => {
-      el.style.width = "0%";
-    });
-    divs.forEach(el => {
-      el.style.width = "100%";
-    });
-    portfolio.style.flexFlow = "column wrap";
-  }
-}
 
-window.onload = function() {
-  divHeight();
-  divWidth();
+// Resize text
+resizeText = function(isMobile) {
+  if (isMobile) {
+    buttons.forEach(el => { el.style.fontSize = "5vw"; })
+    document.querySelectorAll('.button-social').forEach(el => { 
+      el.style.cssFloat = "left"; 
+      el.style.paddingRight = "3vw";
+      el.style.paddingLeft = "1.5vw";
+    });
+    document.getElementById("homepage-image").style.height = "80vh";
+    document.getElementById("main-gradient").style.height = "80vh";
+    document.getElementById("main-right").style.width = "94vw";
+    document.getElementById("joel").style.fontSize = "20vw";
+  }
+  let cardHeight = document.getElementById("site-card").offsetHeight;
+  let cardText   = document.getElementsByClassName("card-text");
+  for (let i=0; i < cardText.length; i++) {
+    cardText[i].style.fontSize = cardHeight * 0.05 + "px";
+  }
+  document.getElementById("card-text-header").style.fontSize = cardHeight * 0.08 + "px";
 }
-window.onresize = function() {divHeight();}
 
 // Store offsets from top
 var headerOffset = stickyHeader.offsetTop;
-var divOffsets   = divs.map(el => el.offsetTop - 200);
+var divOffsets;
 
+// Ensure correct heights of divs
+resizeDivs = function() {
+  vh = $(window).height();
+  toScale.forEach(el => { el.style.height = el.offsetHeight + vh + "px"; });
+  portfolio.style.height = (0.9 * vh) + "px";
+  divOffsets = divs.map(el => el.offsetTop - 0.25 * vh);
+}
+
+// Change layout if on mobile
+checkMobile = function() {
+  if (vh > vw) {
+    toScale.forEach(el => { 
+      el.style.width = "95vw";
+      el.style.paddingRight = "5vw";
+    });
+    resizeText(true);
+  } else {
+    toScale.forEach(el => { 
+      el.style.width = "45vw"; 
+      el.style.paddingRight = "2.5vw";
+    });
+    resizeText(false);
+  }
+  resizeDivs();
+}
+checkMobile();
+window.onresize = function() { checkMobile(); }
+
+// Set the buttons while scrolling
 setButtons = function(id) {
   buttons.forEach(bt => {
     if (bt.id == id) {
@@ -82,7 +104,7 @@ window.onscroll = function() {
 
 // Toggle site card text
 var siteCard  = document.getElementById("site-card");
-var cardText  = document.getElementById("card-text");
+var cardText  = document.getElementById("card-text-container");
 var clicked   = false;
 siteCardChange = function(type) {
   if (type == "click") {clicked = !clicked;}
@@ -123,6 +145,3 @@ box.onclick = function() {
   barrier.style.display = "none";
   window.scrollTo(portfolio);
 }
-
-// Notice
-window.alert("This website is still under construction. I have finals, okay? -Joel");

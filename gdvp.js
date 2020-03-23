@@ -1,5 +1,8 @@
 /* See if the user is on mobile */
-var mobile = $(window).height() > $(window).width();
+var vh = $(window).height();
+var vw = $(window).width();
+var isMobile = vh > vw;
+var stillLoading = true;
 
 /* Set up the map */
 var map = L.map('gdvp-map').setView([38, -100], 4);
@@ -46,22 +49,36 @@ var fieldDict = {
 }
 var field = "rawUtility";
 
-/* Map information */
+/* Header formatting */
 var info = document.getElementById("gdvp-info");
 var headerButtons = document.getElementsByClassName("gdvp-header");
-sizeInfoDiv = function() {
-  var w = $(window).width() * 0.935;
-  for (var i = 0; i < headerButtons.length; i++) { 
-    w -= headerButtons[i].offsetWidth; 
+formatHeader = function() {
+  if (isMobile) {
+    info.style.width = vw + "px";
+    info.style.position = "relative";
+    document.getElementById("gdvp-map").style.height = 80 * vh;
+    document.getElementById("button-tooltip").innerHTML = "≡";
+    for (var i = 0; i < headerButtons.length - 1; i++) {
+      headerButtons[i].style.marginLeft = "3vw";
+    }
+  } else {
+    var w = vw * 0.93;
+    var m = vw * 0.03;
+    for (var i = 0; i < headerButtons.length; i++) {
+      let buttonLength = headerButtons[i].offsetWidth;
+      w -= buttonLength;
+      if (i < 2) { m += buttonLength; }
+    }
+    info.style.width = w + "px";
+    info.style.marginLeft = m + "px";
   }
-  info.style.width = w + "px";
 }
-window.onload   = function() {sizeInfoDiv();}
-window.onresize = function() {sizeInfoDiv();}
+window.onload   = formatHeader;
+window.onresize = formatHeader;
 info.update = function(properties) {
   info.innerHTML = "<h3>" + fieldDict[field].name + (properties ? ": " + fieldDict[field].display(properties[field]) : "") + "</h3>";
   if (document.getElementsByClassName("header")[0].offsetHeight > $(window).height() / 10) {
-    sizeInfoDiv();}
+    formatHeader();}
 }
 
 /* Interactions */
@@ -102,11 +119,9 @@ function onEachFeature(feat, layer) {
     mouseout: hideData,
     click: function(e) {
       if (mobile) {
-        if (featureClicked) { showData; }
-        else { hideData; }
+        (featureClicked) ? showData : hideData;
         featureClicked = !featureClicked;
-      }
-      else {
+      } else {
         map.fitBounds(e.target.getBounds());
       }
     }
@@ -129,11 +144,11 @@ var lyrs = {'Alabama':'', 'Alaska':'', 'Arizona':'', 'Arkansas':'', 'California'
   'West Virginia':'', 'Wisconsin':'', 'Wyoming':''}
 for (let st in lyrs) {
   $.getJSON("https://raw.githubusercontent.com/joelsalzman/joelsalzman.github.io/master/final_by_state/" + st + ".js", function(data) {
-    let feat = new L.geoJSON(data, {
+    lyrs[st] = new L.geoJSON(data, {
       style: styleLayers,
       onEachFeature: onEachFeature
-    }).addTo(map);
-    lyrs[st] = feat;
+    });
+    if (stillLoading) { lyrs[st].addTo(map); }
   })
 };
 
@@ -161,6 +176,8 @@ legend.onAdd = function(map) {
 legend.addTo(map);
 setLegend(document.getElementById("black-ryg"));
 
+/* -------------------------------------- The tooltip -------------------------------------- */
+
 /* Toggle the tooltip */
 var tooltipButton = document.getElementById("button-tooltip");
 var btnText = document.getElementById("button-tooltip-text");
@@ -168,21 +185,43 @@ var tooltip = document.getElementById("tooltip");
 tooltipButton.onclick = function() {
   if (tooltip.style.width != "30%") {
     gdvp.style.width = "70vw";
+    tooltip.style.display = "block";
     tooltip.style.width = "30%";
   } else {
     gdvp.style.width = "100vw";
     tooltip.style.width = "0%";
+    tooltip.style.display = "none";
   }
 };
-tooltipButton.onmouseenter = function() {
-  tooltipButton.style.backgroundColor = "#DBDBDB";
-}
-tooltipButton.onmouseleave = function() {
-  tooltipButton.style.backgroundColor = "#FFFFFF";
-}
+tooltipButton.onmouseenter = function() { tooltipButton.style.backgroundColor = "#DBDBDB"; }
+tooltipButton.onmouseleave = function() { tooltipButton.style.backgroundColor = "#FFFFFF"; }
 
-/* The tooltip */
-var displayField = document.getElementById("display-field");
+/* Variables */
 var displayState = document.getElementById("display-state");
-var displayElect = document.getElementById("display-election");
+//var displayField = document.getElementById("display-field");
+//var displayElect = document.getElementById("display-election");
 
+/* State */
+checkContShow  = false;
+checkContainer = document.getElementById("state-checks");
+toggleCheckContainer = function() {
+  if (checkContShow) { checkContainer.style.display = "none"; }
+  else { checkContainer.style.display = "block"; }
+  checkContShow = !checkContShow;
+}
+
+toggleState = function(st, mustHide=false, mustShow=false) {
+  var check = (st == "District of Columbia") ? document.getElementById("check-DC") : document.getElementById("check-" + st);
+  var show  = (mustShow || (!check.checked && !mustHide)) ? true : false;
+  if ((mustHide && check.checked) || (mustShow && !check.checked)) { check.checked = !check.checked; }
+  let layer = lyrs[st];
+  if (show && !map.hasLayer(layer)) { map.addLayer(layer); }
+  else if (    map.hasLayer(layer)) { map.removeLayer(layer); }
+}
+allButton = true;
+toggleAllStates = function() {
+  if (stillLoading) { stillLoading = false; }
+  for (let st in lyrs) { (allButton) ? toggleState(st, true) : toggleState(st, false, true);}
+  document.getElementById("toggleAll-text").innerHTML = (allButton) ? "Show All" : "Hide All";
+  allButton = !allButton;
+}
