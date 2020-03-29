@@ -240,6 +240,11 @@ a {
     overflow: auto;
 }
 
+.research {
+    text-decoration: underline; 
+    display: inline;
+}
+
 #Skills table {
     width: 100%;
 }
