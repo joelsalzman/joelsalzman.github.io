@@ -63,7 +63,7 @@
             <span>
               I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
                 I finished my Geography requirements last spring (the same term I was inducted into Phi Beta Kappa)
-                and finished my Philosophy requirements just before covid-19 shuttered campus.
+                and finished my Philosophy requirements just before Covid-19 shuttered campus.
                 While in college, I've competed as part of the UCSB Climbing Team, 
                 worked in the wilderness with UCSB Adventure Programs,
                 and eaten lots of bagels with the Santa Barbara Hillel. 
@@ -105,7 +105,7 @@
             </br>
               During the Fall of 2019, I studied abroad at King's College London, where I took advanced modules in 
                 computer science and philosophy. It was an interesting time to be there since my stay coincided 
-                with a Brexit deadline (though I fortunately left before covid-19 struck). 
+                with a Brexit deadline (though I fortunately left before Covid-19 struck). 
                 I gained a real appreciation for tea and crumpets as well.
             </span>
 

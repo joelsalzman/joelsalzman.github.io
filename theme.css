@@ -203,6 +203,10 @@ a {
     overflow-x: hidden;
 }
 
+.content-container {
+    width: 100%;
+}
+
 .content a {
     color: black;
     font-weight: bold;
@@ -220,14 +224,14 @@ a {
 #wg-gradient {
     background-image: linear-gradient(#ffffff, #e1f1c4);
     height: 80vh;
-    width: 46vw;
+    width: 45vw;
     padding-left: 2.5vw;
     padding-right: 2.5vw;
     float: left;
 }
 
 .info {
-    width: 46vw;
+    width: 45vw;
     background-color: #e1f1c4;
     float: left;
     padding: 5vh 2.5vw;
@@ -269,7 +273,7 @@ a {
 
 #ga-gradient {
     height: 30vh;
-    width: 46vw;
+    width: 45vw;
     background-image:linear-gradient(#e1f1c4, rgb(0, 0, 0, 0));
     float: left;
     padding: 5vh 2.5vw;
