@@ -106,7 +106,7 @@
               The coursework most relevant to GIS were my studies of spatial ontology, predicate calculus, and data ethics.
             </span>
 
-          <h2>Abroad</h2>
+          <h2>Foreign Study and Travel</h2>
             <span>
               I took a gap year during which I worked and then backpacked independently around South America for
                 about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
@@ -251,8 +251,8 @@
         <div class="card" id="site-card">
           <div id="card-text-container">
             <h2 class="card-text" id="card-text-header">This website</h2>
-            <p class="card-text">I created this interactive resume from scratch.</p>
-            <p class="card-text">Experience with front-end web develoment is essential in order to develop custom web mapping solutions.</p>
+            <p class="card-text">I wrote this interactive resume from scratch.</p>
+            <p class="card-text">My skill with front-end web development enables me to produce custom web mapping applications.</p>
           </div>
         </div> 
 
