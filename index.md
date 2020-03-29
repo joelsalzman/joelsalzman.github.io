@@ -62,29 +62,31 @@
           <h2>University of California,</br>Santa Barbara</h2>
             <span>
               I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
-                I finished my Geography requirements last spring (the same term I was inducted into Phi Beta Kappa)
-                and finished my Philosophy requirements just before Covid-19 shuttered campus.
-                While in college, I've competed as part of the UCSB Climbing Team, 
-                worked in the wilderness with UCSB Adventure Programs,
-                and eaten lots of bagels with the Santa Barbara Hillel. 
-                I don't surf though; please stop asking.
+              Throughout college, I competed as part of the UCSB Climbing Team.
+              I also led and assisted outdoor excursions, 
+                facilitated activities at the UCSB Ropes Course, 
+                and managed shifts at Campus Point Rentals while staff of UCSB Adventure Programs.
+              During my third year, I was inducted into Phi Beta Kappa.
             </span>
           
           <h3>Geography (Geographic Information Science)</h3>
             <span>
               My degree in "Where?"
               </br></br>
-              My coursework 
+              My coursework included advanced location theory, transportation modeling, and remote sensing
+                of the environment. 
+              In addition, I helped redesign the labs for an undergraduate GIS class and tutored classmates in ArcPy.
               </br></br>
-              The first research topic I've pursued is voting. 
-                I wanted to know where votes have mattered most across the United States in federal elections in the past twenty years.
-                  The results are <a href="#Portfolio">below</a>.
-                  I'm also developing an algorithm to identify precincts with inordinately diluted voting power
-                  for use as potential evidence of gerrymandering.
-              </br></br>
-                The second topic I've researched is indoor cartography. 
-                  Our lab built 3D models of indoor spaces from LIDAR scans using deep learning classification techniques 
+              I've pursued two research topics. The first is indoor cartography.
+                Our lab built 3D models of indoor spaces from LIDAR scans using deep learning classification techniques. The goal is 
                   to ultimately develop a programatic method of generating millimeter-accurate models.
+              </br></br>
+              The second topic I've researched is voting. 
+                I wanted to understand where votes have mattered most across the United States in federal elections in the past 
+                  twenty years, so I led a project to find out.
+                Then I created an <a href="./gdvp.html">interactive map</a> to visualize the results.
+                I'm also developing an algorithm to identify precincts with inordinately diluted voting power
+                  for use as potential evidence of gerrymandering.
             </span>
           
           <h3>Philosophy (Ethics and Public Policy)</h3>
@@ -99,24 +101,21 @@
             <span>
               I took a gap year during which I worked and then backpacked independently around South America for
                 about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
-                <a href="https://wwoof.net/">WWOOF</a>, and I took classes on local cuisine. I also did lots of hiking.
+                <a href="https://wwoof.net/">WWOOF</a>, and I took classes on local cuisine.
             </span>
             <span>
             </br>
-              During the Fall of 2019, I studied abroad at King's College London, where I took advanced modules in 
-                computer science and philosophy. It was an interesting time to be there since my stay coincided 
-                with a Brexit deadline (though I fortunately left before Covid-19 struck). 
-                I gained a real appreciation for tea and crumpets as well.
+              During the Fall of 2019, I studied abroad at King's College London. 
+              While there, I took advanced modules in computer science and philosophy.
             </span>
 
           <h2>Troop 52</h2>
             <span>
-              Boy Scouts was a big part of my life growing up. I was an avid camper and climber as a
-                teenager. My freshman year of high school, I was the Patrol Leader of the Flying Bagels and
-                was awarded Scout of the Year by my troop. My Eagle Scout project was to rebuild a staircase 
-                that was falling apart on a trail near my house, which we miraculously finished in just one 
-                weekend. I include Boy Scouts in the Education section because it's where I learned a lot of 
-                what I know about leadership, self-reliance, and spiders (not to mention how to read a map).
+              I was involved in Boy Scouts from the ages of 9-17.
+              As the Patrol Leader of the <i>Flying Bagels</i>, I was awarded Scout of the Year by my troop. 
+              My Eagle Scout project was to rebuild a staircase that was falling apart on a trail near my house. 
+              I include Boy Scouts in the Education section because it's where I learned a lot of what I know about 
+                leadership, self-reliance, and spiders (not to mention how to read a map).
             </span>
         </div>
       </div>
@@ -128,8 +127,9 @@
             <span>
               <a href="https://www.seasketch.org/">SeaSketch</a> is a GIS application developed by
                 <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for conservation-focused marine spatial planning.
-                My job consists of wrangling data with our partners across the world, writing tools for individual projects,
-                and assisting with the development of SeaSketch 2.0.
+                My job consists of wrangling data with our partners across the world, 
+                  writing analysis tools for individual projects,
+                  and assisting with the development of SeaSketch 2.0.
             </span>
           
           <h2>Apex Clean Energy</h2>
@@ -147,7 +147,7 @@
               </br></br>
               Since I was the GIS intern for New Markets, my research often relied on geospatial data. 
                 I created numerous Python tools to assist both the New Markets and dedicated GIS teams, 
-                including geocoders, web scrapers, and geometric manipulation scripts. 
+                  including geocoders, web scrapers, and geometric manipulation scripts. 
                 Many of my deliverables were service layers that were published to the company web map.
                 I also started a collaborative Python package, <i>Apyx</i>, to increase efficiency across teams by
                   generalizing common geoprocessing workflows.
@@ -163,7 +163,7 @@
               My role as the GIS Specialist was to handle all of the non-binary siting factors and generate
                 presentable seasonal and annual suitability maps for the Southern California region. 
                 One of these maps can be found <a href="#Portfolio">below</a>.
-                I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
+              I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
               </br></br>
               This was my first opportunity to manipulate massive amounts of data. A lot of the datasets we used 
                 contained tens of millions of values, and processing hundreds of these helped me learn how to 
