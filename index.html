@@ -82,12 +82,12 @@
               <h3>Research Topics</h3>
               <span>
 
-              <div class="research">Indoor cartography:</div>
+              <div class="research">Indoor cartography</div>:
               I built 3D models of indoor spaces and segmented point meshes to validate deep learning classifiers run on LIDAR scans. 
               The lab's goal is to develop a programatic method of generating millimeter-accurate models.
               </br></br>
 
-              <div class="research">Voting:</div>
+              <div class="research">Voting</div>:
               I led a team of undergraduates in researching where votes have mattered most across the United States in
                 federal elections in the past twenty years. 
               I later performed a similar analysis independently using more complex tools.
@@ -95,7 +95,7 @@
               </br></br>
               I'm also developing an algorithm to identify precincts with inordinately diluted voting power
                 for use as potential evidence of gerrymandering. 
-              The algorithm utlizes iterative swapping techniques to model potential fluctuations on the vote-seats curve.
+              The algorithm utilizes iterative swapping techniques to model potential fluctuations on the vote-seats curve.
             </span></div>
           
           <h3>Philosophy (Ethics and Public Policy)</h3>
