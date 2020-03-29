@@ -62,11 +62,12 @@
           <h2>University of California,</br>Santa Barbara</h2>
             <span>
               I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
-              Throughout college, I competed as part of the UCSB Climbing Team.
-              I also led and assisted outdoor excursions, 
+              I competed as part of the UCSB Climbing Team throughout college.
+              While staff of <a href="http://recreation.sa.ucsb.edu/adventure-programs">UCSB Adventure Programs</a>,
+                I led and assisted outdoor excursions, 
                 facilitated activities at the UCSB Ropes Course, 
-                and managed shifts at Campus Point Rentals while staff of UCSB Adventure Programs.
-              During my third year, I was inducted into Phi Beta Kappa.
+                and managed shifts at Campus Point Rentals.
+              I was also inducted into Phi Beta Kappa during my third year.
             </span>
           
           <h3>Geography (Geographic Information Science)</h3>
@@ -76,24 +77,32 @@
               My coursework included advanced location theory, transportation modeling, and remote sensing
                 of the environment. 
               In addition, I helped redesign the labs for an undergraduate GIS class and tutored classmates in ArcPy.
-              </br></br>
-              I've pursued two research topics. The first is indoor cartography.
-                Our lab built 3D models of indoor spaces from LIDAR scans using deep learning classification techniques. The goal is 
-                  to ultimately develop a programatic method of generating millimeter-accurate models.
-              </br></br>
-              The second topic I've researched is voting. 
-                I wanted to understand where votes have mattered most across the United States in federal elections in the past 
-                  twenty years, so I led a project to find out.
-                Then I created an <a href="./gdvp.html">interactive map</a> to visualize the results.
-                I'm also developing an algorithm to identify precincts with inordinately diluted voting power
-                  for use as potential evidence of gerrymandering.
             </span>
+            <div style="margin-left: 2vh";>
+              <h3>Research Topics</h3>
+              <span>
+
+              <div class="research">Indoor cartography:</div>
+              I built 3D models of indoor spaces and segmented point meshes to validate deep learning classifiers run on LIDAR scans. 
+              The lab's goal is to develop a programatic method of generating millimeter-accurate models.
+              </br></br>
+
+              <div class="research">Voting:</div>
+              I led a team of undergraduates in researching where votes have mattered most across the United States in
+                federal elections in the past twenty years. 
+              I later performed a similar analysis independently using more complex tools.
+              Using Leaflet, I turned the results of the most recent analysis into an <a href="./gdvp.html">interactive map</a>.
+              </br></br>
+              I'm also developing an algorithm to identify precincts with inordinately diluted voting power
+                for use as potential evidence of gerrymandering. 
+              The algorithm utlizes iterative swapping techniques to model potential fluctuations on the vote-seats curve.
+            </span></div>
           
           <h3>Philosophy (Ethics and Public Policy)</h3>
             <span> 
               My degree in "Why?"
               </br></br>
-              My interests primarily regard political ethics and metaphysics.
+              My interests primarily concern political ethics and metaphysics.
               The coursework most relevant to GIS were my studies of spatial ontology, predicate calculus, and data ethics.
             </span>
 
@@ -102,20 +111,9 @@
               I took a gap year during which I worked and then backpacked independently around South America for
                 about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
                 <a href="https://wwoof.net/">WWOOF</a>, and I took classes on local cuisine.
-            </span>
-            <span>
-            </br>
+              </br></br>
               During the Fall of 2019, I studied abroad at King's College London. 
               While there, I took advanced modules in computer science and philosophy.
-            </span>
-
-          <h2>Troop 52</h2>
-            <span>
-              I was involved in Boy Scouts from the ages of 9-17.
-              As the Patrol Leader of the <i>Flying Bagels</i>, I was awarded Scout of the Year by my troop. 
-              My Eagle Scout project was to rebuild a staircase that was falling apart on a trail near my house. 
-              I include Boy Scouts in the Education section because it's where I learned a lot of what I know about 
-                leadership, self-reliance, and spiders (not to mention how to read a map).
             </span>
         </div>
       </div>
@@ -164,10 +162,6 @@
                 presentable seasonal and annual suitability maps for the Southern California region. 
                 One of these maps can be found <a href="#Portfolio">below</a>.
               I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
-              </br></br>
-              This was my first opportunity to manipulate massive amounts of data. A lot of the datasets we used 
-                contained tens of millions of values, and processing hundreds of these helped me learn how to 
-                optimize my algorithms.
             </span>
         </div>
       </div>
@@ -257,8 +251,8 @@
         <div class="card" id="site-card">
           <div id="card-text-container">
             <h2 class="card-text" id="card-text-header">This website</h2>
-            <p class="card-text">I created this interactive Curriculum Vitae from scratch.</p>
-            <p class="card-text">If you look closely, you might find a very subtle hint implying that I thought of the template while hiking.</p>
+            <p class="card-text">I created this interactive resume from scratch.</p>
+            <p class="card-text">Experience with front-end web develoment is essential in order to develop custom web mapping solutions.</p>
           </div>
         </div> 
 
