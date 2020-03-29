@@ -9,20 +9,26 @@ var toScale = [education, experience, skills, document.getElementById("wg-gradie
 var buttons = divs.map(el => document.getElementById("button-" + el.id.toLowerCase()));
 var vh = $(window).height();
 var vw = $(window).width();
+var isMobile = vh > vw;
 
 // Resize text
-resizeText = function(isMobile) {
+resizeText = function() {
   if (isMobile) {
-    buttons.forEach(el => { el.style.fontSize = "5vw"; })
+    buttons.forEach(el => { 
+      el.style.fontSize = "5vw"; 
+      el.style.paddingLeft = "2vw";
+    });
     document.querySelectorAll('.button-social').forEach(el => { 
       el.style.cssFloat = "left"; 
-      el.style.paddingRight = "3vw";
-      el.style.paddingLeft = "1.5vw";
+      el.style.marginRight = "3vw";
     });
     document.getElementById("homepage-image").style.height = "80vh";
-    document.getElementById("main-gradient").style.height = "80vh";
-    document.getElementById("main-right").style.width = "94vw";
+    document.getElementById("main-gradient").style.height = "80vh"
     document.getElementById("joel").style.fontSize = "20vw";
+    document.getElementById("main-right").style.width = "97vw";
+    document.getElementById("button-top").style.display = "none";
+    document.getElementById("main-left").style.height = (0.07 * vw) + (0.05 * vh) + "px";
+    document.getElementById("wg-gradient").style.backgroundImage = "linear-gradient(#ffffff 10%, #e1f1c4)";
   }
   let cardHeight = document.getElementById("site-card").offsetHeight;
   let cardText   = document.getElementsByClassName("card-text");
@@ -39,7 +45,8 @@ var divOffsets;
 // Ensure correct heights of divs
 resizeDivs = function() {
   vh = $(window).height();
-  toScale.forEach(el => { el.style.height = el.offsetHeight + vh + "px"; });
+  let additional = (isMobile) ? 0 : vh;
+  toScale.forEach(el => { el.style.height = el.offsetHeight + additional + "px"; });
   portfolio.style.height = (0.9 * vh) + "px";
   divOffsets = divs.map(el => el.offsetTop - 0.25 * vh);
 }
@@ -47,22 +54,28 @@ resizeDivs = function() {
 // Change layout if on mobile
 checkMobile = function() {
   if (vh > vw) {
+    isMobile = true;
     toScale.forEach(el => { 
       el.style.width = "95vw";
       el.style.paddingRight = "5vw";
     });
-    resizeText(true);
   } else {
+    isMobile = false;
     toScale.forEach(el => { 
       el.style.width = "45vw"; 
       el.style.paddingRight = "2.5vw";
     });
-    resizeText(false);
   }
+  resizeText();
   resizeDivs();
 }
 checkMobile();
-window.onresize = function() { checkMobile(); }
+window.addEventListener('resize', checkMobile);
+
+// Contact
+contact = function() {
+  window.alert("joelkevlessalzman@gmail.com (Email)\n\nI respond to social media DMs as well");
+}
 
 // Set the buttons while scrolling
 setButtons = function(id) {
@@ -114,34 +127,13 @@ siteCardChange = function(type) {
   } else {
     window.timeout = setTimeout(function() {
       $(cardText).fadeIn(500);
-      $(siteCard).css("background-color", "#88f9a9");
+      $(siteCard).css("background-color", "#e1f1c4");
     }, 500);
     siteCard.onmouseout = function() {
-      clearTimeout(window.timeout);
+      clearTimeout(window.timeout); 
     };
   }
 }
 siteCard.onmouseenter = function() {siteCardChange("enter");}
 siteCard.onmouseleave = function() {siteCardChange("leave");}
 siteCard.onclick      = function() {siteCardChange("click");}
-
-// Open the aquaculture map
-var popup   = document.getElementById("map-popup");
-var barrier = document.getElementById("barrier");
-var aqCard  = document.getElementById("aquaculture");
-var mapImg  = document.getElementById("suitability");
-aqCard.onclick = function() {
-  popup.style.display = "block";
-  let w = document.body.width;
-  mapImg.style.maxHeight = window.innerHeight + "px";
-  barrier.style.width = w - document.body.width;
-  barrier.style.display = "block";
-}
-
-// Close the aquaculture map
-var box = document.getElementById("map-popup");
-box.onclick = function() {
-  popup.style.display = "none";
-  barrier.style.display = "none";
-  window.scrollTo(portfolio);
-}

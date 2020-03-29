@@ -26,14 +26,13 @@
          <header class="header">
 
             <!-- Info -->
-            <div id="gdvp-info"><h3>Individual Voting Power</h3></div>
+            <div id="gdvp-info"><h4 id="gdvp-info-text">Overall Relative Voting Power</h4></div>
 
             <div class="header-container">
 
                 <!-- Buttons -->
                 <a class="button button-main gdvp-header" id="button-back" href="./index">Home</a>
-                <a class="button button-main gdvp-header" id="gdvp-explanation" 
-                    href="http://github.com/joelsalzman/Voting-Power">Explanation</a>
+                <a class="button button-main gdvp-header" id="gdvp-explanation" onclick="popup('exp')">Explanation</a>
 
                 <!-- Tooltip Open/Close -->
                 <a class="button button-main gdvp-header" id="button-tooltip">Toggle Tooltip</a>
@@ -54,131 +53,296 @@
                 <div class="option gdvp-tooltip" id="display-state">
                     <button class="button button-gdvp" onclick="toggleCheckContainer()">Display Individual State(s)</button>
 
-                    <div class="check-container" id="state-checks">
-                        <button class="button" id="button-state" onclick="toggleAllStates()">
-                            <span id="toggleAll-text">Hide All</span>
-                        </button><br>
+                    <a class="button" id="button-state" onclick="toggleAllStates()">Hide All</a>
 
-                        <input type="checkbox" id="check-Alabama" value="1" checked onclick="toggleState('Alabama')">
-                            <span>Alabama</span><br>
-                        <input type="checkbox" id="check-Alaska" value="1" checked onclick="toggleState('Alaska')">
-                            <span>Alaska</span><br>
-                        <input type="checkbox" id="check-Arizona" value="1" checked onclick="toggleState('Arizona')">
-                            <span>Arizona</span><br>
-                        <input type="checkbox" id="check-Arkansas" value="1" checked onclick="toggleState('Arkansas')">
-                            <span>Arkansas</span><br>
-                        <input type="checkbox" id="check-California" value="1" checked onclick="toggleState('California')">
-                            <span>California</span><br>
-                        <input type="checkbox" id="check-Colorado" value="1" checked onclick="toggleState('Colorado')">
-                            <span>Colorado</span><br>
-                        <input type="checkbox" id="check-Connecticut" value="1" checked onclick="toggleState('Connecticut')">
-                            <span>Connecticut</span><br>
-                        <input type="checkbox" id="check-Delaware" value="1" checked onclick="toggleState('Delaware')">
-                            <span>Delaware</span><br>
-                        <input type="checkbox" id="check-DC" value="1" checked onclick="toggleState('District of Columbia')">
-                            <span>District of Columbia</span><br>
-                        <input type="checkbox" id="check-Florida" value="1" checked onclick="toggleState('Florida')">
-                            <span>Florida</span><br>
-                        <input type="checkbox" id="check-Georgia" value="1" checked onclick="toggleState('Georgia')">
-                            <span>Georgia</span><br>
-                        <input type="checkbox" id="check-Hawaii" value="1" checked onclick="toggleState('Hawaii')">
-                            <span>Hawaii</span><br>
-                        <input type="checkbox" id="check-Idaho" value="1" checked onclick="toggleState('Idaho')">
-                            <span>Idaho</span><br>
-                        <input type="checkbox" id="check-Illinois" value="1" checked onclick="toggleState('Illinois')">
-                            <span>Illinois</span><br>
-                        <input type="checkbox" id="check-Indiana" value="1" checked onclick="toggleState('Indiana')">
-                            <span>Indiana</span><br>
-                        <input type="checkbox" id="check-Iowa" value="1" checked onclick="toggleState('Iowa')">
-                            <span>Iowa</span><br>
-                        <input type="checkbox" id="check-Kansas" value="1" checked onclick="toggleState('Kansas')">
-                            <span>Kansas</span><br>
-                        <input type="checkbox" id="check-Kentucky" value="1" checked onclick="toggleState('Kentucky')">
-                            <span>Kentucky</span><br>
-                        <input type="checkbox" id="check-Louisiana" value="1" checked onclick="toggleState('Louisiana')">
-                            <span>Louisiana</span><br>
-                        <input type="checkbox" id="check-Maine" value="1" checked onclick="toggleState('Maine')">
-                            <span>Maine</span><br>
-                        <input type="checkbox" id="check-Maryland" value="1" checked onclick="toggleState('Maryland')">
-                            <span>Maryland</span><br>
-                        <input type="checkbox" id="check-Massachusetts" value="1" checked onclick="toggleState('Massachusetts')">
-                            <span>Massachusetts</span><br>
-                        <input type="checkbox" id="check-Michigan" value="1" checked onclick="toggleState('Michigan')">
-                            <span>Michigan</span><br>
-                        <input type="checkbox" id="check-Minnesota" value="1" checked onclick="toggleState('Minnesota')">
-                            <span>Minnesota</span><br>
-                        <input type="checkbox" id="check-Mississippi" value="1" checked onclick="toggleState('Mississippi')">
-                            <span>Mississippi</span><br>
-                        <input type="checkbox" id="check-Missouri" value="1" checked onclick="toggleState('Missouri')">
-                            <span>Missouri</span><br>
-                        <input type="checkbox" id="check-Montana" value="1" checked onclick="toggleState('Montana')">
-                            <span>Montana</span><br>
-                        <input type="checkbox" id="check-Nebraska" value="1" checked onclick="toggleState('Nebraska')">
-                            <span>Nebraska</span><br>
-                        <input type="checkbox" id="check-Nevada" value="1" checked onclick="toggleState('Nevada')">
-                            <span>Nevada</span><br>
-                        <input type="checkbox" id="check-New Hampshire" value="1" checked onclick="toggleState('New Hampshire')">
-                            <span>New Hampshire</span><br>
-                        <input type="checkbox" id="check-New Jersey" value="1" checked onclick="toggleState('New Jersey')">
-                            <span>New Jersey</span><br>
-                        <input type="checkbox" id="check-New Mexico" value="1" checked onclick="toggleState('New Mexico')">
-                            <span>New Mexico</span><br>
-                        <input type="checkbox" id="check-New York" value="1" checked onclick="toggleState('New York')">
-                            <span>New York</span><br>
-                        <input type="checkbox" id="check-North Carolina" value="1" checked onclick="toggleState('North Carolina')">
-                            <span>North Carolina</span><br>
-                        <input type="checkbox" id="check-North Dakota" value="1" checked onclick="toggleState('North Dakota')">
-                            <span>North Dakota</span><br>
-                        <input type="checkbox" id="check-Ohio" value="1" checked onclick="toggleState('Ohio')">
-                            <span>Ohio</span><br>
-                        <input type="checkbox" id="check-Oklahoma" value="1" checked onclick="toggleState('Oklahoma')">
-                            <span>Oklahoma</span><br>
-                        <input type="checkbox" id="check-Oregon" value="1" checked onclick="toggleState('Oregon')">
-                            <span>Oregon</span><br>
-                        <input type="checkbox" id="check-Pennsylvania" value="1" checked onclick="toggleState('Pennsylvania')">
-                            <span>Pennsylvania</span><br>
-                        <input type="checkbox" id="check-Rhode Island" value="1" checked onclick="toggleState('Rhode Island')">
-                            <span>Rhode Island</span><br>
-                        <input type="checkbox" id="check-South Carolina" value="1" checked onclick="toggleState('South Carolina')">
-                            <span>South Carolina</span><br>
-                        <input type="checkbox" id="check-South Dakota" value="1" checked onclick="toggleState('South Dakota')">
-                            <span>South Dakota</span><br>
-                        <input type="checkbox" id="check-Tennessee" value="1" checked onclick="toggleState('Tennessee')">
-                            <span>Tennessee</span><br>
-                        <input type="checkbox" id="check-Texas" value="1" checked onclick="toggleState('Texas')">
-                            <span>Texas</span><br>
-                        <input type="checkbox" id="check-Utah" value="1" checked onclick="toggleState('Utah')">
-                            <span>Utah</span><br>
-                        <input type="checkbox" id="check-Vermont" value="1" checked onclick="toggleState('Vermont')">
-                            <span>Vermont</span><br>
-                        <input type="checkbox" id="check-Virginia" value="1" checked onclick="toggleState('Virginia')">
-                            <span>Virginia</span><br>
-                        <input type="checkbox" id="check-Washington" value="1" checked onclick="toggleState('Washington')">
-                            <span>Washington</span><br>
-                        <input type="checkbox" id="check-West Virginia" value="1" checked onclick="toggleState('West Virginia')">
-                            <span>West Virginia</span><br>
-                        <input type="checkbox" id="check-Wisconsin" value="1" checked onclick="toggleState('Wisconsin')">
-                            <span>Wisconsin</span><br>
-                        <input type="checkbox" id="check-Wyoming" value="1" checked onclick="toggleState('Wyoming')">
-                            <span>Wyoming</span>
+                    <div class="tool-container" id="state-checks">
+                        <li onclick="toggleState('Alabama')">
+                            <input type="checkbox" class="checkbox" id="check-Alabama" checked>
+                            <span class="check-text">Alabama</span><br>
+                        </li>
+                        <li onclick="toggleState('Alaska')">
+                            <input type="checkbox" class="checkbox" id="check-Alaska" checked>
+                            <span class="check-text">Alaska</span><br>
+                        </li>
+                        <li onclick="toggleState('Arizona')">
+                            <input type="checkbox" class="checkbox" id="check-Arizona" checked>
+                            <span class="check-text">Arizona</span><br>
+                        </li>
+                        <li onclick="toggleState('Arkansas')">
+                            <input type="checkbox" class="checkbox" id="check-Arkansas" checked>
+                            <span class="check-text">Arkansas</span><br>
+                        </li>
+                        <li onclick="toggleState('California')">
+                            <input type="checkbox" class="checkbox" id="check-California" checked>
+                            <span class="check-text">California</span><br>
+                        </li>
+                        <li onclick="toggleState('Colorado')">
+                            <input type="checkbox" class="checkbox" id="check-Colorado" checked>
+                            <span class="check-text">Colorado</span><br>
+                        </li>
+                        <li onclick="toggleState('Connecticut')">
+                            <input type="checkbox" class="checkbox" id="check-Connecticut" checked>
+                            <span class="check-text">Connecticut</span><br>
+                        </li>
+                        <li onclick="toggleState('Delaware')">
+                            <input type="checkbox" class="checkbox" id="check-Delaware" checked>
+                            <span class="check-text">Delaware</span><br>
+                        </li>
+                        <li onclick="toggleState('District of Columbia')">
+                            <input type="checkbox" class="checkbox" id="check-District of Columbia" checked>
+                            <span class="check-text">District of Columbia</span><br>
+                        </li>
+                        <li onclick="toggleState('Florida')">
+                            <input type="checkbox" class="checkbox" id="check-Florida" checked>
+                            <span class="check-text">Florida</span><br>
+                        </li>
+                        <li onclick="toggleState('Georgia')">
+                            <input type="checkbox" class="checkbox" id="check-Georgia" checked>
+                            <span class="check-text">Georgia</span><br>
+                        </li>
+                        <li onclick="toggleState('Hawaii')">
+                            <input type="checkbox" class="checkbox" id="check-Hawaii" checked>
+                            <span class="check-text">Hawaii</span><br>
+                        </li>
+                        <li onclick="toggleState('Idaho')">
+                            <input type="checkbox" class="checkbox" id="check-Idaho" checked>
+                            <span class="check-text">Idaho</span><br>
+                        </li>
+                        <li onclick="toggleState('Illinois')">
+                            <input type="checkbox" class="checkbox" id="check-Illinois" checked>
+                            <span class="check-text">Illinois</span><br>
+                        </li>
+                        <li onclick="toggleState('Indiana')">
+                            <input type="checkbox" class="checkbox" id="check-Indiana" checked>
+                            <span class="check-text">Indiana</span><br>
+                        </li>
+                        <li onclick="toggleState('Iowa')">
+                            <input type="checkbox" class="checkbox" id="check-Iowa" checked>
+                            <span class="check-text">Iowa</span><br>
+                        </li>
+                        <li onclick="toggleState('Kansas')">
+                            <input type="checkbox" class="checkbox" id="check-Kansas" checked>
+                            <span class="check-text">Kansas</span><br>
+                        </li>
+                        <li onclick="toggleState('Kentucky')">
+                            <input type="checkbox" class="checkbox" id="check-Kentucky" checked>
+                            <span class="check-text">Kentucky</span><br>
+                        </li>
+                        <li onclick="toggleState('Louisiana')">
+                            <input type="checkbox" class="checkbox" id="check-Louisiana" checked>
+                            <span class="check-text">Louisiana</span><br>
+                        </li>
+                        <li onclick="toggleState('Maine')">
+                            <input type="checkbox" class="checkbox" id="check-Maine" checked>
+                            <span class="check-text">Maine</span><br>
+                        </li>
+                        <li onclick="toggleState('Maryland')">
+                            <input type="checkbox" class="checkbox" id="check-Maryland" checked>
+                            <span class="check-text">Maryland</span><br>
+                        </li>
+                        <li onclick="toggleState('Massachusetts')">
+                            <input type="checkbox" class="checkbox" id="check-Massachusetts" checked>
+                            <span class="check-text">Massachusetts</span><br>
+                        </li>
+                        <li onclick="toggleState('Michigan')">
+                            <input type="checkbox" class="checkbox" id="check-Michigan" checked>
+                            <span class="check-text">Michigan</span><br>
+                        </li>
+                        <li onclick="toggleState('Minnesota')">
+                            <input type="checkbox" class="checkbox" id="check-Minnesota" checked>
+                            <span class="check-text">Minnesota</span><br>
+                        </li>
+                        <li onclick="toggleState('Mississippi')">
+                            <input type="checkbox" class="checkbox" id="check-Mississippi" checked>
+                            <span class="check-text">Mississippi</span><br>
+                        </li>
+                        <li onclick="toggleState('Missouri')">
+                            <input type="checkbox" class="checkbox" id="check-Missouri" checked>
+                            <span class="check-text">Missouri</span><br>
+                        </li>
+                        <li onclick="toggleState('Montana')">
+                            <input type="checkbox" class="checkbox" id="check-Montana" checked>
+                            <span class="check-text">Montana</span><br>
+                        </li>
+                        <li onclick="toggleState('Nebraska')">
+                            <input type="checkbox" class="checkbox" id="check-Nebraska" checked>
+                            <span class="check-text">Nebraska</span><br>
+                        </li>
+                        <li onclick="toggleState('Nevada')">
+                            <input type="checkbox" class="checkbox" id="check-Nevada" checked>
+                            <span class="check-text">Nevada</span><br>
+                        </li>
+                        <li onclick="toggleState('New Hampshire')">
+                            <input type="checkbox" class="checkbox" id="check-New Hampshire" checked>
+                            <span class="check-text">New Hampshire</span><br>
+                        </li>
+                        <li onclick="toggleState('New Jersey')">
+                            <input type="checkbox" class="checkbox" id="check-New Jersey" checked>
+                            <span class="check-text">New Jersey</span><br>
+                        </li>
+                        <li onclick="toggleState('New Mexico')">
+                            <input type="checkbox" class="checkbox" id="check-New Mexico" checked>
+                            <span class="check-text">New Mexico</span><br>
+                        </li>
+                        <li onclick="toggleState('New York')">
+                            <input type="checkbox" class="checkbox" id="check-New York" checked>
+                            <span class="check-text">New York</span><br>
+                        </li>
+                        <li onclick="toggleState('North Carolina')">
+                            <input type="checkbox" class="checkbox" id="check-North Carolina" checked>
+                            <span class="check-text">North Carolina</span><br>
+                        </li>
+                        <li onclick="toggleState('North Dakota')">
+                            <input type="checkbox" class="checkbox" id="check-North Dakota" checked>
+                            <span class="check-text">North Dakota</span><br>
+                        </li>
+                        <li onclick="toggleState('Ohio')">
+                            <input type="checkbox" class="checkbox" id="check-Ohio" checked>
+                            <span class="check-text">Ohio</span><br>
+                        </li>
+                        <li onclick="toggleState('Oklahoma')">
+                            <input type="checkbox" class="checkbox" id="check-Oklahoma" checked>
+                            <span class="check-text">Oklahoma</span><br>
+                        </li>
+                        <li onclick="toggleState('Oregon')">
+                            <input type="checkbox" class="checkbox" id="check-Oregon" checked>
+                            <span class="check-text">Oregon</span><br>
+                        </li>
+                        <li onclick="toggleState('Pennsylvania')">
+                            <input type="checkbox" class="checkbox" id="check-Pennsylvania" checked>
+                            <span class="check-text">Pennsylvania</span><br>
+                        </li>
+                        <li onclick="toggleState('Rhode Island')">
+                            <input type="checkbox" class="checkbox" id="check-Rhode Island" checked>
+                            <span class="check-text">Rhode Island</span><br>
+                        </li>
+                        <li onclick="toggleState('South Carolina')">
+                            <input type="checkbox" class="checkbox" id="check-South Carolina" checked>
+                            <span class="check-text">South Carolina</span><br>
+                        </li>
+                        <li onclick="toggleState('South Dakota')">
+                            <input type="checkbox" class="checkbox" id="check-South Dakota" checked>
+                            <span class="check-text">South Dakota</span><br>
+                        </li>
+                        <li onclick="toggleState('Tennessee')">
+                            <input type="checkbox" class="checkbox" id="check-Tennessee" checked>
+                            <span class="check-text">Tennessee</span><br>
+                        </li>
+                        <li onclick="toggleState('Texas')">
+                            <input type="checkbox" class="checkbox" id="check-Texas" checked>
+                            <span class="check-text">Texas</span><br>
+                        </li>
+                        <li onclick="toggleState('Utah')">
+                            <input type="checkbox" class="checkbox" id="check-Utah" checked>
+                            <span class="check-text">Utah</span><br>
+                        </li>
+                        <li onclick="toggleState('Vermont')">
+                            <input type="checkbox" class="checkbox" id="check-Vermont" checked>
+                            <span class="check-text">Vermont</span><br>
+                        </li>
+                        <li onclick="toggleState('Virginia')">
+                            <input type="checkbox" class="checkbox" id="check-Virginia" checked>
+                            <span class="check-text">Virginia</span><br>
+                        </li>
+                        <li onclick="toggleState('Washington')">
+                            <input type="checkbox" class="checkbox" id="check-Washington" checked>
+                            <span class="check-text">Washington</span><br>
+                        </li>
+                        <li onclick="toggleState('West Virginia')">
+                            <input type="checkbox" class="checkbox" id="check-West Virginia" checked>
+                            <span class="check-text">West Virginia</span><br>
+                        </li>
+                        <li onclick="toggleState('Wisconsin')">
+                            <input type="checkbox" class="checkbox" id="check-Wisconsin" checked>
+                            <span class="check-text">Wisconsin</span><br>
+                        </li>
+                        <li onclick="toggleState('Wyoming')">
+                            <input type="checkbox" class="checkbox" id="check-Wyoming" checked>
+                            <span class="check-text">Wyoming</span><br>
+                        </li>
                     </div>
                 </div>
 
-                <!--
                 <div class="option gdvp-tooltip" id="display-field">
-                    <button class="button button-gdvp" onclick="">Change Display Field</button>
+                    <button class="button button-gdvp" onclick="toggleFieldContainer()">Change Display Field</button>
+                    <div class="tool-container" id="field-container">
+                        <h3>Individual Voting Power</h3>
+                        <li onclick="changeField('rawUtility')">
+                            <input type="checkbox" class="checkbox circle" id="rawUtility" checked>
+                            <span class="check-text">Overall Voting Power</span><br>
+                        </li>
+                        <li onclick="changeField('h_rawMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="h_rawMargin_avg">
+                            <span class="check-text">Average House Margin</span><br>
+                        </li>
+                        <li onclick="changeField('s_rawMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="s_rawMargin_avg">
+                            <span class="check-text">Average Senate Margin</span><br>
+                        </li>
+                        <li onclick="changeField('p_rawMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="p_rawMargin_avg">
+                            <span class="check-text">Average Presidential Margin</span><br>
+                        </li>
+                        <h3>Proportional Voting Power</h3>
+                        <li onclick="changeField('decUtility')">
+                            <input type="checkbox" class="checkbox circle" id="decUtility">
+                            <span class="check-text">Overall Voting Power</span><br>
+                        </li>
+                        <li onclick="changeField('h_decMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="h_decMargin_avg">
+                            <span class="check-text">Average House Margin</span><br>
+                        </li>
+                        <li onclick="changeField('s_decMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="s_decMargin_avg">
+                            <span class="check-text">Average Senate Margin</span><br>
+                        </li>
+                        <li onclick="changeField('p_decMargin_avg')">
+                            <input type="checkbox" class="checkbox circle" id="p_decMargin_avg">
+                            <span class="check-text">Average Presidential Margin</span><br>
+                        </li>
+                        <h3>Other</h3>
+                        <li onclick="changeField('changes')">
+                            <input type="checkbox" class="checkbox circle" id="changes">
+                            <span class="check-text">Number of Times Redistricted</span><br>
+                        </li>
+                    </div>
                 </div>
-
-                <div class="option gdvp-tooltip" id="display-election">
-                    <button class="button button-gdvp" onclick="">Show Single Election</button>
-                </div>-->
 
             </div>
 
         </div>
 
+        <div class="popup-container" id="exp-container">
+            <div class="barrier" id="exp-barrier", onclick="popup('exp')"></div>
+            <div class="popup-main popup-text" id="exp-main">
+                <h2>Where do Votes Matter Most?</h2>
+                <h3>
+                    Your voting power depends which elections you can vote in. In the United States, where you live determines which
+                    elections those are. This map models how voting power in federal elections has been geographically distributed
+                    since 1999.
+                </h3>
+                <h3>
+                    The polygons represent areas that were in different congressional districts at some time. They were created by
+                    overlaying every congressional district map implemented since 1999. Voting data were then geocoded so that for each 
+                    polygon, it is possible to see the outcome of every federal election in which someone who lived in that area would 
+                    have been able to vote.
+                </h3>
+                <h3>
+                    The "Overall Voting Power" fields are modeled utility values that represent total voting power. They are derived
+                    from the average margins in House, Senate, and Presidential elections. Both raw (# of votes) and proportional
+                    (% of votes) average margins for all three types of elections can be seen on this map. You can also see how
+                    redistricting affected the map by looking at which district each polygon was in at which time.
+                </h3>
+                <h3>
+                   You can see a more detailed explanation of the methodology, a summary of the results, and the code involved in the 
+                   analysis in the <a href="https://github.com/joelsalzman/Voting-Power/">GitHub repository</a>.
+                </h3>
+            </div>
+        </div>
+
         <!-- Load the JavaScript -->
         <script src="./gdvp.js"></script>
+        <script src="./popups.js"></script>
 
     </body>
 

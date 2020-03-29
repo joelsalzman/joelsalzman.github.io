@@ -137,6 +137,7 @@ a {
     float: right;
     height: 6vh;
     width: 6vh;
+    margin-right: 3vw;
     background-size: contain;
     background-repeat: no-repeat;
     margin-top: 2vh;
@@ -145,7 +146,6 @@ a {
 
 #button-GitHub {
     background-image: url("./pics/GitHub.png");
-    margin-right: 3vw;
 }
 
 #button-GitHub:hover {
@@ -154,11 +154,18 @@ a {
 
 #button-LinkedIn {
     background-image: url("./pics/LinkedIn.jpg");
-    margin-right: 3vw;
 }
 
 #button-LinkedIn:hover {
     background-image: url("./pics/LinkedIn_gray.jpg");
+}
+
+#button-Instagram {
+    background-image: url("./pics/Instagram.png");
+}
+
+#button-Instagram:hover {
+    background-image: url("./pics/Instagram_gray.png");
 }
 
 #button-hire {
@@ -211,7 +218,7 @@ a {
 }
 
 #wg-gradient {
-    background-image: linear-gradient(#ffffff, #88f9a9);
+    background-image: linear-gradient(#ffffff, #e1f1c4);
     height: 80vh;
     width: 45vw;
     padding-left: 2.5vw;
@@ -221,7 +228,7 @@ a {
 
 .info {
     width: 45vw;
-    background-color: #88f9a9;
+    background-color: #e1f1c4;
     float: left;
     padding: 5vh 2.5vw;
     padding-top: 10vh;
@@ -263,7 +270,7 @@ a {
 #ga-gradient {
     height: 30vh;
     width: 45vw;
-    background-image:linear-gradient(#88f9a9, rgb(0, 0, 0, 0));
+    background-image:linear-gradient(#e1f1c4, rgb(0, 0, 0, 0));
     float: left;
     padding: 5vh 2.5vw;
     padding-top: 10vh;
@@ -321,40 +328,106 @@ a {
     object-fit: cover;
 }
 
-/* Popup for maps */
+/* Popup styling */
 
-#barrier {
-    display: none;
-    height: 100%;
-    width: 2vh;
-    background-color: black;
-    float: right;
-    overflow: hidden;
-}
-
-.popup {
+.popup-container {
     display: none;
     position: fixed;
+    height: 100vh;
+    width: 100vw;
     z-index: 1;
-    left: 0;
     top: 0;
-    width: 100%;
+    left: 0;
+    text-align: left;
+    contain: strict;
+}
+
+.barrier {
+    height: 100vh;
+    width: 100vw;
+    z-index: 2;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.95);
+}
+
+.barrier:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.popup-main {
+    display: block;
+    position: fixed;
+    z-index: 3;
+    top: 0;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.9);
+    margin: 0 auto;
+    animation-name: zoom;
+    animation-duration: 0.8s;
 }
 
 .map-img {
     display: block;
     z-index: 2;
-    margin: auto;
-    animation-name: zoom;
-    animation-duration: 0.8s;
+    margin: 0 auto;
 } 
 
 @keyframes zoom {
     from {transform:scale(0)}
     to {transform:scale(1)}
+}
+
+#contact-popup {
+    position: fixed;
+    display: block;
+    height: 98vh;
+    width: 70vw;
+    margin-left: 15vw;
+    border: 1vh solid black;
+    border-radius: 1vh;
+    contain: strict;
+    overflow: hidden;
+    z-index: 4;
+
+    background-image: url("./pics/prof-pic.jpg");
+    background-position: center;
+    background-repeat: none;
+    background-size: cover;
+}
+
+#email {
+    display: block;
+    height: 8vh;
+    margin-top: 64vh;
+    background-color: white;
+    text-align: center;
+    padding-top: 1.5vh;
+    padding-bottom: 0;
+    z-index: 5;
+    contain: strict;
+}
+.popup-text {
+    background-color: #e1f1c4;
+    word-wrap: normal;
+    overflow-y: auto;
+    contain: strict;
+    height: 10vh;
+}
+
+.popup-text h2, h3 {
+    padding: 0 2vh;
+    text-align: left;
+}
+
+#exp-main {
+    background-color: white;
+    height: 100vh;
+    width: 70vw;
+    margin-left: 15vw;
+}
+
+#exp-main h3 {
+    font-weight: normal;
 }
 
 /* Interactive map page */
@@ -387,6 +460,18 @@ a {
     border-radius: 1vh;
     z-index: 1;
     position: absolute;
+    contain: strict;
+}
+
+#gdvp-info h4 {
+    margin: 2.5vh;
+    font-size: 3vh;
+}
+
+#gdvp-info h3 {
+    margin: 2vh;
+    font-size: 4vh;
+    text-align: center;
 }
 
 #button-tooltip {
@@ -400,30 +485,66 @@ a {
     width: 100vw;
 }
 
+/* GDVP Map */
+
 #gdvp-map {
     width: 100vw;
     height: 90vh;
-    overflow: hidden;
+    contain: strict;
     float: left;
 }
 
-#legend-container {
+.leaflet-control {
+    padding-left: 1vh;
+}
+
+.control-container {
     background-color: white;
-    opacity: 0.7;
-    height: 30vh;
-    width: 20vh;
+    opacity: 0.9;
+    height: max-content;
+    width: max-content;
+    overflow: auto;
+    border: 2px solid black;
+    border-radius: 1vh;
+}
+
+#legend-title {
+    margin: 1vh 1vh 1vh 0;
+    font-size: 3vh;
+    font-weight: bold;
 }
 
 #legend-bar {
-    height: 90%;
-    width: 50%;
+    height: 10vh;
+    width: 5vh;
+    margin: 1.5vh 1.5vh;
     float: left;
-    margin-left: 1vw;
-    margin-top: 1vh;
+    border: 1px solid black;
 }
 
-#legend-key {
-    font-size: 2.5vh;
+.legend-key {
+    font-size: 2vh;
+    position: absolute;
+    padding-left: 7.5vh;
+}
+
+#key-top {
+    padding-top: 0.5vh;
+}
+
+#key-bottom {
+    padding-top: 9.5vh;
+}
+
+.leaflet-control-scale-line {
+    height: 3vh;
+    border: 1px solid black;
+}
+
+/* Tooltip */
+
+.button-gdvp {
+    font-size: 3vh;
 }
 
 #tooltip {
@@ -432,19 +553,85 @@ a {
     height: 90vh;
     float: right;
     background-color: white;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .option {
-    padding: 3vh 3vh 0;
-    margin-top: 3vh;
+    margin: 6vh 3vh 0;
 }
 
-.check-container {
-    height: 20vh;
-    margin: 3vh 3vh;
+.tool-container {
+    display: none;
+    height: 200px;
+    margin: 0 3vh;
     contain: strict;
     overflow: auto;
-    display: none;
     border: 1px solid black;
+}
+
+#button-state {
+    display: none;
+    width: max-content;
+    margin: 15px 30px 0 0;
+    padding: 12px 12px;
+    text-align: left;
+    font-size: 18px;
+}
+
+#button-state:hover {
+    background-color: #dbdbdb;
+}
+
+.checkbox {
+    -webkit-appearance: none;
+    background-color: #ffffff;
+    height: 24px;
+    width: 24px;
+    border: 1px solid black;
+    display: inline-block;
+    position: relative;
+    transition-duration: 1s;
+}
+
+.circle {
+    border-radius: 12px;
+}
+
+.checkbox:hover {
+    border: 2px solid black;
+}
+
+.checkbox:checked {
+    background-color: #aaaaaa;
+}
+
+.check-text {
+    margin-top: 3px;
+    padding-left: 10px;
+    font-size: 18px;
+    display: inline-block;
+    position: absolute;
+}
+
+#field-container {
+    margin-top: 30px;
+}
+
+#field-container h3 {
+    margin: 5px 5px;
+    font-size: 30px;
+}
+
+.tool-container li {
+    list-style-type: none;
+    white-space: nowrap;
+}
+
+.tool-container li:hover {
+    background-color: #DBDBDB;
+}
+
+.button-field {
+    padding: 10px 10px;
+    position: relative;
 }

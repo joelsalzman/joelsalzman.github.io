@@ -13,7 +13,7 @@
 
   <!---------------------------------------------------------------------------------->
 
-  <body style="background-color: #88f9a9;">
+  <body style="background-color: #e1f1c4;">
 
     <!-- Initial view -->
     <div class="main-image" id="homepage-image">
@@ -29,9 +29,10 @@
 
       <!-- Links -->
       <div class="header-container" id="main-right">
-        <a class="button button-bordered" id="button-hire" href="mailto:joelkevlessalzman@gmail.com">CONTACT</a>
-        <a class="button-social" id="button-LinkedIn" href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
-        <a class="button-social" id="button-GitHub" href="http://github.com/joelsalzman"></a>
+        <a class="button button-bordered" id="button-hire" onclick="popup('contact')">CONTACT</a>
+        <a class="button-social" id="button-LinkedIn"  href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
+        <a class="button-social" id="button-GitHub"    href="http://github.com/joelsalzman"></a>
+        <a class="button-social" id="button-Instagram" href="https://www.instagram.com/salzman.joel"></a>
       </div>
 
       <!-- Homepage tabs -->
@@ -62,7 +63,7 @@
             <span>
               I will graduate Magna Cum Laude in June 2020 with two Bachelors of Arts. 
                 I finished my Geography requirements last spring (the same term I was inducted into Phi Beta Kappa)
-                and am finishing my Philosophy degree this term.
+                and finished my Philosophy requirements just before covid-19 shuttered campus.
                 While in college, I've competed as part of the UCSB Climbing Team, 
                 worked in the wilderness with UCSB Adventure Programs,
                 and eaten lots of bagels with the Santa Barbara Hillel. 
@@ -73,12 +74,17 @@
             <span>
               My degree in "Where?"
               </br></br>
-              I have pursued two topics of research. The first is voting. 
-                I performed an analysis of where votes matter most, which you can see <a href="#Portfolio">below</a>.
-                I'm also developing an algorithm to identify precincts with inordinately diluted voting power
+              My coursework 
+              </br></br>
+              The first research topic I've pursued is voting. 
+                I wanted to know where votes have mattered most across the United States in federal elections in the past twenty years.
+                  The results are <a href="#Portfolio">below</a>.
+                  I'm also developing an algorithm to identify precincts with inordinately diluted voting power
                   for use as potential evidence of gerrymandering.
-                The second is indoor cartography. Our lab built 3D models of indoor spaces from LIDAR scans using deep 
-                learning classification techniques and we're working on programatically generating millimeter-accurate models.
+              </br></br>
+                The second topic I've researched is indoor cartography. 
+                  Our lab built 3D models of indoor spaces from LIDAR scans using deep learning classification techniques 
+                  to ultimately develop a programatic method of generating millimeter-accurate models.
             </span>
           
           <h3>Philosophy (Ethics and Public Policy)</h3>
@@ -86,14 +92,14 @@
               My degree in "Why?"
               </br></br>
               My interests primarily regard political ethics and metaphysics.
-              My coursework has related to GIS through my studies of spatial ontology, logic, and data ethics.
+              The coursework most relevant to GIS were my studies of spatial ontology, predicate calculus, and data ethics.
             </span>
 
           <h2>Abroad</h2>
             <span>
               I took a gap year during which I worked and then backpacked independently around South America for
                 about nine months. In that time my Spanish improved to the point of fluency, I volunteered with
-                WWOOF, and I took classes on local cuisine. I also did lots of hiking.
+                <a href="https://wwoof.net/">WWOOF</a>, and I took classes on local cuisine. I also did lots of hiking.
             </span>
             <span>
             </br>
@@ -121,9 +127,9 @@
           <h2>SeaSketch</h2>
             <span>
               <a href="https://www.seasketch.org/">SeaSketch</a> is a GIS application developed by
-                <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for marine spatial planning.
-                My job consists of wrangling data with our partners across the world to visualize projects
-                and assisting with the JavaScript development of SeaSketch 2.0.
+                <a href="https://www.nceas.ucsb.edu/">NCEAS</a> for conservation-focused marine spatial planning.
+                My job consists of wrangling data with our partners across the world, writing tools for individual projects,
+                and assisting with the development of SeaSketch 2.0.
             </span>
           
           <h2>Apex Clean Energy</h2>
@@ -150,12 +156,13 @@
           <h2>Primary Ocean Producers</h2>
             <span>
               <a href="http://www.primaryocean.com/">Primary Ocean Producers</a> is an aquaculture startup. 
-              They were awarded a contract by the ARPA-E MARINER program to determine the most suitable regions 
-                in federal and state waters to grow giant kelp (<i>Macrocystis pyrifera</i>). 
+              They partnered with <a href="https://catalinasearanch.com/">Catalina Sea Ranch</a> to fulfill an
+                <a href="https://arpa-e.energy.gov/?q=programs/mariner">ARPA-E MARINER</a> contract to determine 
+                the most suitable regions in federal and state waters to grow giant kelp (<i>Macrocystis pyrifera</i>). 
               </br></br>
               My role as the GIS Specialist was to handle all of the non-binary siting factors and generate
                 presentable seasonal and annual suitability maps for the Southern California region. 
-                Some of these maps can be found <a href="#Portfolio">below</a>.
+                One of these maps can be found <a href="#Portfolio">below</a>.
                 I also coordinated with NOAA and ARPA-E to acquire data and document our progress as required.
               </br></br>
               This was my first opportunity to manipulate massive amounts of data. A lot of the datasets we used 
@@ -183,7 +190,7 @@
             <tr>
               <td class="skillName">Python</td>
               <td class="skillName">R</td>
-              <td class="skillName">SQL</td>
+              <td class="skillName">SQL (Post, MS)</td>
             </tr>
             <tr>
               <td class="skillImg skill_1"><img src="./pics/amazing.svg" alt="Superb" title="Superb"></td>
@@ -213,7 +220,7 @@
 
             <tr><td colspan=3><h2>Applications</h2></td></tr>
             <tr>
-              <td class="skillName">ESRI</td>
+              <td class="skillName">ESRI Stack</td>
               <td class="skillName">QGIS</td>
               <td class="skillName">ENVI</td>
             </tr>
@@ -250,12 +257,12 @@
         <div class="card" id="site-card">
           <div id="card-text-container">
             <h2 class="card-text" id="card-text-header">This website</h2>
-            <p class="card-text">I created this interactive CV almost entirely from scratch.</p>
+            <p class="card-text">I created this interactive Curriculum Vitae from scratch.</p>
             <p class="card-text">If you look closely, you might find a very subtle hint implying that I thought of the template while hiking.</p>
           </div>
         </div> 
 
-        <div class="card" id="aquaculture">
+        <div class="card" id="aquaculture" onclick="popup('aq')">
           <img src="pics/kelp.jpg" alt="M. Pyrifera (pic from NOAA Photo Library)" class="card-img">
         </div>
 
@@ -263,14 +270,25 @@
     </div>
 
     <!-- Imagebox for aquaculture maps -->
-    <div id="barrier"></div>
-    <div class="popup" id="map-popup">
-      <img src="./pics/Regional_Federal.png" alt="Image failed to load" class="map-img" id="suitability">
+    <div class="popup-container" id="aq-container">
+      <div class="barrier" id="aq-barrier" onclick="popup('aq')"></div>
+      <div class="popup-main" id="aq-popup">
+        <img src="./pics/Regional_Federal.png" alt="Image failed to load" class="map-img" id="suitability">
+      </div>
+    </div>
+
+    <!-- Contact popup -->
+    <div class="popup-container" id="contact-container">
+      <div class="barrier" id="contact-barrier" onclick="popup('contact')"></div>
+      <div class="popup-main contact-div" id="contact-popup">
+          <h2 class="contact-div" id="email">joelkevlessalzman@gmail.com</h2>
+      </div>
     </div>
 
   </body>
 
   <!-- Load the JavaScript -->
   <script src="./index.js"></script>
+  <script src="./popups.js"></script>
 
 </html>
