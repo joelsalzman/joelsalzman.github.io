@@ -60,7 +60,7 @@ a {
 }
 
 .main-image {
-    background-image: url("./pics/topomap.jpg");
+    background-image: url("./pics/topomap.svg");
     height: 90vh;
     background-position: center;
     background-repeat: no-repeat;
@@ -193,9 +193,17 @@ a {
 
 /* Body */
 
+#trail {
+    position: absolute;
+    margin-right: 0;
+    height: 110vh;
+    right: 0;
+
+}
+
 .content {
     margin: 0px;
-    background-image: url("./pics/topomap.jpg");
+    background-image: url("./pics/topomap.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -243,6 +251,10 @@ a {
 .research {
     text-decoration: underline; 
     display: inline;
+}
+
+.date {
+    font-size: 2.5vh;
 }
 
 #Skills table {
@@ -633,6 +645,7 @@ a {
 }
 
 .tool-container li {
+    padding-top: 4px;
     list-style-type: none;
     white-space: nowrap;
 }

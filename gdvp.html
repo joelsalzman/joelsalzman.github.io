@@ -308,6 +308,10 @@
                     </div>
                 </div>
 
+                <div class="option gdvp-tooltip">
+                    <button class="button button-gdvp" id="set-scheme" onclick="setScheme()">Set Colors to Monochrome</button>
+                </div>
+
             </div>
 
         </div>
@@ -329,13 +333,13 @@
                 </h3>
                 <h3>
                     The "Overall Voting Power" fields are modeled utility values that represent total voting power. They are derived
-                    from the average margins in House, Senate, and Presidential elections. Both raw (# of votes) and proportional
-                    (% of votes) average margins for all three types of elections can be seen on this map. You can also see how
-                    redistricting affected the map by looking at which district each polygon was in at which time.
+                    from the average margins in House, Senate, and Presidential elections. Both <b>raw (# of votes)</b> and 
+                    <b>proportional (% of votes)</b> average margins for all three types of elections can be seen on this map. 
+                    You can also see how redistricting affected the map by looking at which district each polygon was in at which time.
                 </h3>
                 <h3>
-                   You can see a more detailed explanation of the methodology, a summary of the results, and the code involved in the 
-                   analysis in the <a href="https://github.com/joelsalzman/Voting-Power/">GitHub repository</a>.
+                    This project's <a href="https://github.com/joelsalzman/Voting-Power/">GitHub repository</a> contains a more detailed
+                    explanation of the methodology, a summary of the results, and the code involved in the analysis.
                 </h3>
             </div>
         </div>

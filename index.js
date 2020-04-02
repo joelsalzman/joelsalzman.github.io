@@ -113,6 +113,11 @@ window.onscroll = function() {
     setButtons();
   }
 
+  // Vector gimmick
+  if (!isMobile) {
+    
+  }
+
 };
 
 // Toggle site card text

@@ -3,10 +3,11 @@ var vh = $(window).height();
 var vw = $(window).width();
 var isMobile = vh > vw;
 var field = "rawUtility";
+var scheme = "multichrome";
 var tooltipButton = document.getElementById("button-tooltip");
 
 // Set up the map
-var map  = L.map('gdvp-map').setView((isMobile) ? [20, -99] : [38, -93], (isMobile) ? 5 : 4);
+var map  = (isMobile) ? L.map('gdvp-map').setView([20, -99], 5) : L.map('gdvp-map').setView([38, -93], 4);
 var gdvp = document.getElementById("gdvp-map");
 
 // Fields
@@ -14,74 +15,73 @@ var fieldDict = {
   "rawUtility": {
     name:    "Overall Relative Voting Power",
     title:   "Overall Relative<br>Voting Power",
-    scheme:  "black-ryg",
-    range:   [0, 1],
-    labels:  ["0.4 (Blowouts)", "1 (Ties)"],
+    range:   [.4, .6],
+    labels:  ["0.4 (Blowouts)", "1.0 (Ties)"],
+    flip:    false,
     display: function(val) { return String(val).slice(0, 6); }
   },
   "decUtility": {
     name:    "Overall Election Competitiveness",
     title:   "Overall Election<br>Competitiveness",
-    scheme:  "black-ryg",
-    range:   [0, 1],
-    labels:  ["0.0 (Safe)", "0.9293 (Swing)"],
+    range:   [.4, .6],
+    labels:  ["0.4 (Safe)", "1.0 (Swing)"],
+    flip:    false,
     display: function(val) { return String(val).slice(0, 6); }
   },
   "h_rawMargin_avg": {
     name:    "House Average Raw Margin",
     title:   "House Average<br>Raw Margin",
-    scheme:  "purpscale",
     range:   [17193, 192181],
-    labels:  ["17,193 Votes", "192,181 Votes"],
-    display: function(val) { return parseInt(val); }
+    labels:  ["192,181 Votes", "17,193 Votes"],
+    flip:    true,
+    display: function(val) { return parseInt(val).toLocaleString() + " Votes"; }
   },
   "s_rawMargin_avg": {
     name:    "Senate Average Raw Margin",
     title:   "Senate Average<br>Raw Margin",
-    scheme:  "purpscale",
     range:   [38699, 2064244],
-    labels:  ["38,699 Votes", "2,064,224 Votes"],
-    display: function(val) { return parseInt(val); }
+    labels:  ["2,064,224 Votes", "38,699 Votes"],
+    flip:    true,
+    display: function(val) { return parseInt(val).toLocaleString() + " Votes"; }
   },
   "p_rawMargin_avg": {
     name:    "Presidential Average Raw Margin",
     title:   "Presidential<br>Average Raw Margin",
-    scheme:  "purpscale",
     range:   [25431, 2615286],
-    labels:  ["25,431 Votes", "2,615,286 Votes"],
-    display: function(val) { return parseInt(val); }
+    labels:  ["2,615,286 Votes", "25,431 Votes"],
+    flip:    true,
+    display: function(val) { return parseInt(val).toLocaleString() + " Votes"; }
   },
   "h_decMargin_avg": {
     name:    "House Proportional Average Margin",
     title:   "House Proportional<br>Average Margin",
-    scheme:  "purpscale",
     range:   [0, 1],
-    labels:  ["0% (Ties)", "100% (Blowouts)"],
+    labels:  ["100% (Blowouts)", "0% (Ties)"],
+    flip:    true,
     display: function(val) { return String(val * 100).slice(0, 7) + "%"; }
   },
   "s_decMargin_avg": {
     name:    "Senate Proportional Average Margin",
     title:   "Senate Proportional<br>Average Margin",
-    scheme:  "purpscale",
     range:   [0, 1],
-    labels:  ["0% (Ties)", "100% (Blowouts)"],
+    labels:  ["100% (Blowouts)", "0% (Ties)"],
+    flip:    true,
     display: function(val) { return String(val * 100).slice(0, 7) + "%"; }
   },
   "p_decMargin_avg": {
     nname:   "Presidential Proportional Average Margin",
     title:   "Presidential Proportional<br>Average Margin",
-    scheme:  "purpscale",
     range:   [0, 1],
-    labels:  ["0% (Ties)", "100% (Blowouts)"],
+    labels:  ["100% (Blowouts)", "0% (Ties)"],
+    flip:    true,
     display: function(val) { return String(val * 100).slice(0, 7) + "%"; }
   },
   "changes": {
     name:    "Number of Times Redistricted",
     title:   "Number of Times<br>Redistricted",
-    scheme:  "purpscale",
     range:   [0, 5],
     labels:  ["0", "5"],
-    display: function(val) { return val; }
+    flip:    false,
   },
   "changeDesc": {
     display: function(val) { return val; }
@@ -119,48 +119,67 @@ formatHeader = function() {
 window.onload = formatHeader;
 window.addEventListener('resize', formatHeader);
 info.update = function(properties) {
-  if (properties) {
-    var f = (field == "changes") ? "changeDesc" : field;
-    info.innerHTML = '<h3 id="gdvp-info-text">' + fieldDict[f].display(properties[f]) + '</h3>';
-  } else {
-    info.innerHTML = '<h4 id="gdvp-info-text">' + fieldDict[field].name + '</h4>';
-  }
+  let f = (field == "changes") ? "changeDesc" : field;
+  info.innerHTML = (properties) ? 
+    '<h3 id="gdvp-info-text">' + fieldDict[f].display(properties[f]) + '</h3>':
+    '<h4 id="gdvp-info-text">' + fieldDict[field].name + '</h4>';
 }
 
 // Symbologies
 function colorize(val) {
-  var scheme = fieldDict[field].scheme;
   var range  = fieldDict[field].range;
   var r = 0;
   var g = 0;
   var b = 0;
+
   if (val || val == 0) {
-    var normal = (val - range[0]) / range[1];
-    if (scheme == "black-ryg") {
-      if (normal > .8) {
-        r = ((.8 - normal) * 1275) + 255;
-        g = 255;
-      } else if (normal > .6) {
-        r = 255;
-        g = (normal - .6) * 1275;
+
+    // Normalize the value
+    var n = (val - range[0]) / range[1];
+
+    // Invert the value if the field isn't Utility
+    if (fieldDict[field].flip) { n = (n * -1) + 1; }
+
+    // Set RGB values
+    if (scheme == "multichrome") {
+      var stops = [[150, 255, 161, 65,  44,  37], 
+                   [150, 255, 218, 182, 127, 52], 
+                   [0,   150, 180, 196, 184, 148]];
+      var level = 1
+      if (n > .8) {
+        n = (n * 5) - 4;
+      } else if (n > .6) {
+        n = (n * 5) - 3;
+        level += 1;
+      } else if (n > .4) {
+        n = (n * 5) - 2;
+        level += 2;
+      } else if (n > .2) {
+        n = (n * 5) - 1;
+        level += 3;
       } else {
-        r = (normal - .4) * 1275;
-        g = 0;
+        n = n * 5;
+        level += 4;
       }
+      r = (n * (stops[0][level - 1] - stops[0][level])) + stops[0][level];
+      g = (n * (stops[1][level - 1] - stops[1][level])) + stops[1][level];
+      b = (n * (stops[2][level - 1] - stops[2][level])) + stops[2][level];
     } 
-    else if (scheme == "purpscale") {
-      r = b = 128 + (127 * (1 - normal));
-      g = 255 * (1 - normal);
+    else {
+      r = b = 128 + (127 * (1 - n));
+      g = 255 * (1 - n);
     }
-    return "rgb(" + String(r) + ", " + String(g) + ", " + String(b) + ")";
+    return "rgb(" + String(parseInt(r)) + ", " + String(parseInt(g)) + ", " + String(parseInt(b)) + ")";
   }
+
+  // Return transparent for undefined values
   return "rgba(0, 0, 0, 0)";
 }
 
 // Interactions
 function styleLayers(feat) {
   return {
-    fillColor: colorize(feat.properties[field], fieldDict[field].scheme),
+    fillColor: colorize(feat.properties[field]),
     weight: 1,
     opacity: 1,
     color: 'black',
@@ -230,6 +249,19 @@ buildLayer = function(st) {
 }
 for (let st in lyrs) { buildLayer(st); };
 
+// Build all the layers
+rebuildLayers = function() {
+  for (let st in lyrs) {
+    let layer = lyrs[st];
+    if (map.hasLayer(layer)) {
+      map.removeLayer(layer);
+      buildLayer(st);
+    }
+  };
+  setLegend();
+  info.update();
+};
+
 // Legend and scale bar
 var legend   = L.control({position: "bottomleft"})
 legend.onAdd = function(map) {
@@ -251,8 +283,9 @@ setLegend    = function() {
   var keys   = [document.getElementById("key-bottom"), document.getElementById("key-top")];
 
   document.getElementById("legend-title").innerHTML = fieldDict[field].title;
-  document.getElementById("legend-bar").style.backgroundImage = (fieldDict[field].scheme == "black-ryg") ?
-      "linear-gradient(to top, rgb(0, 0, 0), rgb(255, 0, 0), rgb(255, 255, 0), rgb(0, 255, 0))" :
+  document.getElementById("legend-bar").style.backgroundImage = (scheme == "multichrome") ?
+      "linear-gradient(to bottom, rgb(150, 150, 0), rgb(255, 255, 150), " +
+      "rgb(161, 218, 180), rgb(65, 182, 196), rgb(44, 127, 184), rgb(37, 52, 148))" :
       "linear-gradient(to top, rgb(255, 255, 255), rgb(127, 0, 127)";
   for (let i = 0; i < 2; i++) { keys[i].innerHTML = labels[i]; };
 }
@@ -283,7 +316,7 @@ tooltipButton.onclick = function() {
   }
 };
 
-// State
+// State 
 checkContainer = document.getElementById("state-checks");
 showAllStates  = document.getElementById("button-state");
 
@@ -302,10 +335,14 @@ toggleCheckContainer = function() {
 toggleState = function(st, mustHide=false, mustShow=false) {
   let layer = lyrs[st];
   var check = document.getElementById("check-" + st);
+
+  // Mark or unmark the check
   if ((mustHide && check.checked) || (mustShow && !check.checked) || (!mustHide && !mustShow && map.hasLayer(layer) == check.checked)) { 
     check.checked = !check.checked; 
   }
   var show  = (mustShow || (check.checked && !mustHide)) ? true : false;
+
+  // Show or hide the layer
   if (show && !map.hasLayer(layer)) { map.addLayer(layer); }
   if (!show && map.hasLayer(layer)) { map.removeLayer(layer); }
 }
@@ -326,26 +363,38 @@ toggleFieldContainer = function() {
 }
 
 changeField = function(newField) {
+
+  // Do nothing if the field is being set to the same thing
   if (field == newField) {
     var c = document.getElementById(field);
     c.checked = true;
     return;
   }
 
+  // Change the field and rebuild the layers
   field = newField;
-  
-  for (let st in lyrs) {
-    let layer = lyrs[st];
-    if (map.hasLayer(layer)) {
-      map.removeLayer(layer);
-      buildLayer(st);
-    }
-  };
-  setLegend();
-  info.update();
+  rebuildLayers();
 
+  // Make sure only the correct circle is marked
   circles.each(function(i) {
     let c = circles[i];
     if ((c.checked && $(c).attr("id") != field) || ($(c).attr("id") == field && !c.checked)) { c.checked = !c.checked; }
   });
+}
+
+// Set scheme
+var setSchemeButton = document.getElementById("set-scheme");
+setScheme = function() {
+
+  // Set the scheme and the button text
+  if (scheme == "multichrome") {
+    scheme = "purpscale";
+    setSchemeButton.innerHTML = "Set Colors to Multichrome";
+  } else {
+    scheme = "multichrome";
+    setSchemeButton.innerHTML = "Set Colors to Monochrome";
+  }
+
+  // Recolor the layers
+  rebuildLayers();
 }
