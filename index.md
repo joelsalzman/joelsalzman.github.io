@@ -86,8 +86,8 @@
               <span>
 
               <div class="research">Indoor cartography</div>:
-              I built 3D models of indoor spaces and segmented point meshes to validate deep learning classifiers run on LIDAR scans. 
-              The lab's goal is to develop a programatic method of generating millimeter-accurate models using LIDAR.
+              We built 3D models of indoor spaces and segmented point meshes to validate deep learning classifications of LIDAR scans. 
+              Our goal was to develop a programatic method of generating millimeter-accurate models using LIDAR.
               </br></br>
 
               <div class="research">Voting</div>:
