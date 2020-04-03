@@ -114,15 +114,22 @@ formatHeader = function() {
     info.style.width = w + "px";
     info.style.marginLeft = m + "px";
   }
-  if (infoText.offsetHeight > 0.07 * vh) { infoText.style.marginTop = "1vh"; }
 }
 window.onload = formatHeader;
 window.addEventListener('resize', formatHeader);
 info.update = function(properties) {
   let f = (field == "changes") ? "changeDesc" : field;
   info.innerHTML = (properties) ? 
-    '<h3 id="gdvp-info-text">' + fieldDict[f].display(properties[f]) + '</h3>':
+    '<h3 id="gdvp-info-text">' + fieldDict[f].display(properties[f]) + '</h3>' :
     '<h4 id="gdvp-info-text">' + fieldDict[field].name + '</h4>';
+  infoText = document.getElementById("gdvp-info-text");
+  if (infoText.offsetHeight > 0.9 * info.offsetHeight) {
+    info.innerHTML = '<h4 id="gdvp-info-text">' + fieldDict[f].display(properties[f]) + '</h4>';
+    infoText = document.getElementById("gdvp-info-text");
+    if (infoText.offsetHeight > 0.6 * info.offsetHeight) {
+      infoText.style.marginTop = "1vh";
+    }
+  }
 }
 
 // Symbologies
