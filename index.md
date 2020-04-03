@@ -86,6 +86,7 @@
               <span>
 
               <div class="research">Indoor cartography</div>:
+              I under the direction of Professor <a href="http://www.geog.ucsb.edu/~kclarke/">Keith Clarke</a>.
               We built 3D models of indoor spaces and segmented point meshes to validate deep learning classifications of LIDAR scans. 
               Our goal was to develop a programatic method of generating millimeter-accurate models using LIDAR.
               </br></br>
