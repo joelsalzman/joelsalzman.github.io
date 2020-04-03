@@ -136,7 +136,7 @@
             </span>
           
           <h2>Apex Clean Energy</h2>
-          <div class="date">(Summer 2020)</br></br></div>
+          <div class="date">(Summer 2019)</br></br></div>
             <span>
               <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a> is a wind and solar developer based 
                 out of Charlottesville, Virginia. My role at Apex was to determine where to site new utility-scale 
@@ -158,7 +158,7 @@
             </span>
           
           <h2>Primary Ocean Producers</h2>
-          <div class="date">(Summer 2019)</br></br></div>
+          <div class="date">(Summer 2018)</br></br></div>
             <span>
               <a href="http://www.primaryocean.com/">Primary Ocean Producers</a> is an aquaculture startup. 
               They partnered with <a href="https://catalinasearanch.com/">Catalina Sea Ranch</a> to fulfill an
