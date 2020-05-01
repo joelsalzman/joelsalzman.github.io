@@ -97,9 +97,8 @@
               I later performed a similar analysis independently using more complex tools.
               Using Leaflet, I turned the results of the most recent analysis into an <a href="./gdvp.html">interactive map</a>.
               </br></br>
-              I'm also developing an algorithm to identify precincts with inordinately diluted voting power
-                for use as potential evidence of gerrymandering. 
-              The algorithm utilizes iterative swapping techniques to model potential fluctuations on the vote-seats curve.
+              I'm also developing an algorithm to identify gerrymandering by sampling spatially similar redistricting plans that
+                are superior in terms of certain important metrics (partisan bias, responsiveness, compactness, etc.)
             </span></div>
           
           <h3>Philosophy (Ethics and Public Policy)</h3>
