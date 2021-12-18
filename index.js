@@ -4,7 +4,7 @@ var vw = $(window).width();
 var vh = $(window).height();
 var bb = [0, 0, vw, vh];
 
-const final = "gdvp";
+const final = "kelp";
 
 class Center {
 
@@ -74,7 +74,8 @@ function loadDelaunay(center, step, multiplier) {
 
     // fill rest of page with random points
     let x, y = null;
-    for (let i = 0; i < parseInt((vh * vw) / (step * 50)); i += 1) {
+    let numPoints = Math.min(parseInt((vh * vw) / (step * 50)), 500);
+    for (let i = 0; i < numPoints; i += 1) {
         do {
             x = parseInt(Math.random() * vw);
             y = parseInt(Math.random() * vh);

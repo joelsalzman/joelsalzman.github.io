@@ -242,18 +242,6 @@ polygon.center {
     height: 100%;
 }
 
-.container#initial-container {
-    background-color: white;
-}
-
-.container#about-container {
-    background-color: rgb(83, 83, 255);
-}
-
-.container#gdvp-container {
-    background: linear-gradient(purple, purple, rgb(194, 117, 194));
-}
-
 .content {
     display: block;
     height: 66%;
@@ -270,10 +258,30 @@ img {
     height: 25%;
 }
 
+.container#initial-container {
+    background-color: white;
+}
+
 .transition#initial-about {
     background: linear-gradient(white, rgb(83, 83, 255));
 }
 
+.container#about-container {
+    background-color: rgb(83, 83, 255);
+}
+
 .transition#about-gdvp {
     background: linear-gradient(rgb(83, 83, 255), purple);
+}
+
+.container#gdvp-container {
+    background: linear-gradient(purple, purple, rgb(194, 117, 194));
+}
+
+.transition#gdvp-kelp {
+    background: linear-gradient(rgb(194, 117, 194), green);
+}
+
+.container#kelp-container {
+    background-color: green;
 }
