@@ -279,9 +279,9 @@ img {
 }
 
 .transition#gdvp-kelp {
-    background: linear-gradient(rgb(194, 117, 194), green);
+    background: linear-gradient(rgb(194, 117, 194), #4be612);
 }
 
 .container#kelp-container {
-    background-color: green;
+    background-color: #4be612;
 }
