@@ -6,6 +6,8 @@ popup = function(key) {
     var contain = document.getElementById(key + "-container");
     var main    = document.getElementById(key + "-popup");
 
+    if (isNaN(main)) return;
+
     // Size the container
     if (contain.style.display != "inline-block") {
         contain.style.display = "inline-block";

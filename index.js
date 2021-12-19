@@ -289,7 +289,7 @@ function scrollFuncs() {
             // Format image
             let textBox = $(tag).children(".text-box");
             if (textBox.length) {
-                let remaining = $(tag).height() - textBox.height() - textBox.position().top;
+                let remaining = $(tag).height() - textBox.height() - textBox.position().top - $("#nav").height();
                 $("img").height(`${parseInt(remaining)}px`);
             }
             else $("img").height("auto");
