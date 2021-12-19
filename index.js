@@ -272,13 +272,21 @@ function scrollFuncs() {
 
     for (const [tag, anchorHeights] of Object.entries(anchorsByHeight)) {
 
+        // See if this is the current anchor
         [bottomAnchor, topAnchor] = anchorHeights;
         inSection = scrollHeight > topAnchor && scrollHeight <= bottomAnchor;
 
         if (inSection) {
-            $(tag).fadeIn();
-            currentAnchor = tag;
 
+            // Display content
+            $(tag).fadeIn();
+
+            currentAnchor = tag;
+            for (const other of Object.keys(anchorsByHeight)) {
+                if (other != tag) $(other).hide();
+            }
+
+            // Format image
             let textBox = $(tag).children(".text-box");
             if (textBox.length) {
                 let remaining = $(tag).height() - textBox.height() - textBox.position().top;
@@ -287,6 +295,8 @@ function scrollFuncs() {
             else $("img").height("auto");
         }
         else {
+
+            // Hide content
             $(tag).fadeOut();
             if (tag == currentAnchor) currentAnchor = null;
         }
