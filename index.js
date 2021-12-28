@@ -261,7 +261,14 @@ for (let i = 0; i < anchorArray.length; i += 2) {
     };
 }
 
-function scrollFuncs() {
+function sizeDivs() {
+
+    // Size divs
+    $(".content").height($(".center").height() - 100);
+    $(".content").width($(".center").width() - $("#button-div").width() - 80);
+}
+
+async function scrollFuncs() {
 
     // Get scroll height
     let scrollHeight = $(window).scrollTop() + (vh/2);
@@ -289,8 +296,10 @@ function scrollFuncs() {
             // Format image
             let textBox = $(tag).children(".text-box");
             if (textBox.length) {
-                let remaining = $(tag).height() - textBox.height() - textBox.position().top - $("#nav").height();
+                let img = $(tag).find("img");
+                let remaining = $("#nav").offset().top - img.offset().top - 20;
                 $("img").height(`${parseInt(remaining)}px`);
+                console.log(remaining);
             }
             else $("img").height("auto");
         }
@@ -303,7 +312,7 @@ function scrollFuncs() {
 
     };
 
-    // Animate diagram
+    // Trigger animation
     var percent = Math.min(
         (document.body.scrollTop + document.documentElement.scrollTop) / 
         ($(".container#initial-container").height()), 
@@ -327,6 +336,7 @@ function scrollFuncs() {
         $("#tesselation").css("display", "none");
     }
     
+    // Animate diagram
     $(".delaunay").each(function(i) {
         let length = pathLengths["delaunay"][i];
         this.style.strokeDashoffset = length - (length * percent);
@@ -348,14 +358,21 @@ var delaunay = loadDelaunay(center, 300, 4);
 var voronoi = loadVoronoi(delaunay);
 var pathLengths = insertScrollPaths(center, delaunay, voronoi);
 
+sizeDivs();
+
 window.onresize = function() {
+
     vw = $(window).width();
     vh = $(window).height();
     bb = [0, 0, vw, vh];
+
     center = new Center();
     delaunay = loadDelaunay(center, 300, 4);
     voronoi = loadVoronoi(delaunay);
     pathLengths = insertScrollPaths(center, delaunay, voronoi);
+    
+    sizeDivs();
+
 };
 
 window.addEventListener("scroll", scrollFuncs);
