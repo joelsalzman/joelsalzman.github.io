@@ -268,6 +268,7 @@ function sizeDivs() {
     $(".content").width($(".center").width() - $("#button-div").width() - 80);
 }
 
+var currentlyFading = false;
 async function scrollFuncs() {
 
     // Get scroll height
@@ -275,7 +276,7 @@ async function scrollFuncs() {
 
     // Change text
     let bottomAnchor, topAnchor = null;
-    let inSection = false;
+    var inSection = false;
 
     for (const [tag, anchorHeights] of Object.entries(anchorsByHeight)) {
 
@@ -286,7 +287,11 @@ async function scrollFuncs() {
         if (inSection) {
 
             // Display content
-            $(tag).fadeIn();
+            if (!currentlyFading) {
+                currentlyFading = true;
+                await $(tag).fadeIn();
+                currentlyFading = false;
+            }
 
             currentAnchor = tag;
             for (const other of Object.keys(anchorsByHeight)) {
@@ -346,7 +351,6 @@ async function scrollFuncs() {
         let length = pathLengths["voronoi"][i];
         this.style.strokeDashoffset = (length * halfPercent);
     });
-
 
 }
 

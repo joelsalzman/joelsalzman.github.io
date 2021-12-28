@@ -133,6 +133,9 @@ polygon.center {
     display: block;
     width: 40px;
     height: 40px;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
     
     font-size: 12px;
     text-align: center;
@@ -196,15 +199,15 @@ polygon.center {
     bottom: 0;
     height: 60px;
     width: 100%;
-    right: 10px;
+    right: 20px;
     text-align: right;
 }
 
 .navlink {
     color: white;
     display: inline;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 24px;
     text-decoration: none;
 }
