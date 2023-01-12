@@ -238,23 +238,30 @@ var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{
 
 // Display the initial data
 var lyrs = {
-  'Alabama':'', 'Alaska':'', 'Arizona':'', 'Arkansas':'', 'California':'', 'Colorado':'', 'Connecticut':'', 'Delaware':'',
-  'District of Columbia':'', 'Florida':'', 'Georgia':'', 'Hawaii':'', 'Idaho':'', 'Illinois':'', 'Indiana':'', 'Iowa':'', 'Kansas':'',
-  'Kentucky':'', 'Louisiana':'', 'Maine':'', 'Maryland':'', 'Massachusetts':'', 'Michigan':'', 'Minnesota':'', 'Mississippi':'', 
-  'Missouri':'', 'Montana':'', 'Nebraska':'', 'Nevada':'', 'New Hampshire':'', 'New Jersey':'', 'New Mexico':'', 'New York':'', 
-  'North Carolina':'', 'North Dakota':'', 'Ohio':'', 'Oklahoma':'', 'Oregon':'', 'Pennsylvania':'', 'Rhode Island':'', 
-  'South Carolina':'', 'South Dakota':'', 'Tennessee':'', 'Texas':'', 'Utah':'', 'Vermont':'', 'Virginia':'', 'Washington':'', 
-  'West Virginia':'', 'Wisconsin':'', 'Wyoming':''
+  'Alabama':'', 'Alaska':'', 'Arizona':'', 'Arkansas':'', 'California':'', 'Colorado':'', 
+  'Connecticut':'', 'Delaware':'', 'District of Columbia':'', 'Florida':'', 'Georgia':'', 
+  'Hawaii':'', 'Idaho':'', 'Illinois':'', 'Indiana':'', 'Iowa':'', 'Kansas':'', 'Kentucky':'', 
+  'Louisiana':'', 'Maine':'', 'Maryland':'', 'Massachusetts':'', 'Michigan':'', 'Minnesota':'', 
+  'Mississippi':'', 'Missouri':'', 'Montana':'', 'Nebraska':'', 'Nevada':'', 'New Hampshire':'', 
+  'New Jersey':'', 'New Mexico':'', 'New York':'', 'North Carolina':'', 'North Dakota':'', 
+  'Ohio':'', 'Oklahoma':'', 'Oregon':'', 'Pennsylvania':'', 'Rhode Island':'', 'South Carolina':'', 
+  'South Dakota':'', 'Tennessee':'', 'Texas':'', 'Utah':'', 'Vermont':'', 'Virginia':'', 
+  'Washington':'', 'West Virginia':'', 'Wisconsin':'', 'Wyoming':''
 };
 
 // Build the layers
 buildLayer = function(st) {
-  $.getJSON("https://raw.githubusercontent.com/joelsalzman/joelsalzman.github.io/master/final_by_state/" + st + ".js", function(data) {
-    lyrs[st] = new L.geoJSON(data, {
-      style: styleLayers,
-      onEachFeature: onEachFeature
-    }).addTo(map);
-  });
+  $.getJSON(
+    "https://raw.githubusercontent.com/joelsalzman/joelsalzman.github.io/master/final_by_state/" 
+    + st 
+    + ".js", 
+    function(data) {
+      lyrs[st] = new L.geoJSON(data, {
+        style: styleLayers,
+        onEachFeature: onEachFeature
+      }).addTo(map);
+    }
+  );
 }
 for (let st in lyrs) { buildLayer(st); };
 
@@ -346,7 +353,9 @@ toggleState = function(st, mustHide=false, mustShow=false) {
   var check = document.getElementById("check-" + st);
 
   // Mark or unmark the check
-  if ((mustHide && check.checked) || (mustShow && !check.checked) || (!mustHide && !mustShow && map.hasLayer(layer) == check.checked)) { 
+  if ((mustHide && check.checked)  || 
+      (mustShow && !check.checked) || 
+      (!mustHide && !mustShow && map.hasLayer(layer) == check.checked)) { 
     check.checked = !check.checked; 
   }
   var show  = (mustShow || (check.checked && !mustHide)) ? true : false;
@@ -387,7 +396,9 @@ changeField = function(newField) {
   // Make sure only the correct circle is marked
   circles.each(function(i) {
     let c = circles[i];
-    if ((c.checked && $(c).attr("id") != field) || ($(c).attr("id") == field && !c.checked)) { c.checked = !c.checked; }
+    if ((c.checked && $(c).attr("id") != field) || ($(c).attr("id") == field && !c.checked)) { 
+      c.checked = !c.checked; 
+    }
   });
 }
 

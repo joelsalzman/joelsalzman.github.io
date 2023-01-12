@@ -292,6 +292,7 @@ async function scrollFuncs() {
                 await $(tag).fadeIn();
                 currentlyFading = false;
             }
+            else console.log('nah');
 
             currentAnchor = tag;
             for (const other of Object.keys(anchorsByHeight)) {
@@ -301,10 +302,10 @@ async function scrollFuncs() {
             // Format image
             let textBox = $(tag).children(".text-box");
             if (textBox.length) {
-                let img = $(tag).find("img");
-                let remaining = $("#nav").offset().top - img.offset().top - 20;
+                let imgOffset = $(tag).find("img").offset();
+                //if (isNaN(imgOffset)) imgOffset = 100;
+                let remaining = $("#nav").offset().top - imgOffset.top - 20;
                 $("img").height(`${parseInt(remaining)}px`);
-                console.log(remaining);
             }
             else $("img").height("auto");
         }
