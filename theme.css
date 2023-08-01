@@ -162,11 +162,11 @@ polygon.center {
 }
 
 #LinkedIn {
-    background-image: url("./pics/LinkedIn.jpg");
+    background-image: url("./pics/LinkedIn.png");
 }
 
 #LinkedIn:hover {
-    background-image: url("./pics/LinkedIn_hover.jpg");
+    background-image: url("./pics/LinkedIn_hover.png");
 }
 
 #Email {
