@@ -21,135 +21,118 @@
             <!-- drawn from index.js -->
         </svg>
 
-        <div class="center">
-
-            <svg class="center">
-                <!-- drawn from index.js -->
-            </svg>
+        <div class="core">
 
             <div class="hud" id="button-div">
-                <a class="button" id="Email"     href="mailto:joelkevlessalzman@gmail.com"></a>
-                <a class="button" id="LinkedIn"  href="https://www.linkedin.com/in/joel-salzman-322891156"></a>
+                <a class="button" id="Home"      href="#"></a>
+                <a class="button" id="Email"     href="mailto:joel.salzman@columbia.edu"></a>
+                <a class="button" id="LinkedIn"  href="https://www.linkedin.com/in/joel-salzman"></a>
                 <a class="button" id="GitHub"    href="http://github.com/joelsalzman"></a>
             </div>
 
-            <div class="hud" id="nav">
-                <a class="navlink" href="#">Home</a>
-                <a class="navlink" href="#about">About</a>
-                <a class="navlink" href="#gdvp">Work</a>
+        </div>
+
+         <!-- Initial page -->
+        <div class="content" id="top">
+            <h1>Joel<br>Salzman</h1>
+            <img id="prof-pic" src="./pics/prof-pic.JPG">
+        </div>
+
+        <!-- PolXR -->
+        <div class="content" id="viser-content">
+
+            <div class="stuff">
+                <a href="https://www.cs.columbia.edu/">
+                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                </a>
+                <h2><a href="https://pgg.ldeo.columbia.edu/projects/VISER">VISER</a></h2>
             </div>
 
-            <!-- Initial page -->
-            <div class="content" id="initial-content">
-                <h1>Joel<br>Salzman</h1>
-                <div class="text-box"></div>
-                <img src="./pics/prof-pic.JPG">
-            </div>
-
-            <!-- About page -->
-            <div class="content normal" id="about-content">
-
-                <h2>
-                    About Me
-                </h2>
-
+            <div class="stuff">
+                <img class="thumbnail" src="./pics/polxr-screenshot.png">
                 <div class="text-box">
                     <p>
-                        Hey there!
+                        An XR glaciology app.
+                        <br><br>
+                        Using an Oculus or Hololens VR/AR headset, users can manipulate radargrams and other 
+                            scientific data to study glaciological processes in Antarctica and Greenland.
+                        My primary contribution thus far has been creating the pipeline that ingests radar 
+                            plots and generates 3D meshes that visualize the actual locations from where 
+                            the signals were gathered.
                     </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Apex -->
+        <div class="content normal" id="apex-content">
+
+            <div class="stuff" id="content-header">
+                <a href="https://www.apexcleanenergy.com/">
+                    <img class="affiliation" src="./pics/Apex_logo.png">
+                </a>
+                <h2>GIS Developer</h2>
+            </div>
+
+            <div class="stuff">
+                <img class="thumbnail" src="./pics/apex-sitevisit.png">
+                <div class="text-box">
                     <p>
-                        I adore all things spatial.
-                        My career began with geographic information systems (GIS) and spatial 
-                            optimization.
-                        I am currently a Master's student in Computer Science at Columbia University.
-                        Before grad school, I developed GIS tools for the New Markets division at
+                        For over two years, my job was to figure out where to build utility-scale
+                            renewable (primarily wind and solar) projects for 
                             <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a>.
-                        Ultimately, my goal is to have a hand in crafting spatial environments in 
-                            mixed reality and generally leveraging spatial computing to make people's 
-                            lives better.
-                        
-                    </p>
-                    <p>
-                        When I'm not in front of a computer, I like to be out in nature.
-                        Climbing, hiking, kayaking — if there's a fresh breeze or a pretty view, 
-                            I'm there for it.
+                        Most of my work consisted of data engineering and automated geospatial analysis.
+                        My deliverables remain proprietary but I will happily explain what I did and what I
+                            learned if asked.
                     </p>
                 </div>
-
-                <img src="./pics/sippy.jpg"> 
-
             </div>
 
-            <!-- GDVP page -->
-            <div class="content normal" id="gdvp-content">
+        </div>
 
+        <!-- GDVP -->
+        <div class="content normal" id="gdvp-content">
+
+            <div class="stuff">
+                <a href="https://www.geog.ucsb.edu/">
+                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                </a>
                 <h2>
-                    Voting Power
+                    <a href="gdvp">Voting Power</a>
                 </h2>
+            </div>
 
+            <div class="stuff">
+                <img class="thumbnail" src="./pics/176c-screenshot.png">
                 <div class="text-box">
                     <p>
-                        This project began with a simple question: <b>Where do votes matter most?</b>
-                        I grew up around DC and heard countless complaints about the undemocratic 
-                            nature of our electoral system.
-                        Feeling uniquely mobile approaching the end of college, I wondered where I 
-                            could move such that my vote would be most impactful.
-                        Perhaps I could move to Wyoming — maybe Maine — certainly not California, 
-                            where I went to school, or DC, where I was born.
-                        It is no secret that American politics overrepresent rural areas.
-                        But I wanted to know exactly where places are unequally represented, and by 
-                            how much.
-                    </p>
-                    <p>
-                        Answering this question is more complicated than just looking at the 
-                            proportion of a state's population to its number of presidential electors.
-                        Votes matter more when elections are close — that's why swing states matter.
-                        So I attempted to reconcile disproportionate representation with electoral 
-                            competitiveness in order to quantify, in a simple enough way, 
-                            where votes matter most.
-                    </p>
-                    <p>
-                        The first iteration of this project was done as a group assignment for a 
-                            class (GEOG 176C at UCSB).
-                        I pitched the idea and got two terrifically talented colleagues 
-                            (<a href="https://www.linkedin.com/in/juanmirandasmc/">Juan</a> and 
-                            <a href="https://www.linkedin.com/in/owen-karlenzig-95890a154/">Owen</a>)
-                        to join my team. 
-                        I led the project for its three-month duration. 
-                        The final product included a 
-                            <a href="./pics/176c_poster.pdf">poster</a> 
-                        that we 
-                            <a href="./pics/176c_poster.png">presented</a> 
-                        at the annual Geography Department symposium.
-                    </p>
-                    <p>
-                        Afterwards, I was still curious, so I indepenedently expanded the analysis 
-                            to consider every federal election since 2000.
-                        The challenge here was incorporating redistricting since where votes matter 
-                            most depends on which district those votes are cast in, and that changes.
-                        Interpreting just the state of California, I gave a 
-                            <a href="https://www.youtube.com/watch?v=eDqpWtp1WBY">lightning talk</a> 
-                        at the 
-                            <a href="http://spatial.ucsb.edu/">Center for Spatial Studies</a>
-                        annual symposium.
-                    </p>
-                    <p>
-                            <a class="portfolio-link" href="gdvp.html">The final product was an 
-                                interactive map</a>.
-                        It was my first foray into Leaflet and fully open-source web map tech 
-                            stacks in general.
+                        Where do votes matter most? 
+                        A project for a GIS class in college that ended up as an interactive web map.
+                        See the project page for (many) details.
+                    <br><br>
+                        Working on this project is a big part of why I decided to go back to school for
+                            Computer Science.
                     </p>
                 </div>
-
             </div>
 
-            <!-- Kelp page -->
-            <div class="content normal" id="kelp-content">
+        </div>
 
+        <!-- Kelp -->
+        <div class="content normal" id="kelp-content">
+
+            <div class="stuff">
+                <a href="https://www.geog.ucsb.edu/">
+                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                </a>
                 <h2>
-                    Aquaculture
+                    <a href="./pics/Regional_Federal.png">Aquaculture</a>
                 </h2>
+            </div>
 
+            <div class="stuff">
+                <img class="thumbnail" src="./pics/kelp-screenshot.png">
                 <div class="text-box">
                     <p>
                         <a href="http://www.primaryocean.com">Primary Ocean Producers</a> is a 
@@ -158,8 +141,7 @@
                         We were funded by a grant from 
                             <a href="https://arpa-e.energy.gov/technologies/programs/mariner">ARPA-E</a> 
                             to grow giant kelp en masse in order to produce carbon-neutral biofuel.
-                    </p>
-                    <p>
+                    <br><br>
                         My role was to site the pilot facilities off the coast of California.
                         Along with two aquatic biologists, I developed a hierarchical suitability 
                             model for giant kelp cultivation.
@@ -168,37 +150,9 @@
                             restrictions (so we could build the facility).
                     </p>
                 </div>
-
-                <img src="./pics/Regional_Federal.png">
-
             </div>
 
         </div>
-
-            <!-- Initial anchor -->
-            <div class="container" id="initial-container">
-                <a class="anchor" id="initial"></a>
-            </div>
-
-            <div class="transition" id="initial-about"></div>
-            
-            <!-- About anchor -->
-            <div class="container" id="about-container">
-                <a class="anchor" id="about"></a>
-            </div>
-
-            <div class="transition" id="about-gdvp"></div>
-            
-            <!-- Portfolio anchors -->
-            <div class="container" id="gdvp-container">
-                <a class="anchor" id="gdvp"></a>
-            </div>
-
-            <div class="transition" id="gdvp-kelp"></div>
-
-            <div class="container" id="kelp-container">
-                <a class="anchor" id="kelp"></a>
-            </div>
         
     </body>
 

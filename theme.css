@@ -14,21 +14,14 @@ body {
     height: 100%;
     margin: 0px;
     padding: 0px;
+    border: none;
 }
 
 h1 {
     color: white;
     text-align: left;
-    font-size: 48px;
+    font-size: 60px;
     margin-top: 0px;
-    margin-bottom: 20px;
-}
-
-h2 {
-    color: white;
-    font-size: 36px;
-    column-span: all;
-    text-align: left;
     margin-bottom: 20px;
 }
 
@@ -54,9 +47,9 @@ a {
     position: relative;
     color: white;
 }
-
 a:hover {
-    color:rgb(194, 117, 194);
+    color: rgb(83, 83, 255);
+    transition-duration: 1s;
 }
 
 svg {
@@ -89,31 +82,15 @@ svg {
     stroke: black;
 }
 
-/* Center */
+/* Core */
 
-.center {
+.core {
     position: fixed;
     left: 16.5%;
-    top: 12.5%;
-    width: 67%;
-    height: 75%;
+    width: 83.5%;
+    height: 100%;
     z-index: 3;
-}
-
-polygon.center {
-    stroke: rgb(53, 53, 53);
-    fill: rgb(53, 53, 53);
-    z-index: 3;
-}
-
-.content {
-    position: fixed;
-    top: 15%;
-    height: 50%;
-    left: 20%;
-    width: 50%;
-    z-index: 4;
-    display: none;
+    background-color: rgb(53, 53, 53);
 }
 
 .hud {
@@ -177,6 +154,15 @@ polygon.center {
     background-image: url("./pics/Email_hover.png");
 }
 
+#Home {
+    background-image: url("./pics/Caret_top.png");
+}
+
+#Home:hover {
+    background-image: url("./pics/Caret_hover.png");
+}
+
+
 .button-bordered {
     height: 6vh;
     padding: 2vh 1.5vw;
@@ -194,95 +180,79 @@ polygon.center {
     background-color: #aaaaaa;
 }
 
-#nav {
-    position: absolute;
-    bottom: 0;
-    height: 60px;
-    width: 100%;
-    right: 20px;
-    text-align: right;
-}
-
-.navlink {
-    color: white;
-    display: inline;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-size: 24px;
-    text-decoration: none;
-    transition-duration: 1s;
-}
-
-.navlink:hover {
-    color:rgb(83, 83, 255);
-    transition-duration: 1s;
-}
-
 /* Content divs */
 
-.portfolio-link {
-    color: rgb(255, 255, 115);
-    font-weight: bold;
+.content {
+    position: relative;
+    top: 16px;
+    left: 20%;
+    width: 60%;
+    padding-bottom: 50px;
+    z-index: 4;
+    align-items: left;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.portfolio-link:hover {
-    color: rgb(83, 83, 255);
-    transition-duration: .4s;
+.stuff {
+    display: flex;
+    max-width: 100%;
+    height: fit-content;
+    /*position: relative;
+    display: flex;
+    flex-direction: row;
+    */
 }
-
-#initial {
-    height: 200%;
+.stuff p {
+    padding-left: 10px;
+    margin: 0px;
+}
+.stuff a {
+    display: inline-flex;
 }
 
 .container {
     z-index: 0;
     height: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
-.content {
-    display: none;
-    height: 66%;
-    width: 55%;
-    object-fit: contain;
-    contain: strict;
-    overflow: auto;
+h2 {
+    color: white;
+    font-size: 36px;
+    column-span: all;
+    text-align: left;
+    display: inherit;
+    position: inherit;
+    flex-wrap: wrap;
+    padding: 0px;
+    margin: 10px;
+}
+h2 a {
+    text-decoration-thickness: 1px;
+    text-decoration-style: wavy;
 }
 
 img {
     display: block;
-    object-fit: contain;
+    object-fit: scale-down;
     max-width: 100%;
     max-height: 100%;
 }
 
-.transition {
-    height: 25%;
+#initial-container {
+    position: absolute;
+    display: none;
 }
 
-.container#initial-container {
-    background-color: white;
+.affiliation {
+    max-width: 40px;
+    /* max-height: 40px; */
 }
 
-.transition#initial-about {
-    background: linear-gradient(white, rgb(83, 83, 255));
-}
-
-.container#about-container {
-    background-color: rgb(83, 83, 255);
-}
-
-.transition#about-gdvp {
-    background: linear-gradient(rgb(83, 83, 255), purple);
-}
-
-.container#gdvp-container {
-    background: linear-gradient(purple, purple, rgb(194, 117, 194));
-}
-
-.transition#gdvp-kelp {
-    background: linear-gradient(rgb(194, 117, 194), #4be612);
-}
-
-.container#kelp-container {
-    background-color: #4be612;
+.thumbnail {
+    display: flex;
+    flex-direction: row;
+    clear: both;
 }

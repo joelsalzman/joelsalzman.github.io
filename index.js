@@ -2,7 +2,7 @@ import { Delaunay } from "https://cdn.skypack.dev/d3-delaunay@6";
 
 var vw = $(window).width();
 var vh = $(window).height();
-var bb = [0, 0, vw, vh];
+var bb = [0, 0, parseInt(vw/6), vh];
 
 const final = "kelp";
 
@@ -10,76 +10,46 @@ class Center {
 
     constructor() {
         this.points = [
-            [parseInt(vw / 6) * 1, parseInt(vh / 8) * 1],
-            [parseInt(vw / 6) * 5, parseInt(vh / 8) * 1],
-            [parseInt(vw / 6) * 5, parseInt(vh / 8) * 7],
-            [parseInt(vw / 6) * 1, parseInt(vh / 8) * 7],
-            [parseInt(vw / 6) * 1, parseInt(vh / 8) * 1]
+            [parseInt(vw / 6), 0],
+            [0, 0],
+            [0, vh],
+            [parseInt(vw / 6), vh],
+            [parseInt(vw / 6), 0]
         ];
         let center_path = this.points.map(
             coords => [coords[0] - (vw * .165), coords[1] - (vh * .125)]
         ).join(' ');
-        let center_tag = `<polygon class="center" points="${center_path}" />`
-        $('svg.center').html(center_tag);
+        let center_tag = `<polygon class="core" points="${center_path}" />`
+        $('svg.core').html(center_tag);
 
     }
 
     containsPoint = function(pt) {
         let x = parseInt(pt[0]);
-        let y = parseInt(pt[1]);
-        return (y > (vh/8) && y < (7*vh/8)) && (x > (vw/6) && x < (5*vw/6));
+        return x > (vw/6);
     };
 }
 
-function loadDelaunay(center, step, multiplier) {
-
-    function getPointsOnLine(start, end, step) {
-
-        var coords = Array();
-
-        let run = parseInt(start[0]) - parseInt(end[0]);
-        let rise = parseInt(start[1]) - parseInt(end[1]);
-        let length = Math.sqrt(run ** 2 + rise ** 2);
-
-        let intervals = parseInt(multiplier * length / step);
-
-        for (let i = 1; i <= intervals; i += 1) {
-            coords.push([
-                start[0] - parseInt(i * run / intervals),
-                start[1] - parseInt(i * rise / intervals)
-            ]);
-        };
-
-        return coords
-    };
+function loadDelaunay(step, multiplier) {
 
     // place points on edge of center
-    var coords = center.points.map(pt => ({ ...pt }));
-    for (let c = 0; c < center.points.length; c += 1) {
-        let n = c > 0 ? c - 1 : center.points.length - 1;
-        let points = getPointsOnLine(center.points[c], center.points[n], step);
-        for (let i in points) {
-            coords.push(points[i]);
-        };
-    };
+    var coords = new Array();
 
     // place points on edges of page
-    for (let w = 0; w <= vw; w += step) {
+    for (let w = 0; w <= vw/6; w += step) {
         coords.push([w, 0], [w, vh]);
     };
     for (let h = step; h <= vh; h += step) {
-        coords.push([0, h], [vw, h]);
+        coords.push([0, h], [vw/6, h]);
     };
-    coords.push([vw, 0], [vw, vh]);
+    coords.push([vw/6, 0], [vw/6, vh]);
 
     // fill rest of page with random points
     let x, y = null;
     let numPoints = Math.min(parseInt((vh * vw) / (step * 50)), 500);
     for (let i = 0; i < numPoints; i += 1) {
-        do {
-            x = parseInt(Math.random() * vw);
-            y = parseInt(Math.random() * vh);
-        } while (center.containsPoint([x, y]))
+        x = parseInt(Math.random() * vw/6);
+        y = parseInt(Math.random() * vh);
         coords.push([x, y]);
     };
 
@@ -105,7 +75,7 @@ function loadVoronoi(delaunay) {
 
 };
 
-function insertScrollPaths(center, delaunay, voronoi) {
+function insertScrollPaths(delaunay, voronoi) {
 
     // helper functions
     function lineIntersectionPoint(l1, l2) {
@@ -228,100 +198,15 @@ $("#diagram").on('mouseenter', '#tesselation', function() {
     $(this).css("fill", "white");
 });*/
 
-
-// Render text
-let transitionArray = $("div.transition").map(function() {
-    return [
-        $(this).attr("id").split('-')[0], 
-        $(this).offset().top
-    ];
-});
-let transitionObject = {};
-for (let i = 0; i < transitionArray.length; i += 2) {
-    transitionObject[transitionArray[i]] = transitionArray[i+1];
-}
-transitionObject[final] = $(document).height() + 1;
-
-let anchorArray = $("a.anchor").map(function() {
-    return [
-        $(this).attr("id").split('-')[0], 
-        $(this).offset().top + $(this).height()
-    ];
-});
-
-const anchorsByHeight = {};
-for (let i = 0; i < anchorArray.length; i += 2) {
-    if (!isNaN(anchorArray[i+1])) {
-
-        let id = anchorArray[i];
-        anchorsByHeight[`div.content#${id}-content`] = [
-            transitionObject[id],
-            parseInt(anchorArray[i+1])
-        ];
-    };
-}
-
-function sizeDivs() {
-
-    // Size divs
-    $(".content").height($(".center").height() - 100);
-    $(".content").width($(".center").width() - $("#button-div").width() - 80);
-}
-
-var currentlyFading = false;
 async function scrollFuncs() {
 
     // Get scroll height
     let scrollHeight = $(window).scrollTop() + (vh/2);
 
-    // Change text
-    let bottomAnchor, topAnchor = null;
-    var inSection = false;
-
-    for (const [tag, anchorHeights] of Object.entries(anchorsByHeight)) {
-
-        // See if this is the current anchor
-        [bottomAnchor, topAnchor] = anchorHeights;
-        inSection = scrollHeight > topAnchor && scrollHeight <= bottomAnchor;
-
-        if (inSection) {
-
-            // Display content
-            if (!currentlyFading) {
-                currentlyFading = true;
-                await $(tag).fadeIn();
-                currentlyFading = false;
-            }
-            else console.log('nah');
-
-            currentAnchor = tag;
-            for (const other of Object.keys(anchorsByHeight)) {
-                if (other != tag) $(other).hide();
-            }
-
-            // Format image
-            let textBox = $(tag).children(".text-box");
-            if (textBox.length) {
-                let imgOffset = $(tag).find("img").offset();
-                //if (isNaN(imgOffset)) imgOffset = 100;
-                let remaining = $("#nav").offset().top - imgOffset.top - 20;
-                $("img").height(`${parseInt(remaining)}px`);
-            }
-            else $("img").height("auto");
-        }
-        else {
-
-            // Hide content
-            $(tag).fadeOut();
-            if (tag == currentAnchor) currentAnchor = null;
-        }
-
-    };
-
     // Trigger animation
     var percent = Math.min(
         (document.body.scrollTop + document.documentElement.scrollTop) / 
-        ($(".container#initial-container").height()), 
+        ($("#prof-pic").outerHeight(true) + $("#prof-pic").height() + $("#prof-pic").offset().top),
         1
     );
     var halfPercent = percent <= 0.5 ? percent + 0.5 : 1;
@@ -330,11 +215,13 @@ async function scrollFuncs() {
         $("#triangulation").css("display", "none");
         $(".drawPath").css("display", "none");
         $("#tesselation").css("display", "block");
+        $("#Home").css("background-image", "url(./pics/Caret_top.png)");
     }
     else if (percent < 1) {
         $("#triangulation").css("display", "none");
         $(".drawPath").css("display", "block");
         $("#tesselation").css("display", "none");
+        $("#Home").css("background-image", "url(./pics/Caret.png)");
     }
     else {
         $("#triangulation").css("display", "block");
@@ -355,13 +242,16 @@ async function scrollFuncs() {
 
 }
 
+function sizeDivs() {
+    $(".content").width($(".core").width() - $("#button-div").width() - 80);
+}
+
 var currentAnchor = null;
 
 // Call functions
-var center = new Center();
-var delaunay = loadDelaunay(center, 300, 4);
+var delaunay = loadDelaunay(300, 4);
 var voronoi = loadVoronoi(delaunay);
-var pathLengths = insertScrollPaths(center, delaunay, voronoi);
+var pathLengths = insertScrollPaths(delaunay, voronoi);
 
 sizeDivs();
 
@@ -371,11 +261,10 @@ window.onresize = function() {
     vh = $(window).height();
     bb = [0, 0, vw, vh];
 
-    center = new Center();
-    delaunay = loadDelaunay(center, 300, 4);
+    delaunay = loadDelaunay(300, 4);
     voronoi = loadVoronoi(delaunay);
-    pathLengths = insertScrollPaths(center, delaunay, voronoi);
-    
+    pathLengths = insertScrollPaths(delaunay, voronoi);
+
     sizeDivs();
 
 };
