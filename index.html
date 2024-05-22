@@ -53,7 +53,8 @@
                 <img class="thumbnail" src="./pics/polxr-screenshot.png">
                 <div class="text-box">
                     <p>
-                        An XR glaciology app.
+                        An XR glaciology app. 
+                        We visualize radar data in an immersive 3D environment and develop custom UX tools for scientists.
                         <br><br>
                         Using a Quest or Hololens VR/AR headset, users can manipulate radargrams and other 
                             scientific data to study glaciological processes in Antarctica and Greenland.
@@ -87,8 +88,9 @@
                             <a href="https://www.engineering.columbia.edu/faculty/peter-belhumeur">Peter Belhumeur's</a> 
                             <i>Advanced Topics in Deep Learning</i> class,
                             I am attempting to improve the state of the art technique for novel view synthesis
-                            by using a neural network to learn a point sampling probability field and then
-                            performing 3D Gaussian Splatting.
+                            by using a neural network to learn a point sampling probability field, 
+                            sampling primitives from this field,
+                            and then splatting the primitives to render images.
                         I intend to continue this work over the summer of 2024 in 
                             <a href="https://www.cs.columbia.edu/~vondrick/">Carl Vondrick's</a> lab. 
                     </p>
@@ -116,11 +118,12 @@
                         Done as a project for 
                             <a href="https://www.cs.columbia.edu/~nayar/">Shree Nayar's</a> class 
                             <i>Computational Imaging</i>, 
-                            we wrote a pipeline for an Intel RealSense 455 camera that creates a 3D model of
-                            arbitrary objects that are partially seen directly by the camera and are
-                            partially visible through a mirror.
-                        Our goal was to create a more complete point cloud using multi-view stereo by
-                            incorporating the prior knowledge that there are specular surfaces in the scene. 
+                            we wrote a pipeline for an Intel RealSense 455 camera that creates 3D models. 
+                        What makes this interesting is that part of each object is seen directly by the camera and 
+                            part is only visible through a mirror.
+                        So, the object can be reconstructed better if the points seen through the mirror are properly  
+                            registered with the directly-seen points.
+                        We wrote a self-supervised algorithm that segments and merges these point clouds.
                     </p>
                 </div>
             </div>
@@ -141,13 +144,13 @@
                 <img class="thumbnail" src="https://github.com/cgauchey/deeplearningfinalproj/blob/main/data/processedImages/frame_2139_71277.png?raw=true">
                 <div class="text-box">
                     <p>
-                        Pose estimation for an indoor video using a deep neural network.
+                        Camera pose estimation for an indoor video using a deep neural network.
                         This was a group project for 
                             <a href="https://www.engineering.columbia.edu/faculty/peter-belhumeur">Peter Belhumeur's</a> 
                             <i>Deep Learning for Computer Vision</i> class.
                         Our goal was to figure out where in our classroom a random image was taken from, 
                             given simple conditions (same lighting, no movement, etc).
-                        We used a supervised approach but used COLMAP to estimate the ground truth poses.
+                        We took a supervised deep learning approach but used COLMAP to estimate the ground truth poses.
                     </p>
                 </div>
             </div>
