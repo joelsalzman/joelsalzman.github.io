@@ -145,12 +145,22 @@ svg {
 
 
 #GitHub {
-    margin-top: 5px;
     background-image: url("./pics/GitHub.png");
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 #GitHub:hover {
     background-image: url("./pics/GitHub_hover.png");
+}
+
+#Scholar {
+    background-image: url("./pics/GoogleScholar.png");
+    margin-top: 10px;
+}
+
+#Scholar:hover {
+    background-image: url("./pics/GoogleScholar_hover.png");
 }
 
 #LinkedIn {
