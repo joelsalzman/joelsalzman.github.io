@@ -37,8 +37,38 @@
         <div class="content" id="top">
             <h1>Joel<br>Salzman</h1>
             <h3>Research Software Engineer at AT&T Labs</h3>
+            <h3>Incoming PhD Student at Brown University</h3>
             <img id="prof-pic" src="./pics/prof-pic.JPG">
         </div>
+
+        <!-- GBake -->
+        <div class="content" id="gbake-content">
+
+            <div class="stuff">
+                <a href="https://www.cs.columbia.edu/">
+                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                </a>
+                <h2><a href="https://gbake-official.github.io/">GBake</a></h2>
+            </div>
+
+            <div class="stuff">
+                <img class="thumbnail" src="./pics/gbake.png">
+                <div class="text-box">
+                    <p>
+                        We create a tool to bake reflection probes from 3D Gaussian splatting scenes to relight meshes in Unity.
+                        <br><br>
+                        Doing this, we learned that EWA splatting is not accurate enough to render cubemaps.
+                        The approximation causes artifacts to appear at the seams of the cubemaps.
+                        Instead, we raytrace the Gaussian primitives.
+                        Unity can then use the baked cubemaps to relight meshes in real time by interpolating between nearby probes.
+                        <br><br>
+                        We will present GBake as a poster in the technical papers program at <a href="https://s2025.siggraph.org/">SIGGRAPH 2025</a>.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
 
         <!-- AT&T Labs -->
         <div class="content" id="att-content">
@@ -66,7 +96,6 @@
             </div>
 
         </div>
-
         <!-- VHard -->
         <div class="content" id="vhard-content">
 
