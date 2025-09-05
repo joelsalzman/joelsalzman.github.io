@@ -25,7 +25,7 @@
 
             <div class="hud" id="button-div">
                 <a class="button" id="Home"      href="#"></a>
-                <a class="button" id="Email"     href="mailto:joel.salzman@columbia.edu"></a>
+                <a class="button" id="Email"     onclick="showEmailPopup()"></a>
                 <a class="button" id="LinkedIn"  href="https://www.linkedin.com/in/joel-salzman"></a>
                 <a class="button" id="GitHub"    href="http://github.com/joelsalzman"></a>
                 <a class="button" id="Scholar"   href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=X4OkDt8AAAAJ&gmla=AOv-ny-oLe3LlcCTzzHwmR02Hel2n6cwuZ-rkbQqFzB2T2HNiGoL-geIWtjB8Pe_9h5Ky5pRkxoOVGPZDSgv961X6ZIgsHpsztjguHYVClsr7f0Kkg"></a>
@@ -33,16 +33,51 @@
 
         </div>
 
-         <!-- Initial page -->
-        <div class="content" id="top">
-            <h1>Joel<br>Salzman</h1>
-            <h3>Research Software Engineer at AT&T Labs</h3>
-            <h3>Incoming PhD Student at Brown University</h3>
-            <img id="prof-pic" src="./pics/prof-pic.JPG">
+        <div class="popup-container" id="email-container">
+            <div class="barrier" onclick="hideEmailPopup()"></div>
+            <div class="popup-main" id="email-popup">
+                <div class="email-display" id="email-display">joel [underscore] salzman [at] brown [dot] edu</div>
+                <button class="copy-button" id="copy-button" onclick="copyEmailToClipboard()">
+                    Copy to Clipboard
+                </button>
+                <button class="close-button" onclick="hideEmailPopup()">
+                    Close
+                </button>
+            </div>
         </div>
 
+        <div class="content" id="top" style="padding-bottom:0;">
+            <div class="top-header">
+                <div class="name-section">
+                    <h1>Joel<br>Salzman</h1>
+                    <div class="about-section text-box">
+                        <p id="initial-about">
+                            I'm a PhD student in Computer Science at Brown University,
+                                advised by <a href="https://jamestompkin.com/">James Tompkin</a> in the
+                                <a href="https://visual.cs.brown.edu/">Brown Visual Computing group</a>.
+                            My research focuses on 3D geometric reconstruction, scene representation, and 
+                                spatial analysis.
+                            I'm especially interested in hyperscalable methods that can be 
+                                deployed in the wild to capture and understand complex environments like disaster zones.
+                        </p>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <img id="prof-pic" src="./pics/me/linkedin2024_square.jpg" alt="Profile Picture">
+                </div>
+            </div>
+                
+        </div>
+
+        <!-- Publications (pub class) first -->
+        <div class="content" style="padding-bottom:20px;">
+            <div class="tooltip">
+                <button class="option active" onclick="toggleDisplayed('pub')">Publications</button>
+            </div>
+        </div>
+        
         <!-- GBake -->
-        <div class="content" id="gbake-content">
+        <div class="content pub" id="gbake-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -52,52 +87,35 @@
             </div>
 
             <div class="stuff">
+                <p class="citation">
+                    <a href="https://arxiv.org/abs/2507.02257">GBake: Baking 3D Gaussian Splats into Reflection Probes</a><br>
+                    <span class="citation-indent">
+                        <a href="https://www.linkedin.com/in/stephenspasch/">Stephen Pasch*</a>, 
+                        <b>Joel Salzman*</b>, 
+                        <a href="https://www.cs.columbia.edu/~cxz/">Changxi Zheng</a><br>
+                        <i>SIGGRAPH 2025 (Poster)</i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/gbake.png">
                 <div class="text-box">
                     <p>
-                        We create a tool to bake reflection probes from 3D Gaussian splatting scenes to relight meshes in Unity.
+                        A tool to bake reflection probes from 3D Gaussian splatting scenes to relight meshes in Unity.
                         <br><br>
                         Doing this, we learned that EWA splatting is not accurate enough to render cubemaps.
-                        The approximation causes artifacts to appear at the seams of the cubemaps.
-                        Instead, we raytrace the Gaussian primitives.
+                        The approximation causes artifacts to appear at the seams where the cube faces meet.
+                        Instead, we raytraced the Gaussian primitives.
                         Unity can then use the baked cubemaps to relight meshes in real time by interpolating between nearby probes.
-                        <br><br>
-                        We will present GBake as a poster in the technical papers program at <a href="https://s2025.siggraph.org/">SIGGRAPH 2025</a>.
                     </p>
                 </div>
             </div>
 
         </div>
 
-
-        <!-- AT&T Labs -->
-        <div class="content" id="att-content">
-
-            <div class="stuff">
-                <a href="https://about.att.com/sites/labs">
-                    <img class="affiliation" src="./pics/ATTLabs_logo.png">
-                </a>
-                <h2>Research Software Engineer</h2>
-            </div>
-
-            <div class="stuff">
-                <img class="thumbnail" src="./pics/att_raytracing.png">
-                <div class="text-box">
-                    <p>
-                        I currently work on 3D mapping and geospatial machine learning to help deliver better 5G signals to AT&T customers.
-                        The image is from a 
-                        <a href="https://www.researchgate.net/publication/365677651_Playable_ray_tracing_for_real-time_exploration_of_radio_propagation_in_wireless_networks/figures?lo=1">paper published by the group</a> 
-                        before I joined.
-                    <br><br>
-                        I focus on frontend and geometry processing.
-                        Since I'm under NDA, that's all I have to say.
-                    </p>
-                </div>
-            </div>
-
-        </div>
         <!-- VHard -->
-        <div class="content" id="vhard-content">
+        <div class="content pub" id="vhard-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -107,6 +125,20 @@
             </div>
 
             <div class="stuff">
+                <p class="citation">
+                    <a href="https://ieeexplore.ieee.org/document/10765317">VHard: An XR UI for Kinesthetic Rehearsal of Rock Climbing Moves</a>
+                    <span class="citation-indent">
+                        <b>Joel Salzman</b>,
+                        <a href="https://jaceli.com/">Jace Li</a>,
+                        <a href="https://benjyang.com/">Ben Yang</a>,
+                        <a href="https://www.cs.columbia.edu/~feiner/">Steven Feiner</a>
+                        <br>
+                        <i>ISMAR 2024 (Demo)</i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/vhard.png">
                 <div class="text-box">
                     <p>
@@ -118,8 +150,9 @@
                         So, you can practice your exact hand and body positions on the ground with metric accuracy 
                             and live feedback.
                         <br><br>
-                        We presented VHard as a demo in 
-                            <a href="https://ieeeismar.org/demos/#demo1130-vhard-an-xr-ui-for-kinesthetic-rehearsal-of-rock-climbing-moves">IEEE ISMAR 2024</a>.
+                        We were awarded a grant from the 
+                        <a href="https://sportsai.engineering.columbia.edu/research">Columbia-Dream Sports AI Innovation Center</a>
+                        to significantly expand this project. Stay tuned!
                     </p>
                 </div>
             </div>
@@ -127,7 +160,7 @@
         </div>
 
         <!-- PolXR -->
-        <div class="content" id="viser-content">
+        <div class="content pub" id="viser-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -137,6 +170,71 @@
             </div>
 
             <div class="stuff">
+                <p class="citation">
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024AGUFMC43H...01H/abstract">
+                        Discharge promotes melt and formation of submarine ice-shelf channels 
+                        at the Beardmore Glacier grounding zone and basal body formation downstream 
+                    </a>
+                    <span class="citation-indent">
+                        Andrew Hoffman,
+                        S. Isabel Cordero,
+                        Qazi Ashikin,
+                        <b>Joel Salzman</b>,
+                        Kirsty Tinto,
+                        Jonathan Kingslake,
+                        David Felton Porter,
+                        Renata Constantino,
+                        Alexandra Boghosian,
+                        Knut A. Christianson,
+                        Howard Conway,
+                        Michelle R. Koutnik
+                        <br>
+                        <i>AGU Fall 2024</i>
+                    </span>
+                </p>
+            </div>
+            <div class="stuff">
+                <p class="citation">
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024AGUFMC43H...01H/abstract">
+                        Visualizing Ice Sheets in Extended Reality (VISER) for the Improvement of Polar Data Analysis
+                    </a>
+                    <span class="citation-indent">
+                        S. Isabel Cordero,
+                        Alexandra Boghosian,
+                        <b>Joel Salzman</b>,
+                        Qazi Ashikin,
+                        Kirsty Tinto,
+                        Steven Feiner,
+                        Robin Elizabeth Bell
+                        <br>
+                        <i>AGU Fall 2023</i>
+                    </span>
+                </p>
+            </div>
+            <div class="stuff">
+                <p class="citation">
+                    <a href="https://ui.adsabs.harvard.edu/abs/2024AGUFMC43H...01H/abstract">
+                        Augmented Reality and Virtual Reality for Ice-Sheet Data Analysis
+                    </a>
+                    <span class="citation-indent">
+                        Alexandra Boghosian,
+                        S. Isabel Cordero,
+                        Carmine Elvezio,
+                        Sofia Sanchez-Zarate,
+                        Ben Yang,
+                        Shengyue Guo,
+                        Qazi Ashikin,
+                        <b>Joel Salzman</b>,
+                        Kirsty Tinto,
+                        Steven Feiner,
+                        Robin Elizabeth Bell
+                        <br>
+                        <i>IGARSS 2023</i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/polxr-screenshot.png">
                 <div class="text-box">
                     <p>
@@ -147,17 +245,171 @@
                             scientific data to study glaciological processes in Antarctica and Greenland.
                         I created the pipeline that ingests radar plots and generates 3D meshes that visualize 
                             the actual locations from where the signals were gathered. 
-                        We were the first to model the entire flight trajectory in 3D.
-                        <br><br>
-                        Since joining the team, I have been named on two publications (see the project site for details).
+                        We believe we were the first to model the entire flight trajectory in 3D.
                     </p>
                 </div>
             </div>
 
         </div>
 
+        <!-- Indoor Mapping -->
+        <div class="content pub" id="indoor-content">
+
+            <div class="stuff">
+                <a href="https://www.geog.ucsb.edu/">
+                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                </a>
+                <h2>Indoor Mapping</h2>
+            </div>
+
+            <div class="stuff">
+                <p class="citation">
+                    <a href="https://cartogis.org/docs/autocarto/2020/docs/abstracts/4b%20LiDAR%20Data%20Segmentation%20using%20Deep%20Learning%20for%20Indoor%20Mapping.pdf">
+                        LiDAR Data Segmentation using Deep Learning for Indoor Mapping
+                    </a>
+                    <span class="citation-indent">
+                        Enbo Zhou,
+                        Keith C. Clarke,
+                        <b>Joel Salzman</b>,
+                        Haoyu Shi,
+                        Bryn Morgan
+                        <br>
+                        <i>AutoCarto 2020</i>
+                    </span>
+                </p>
+            </div>
+
+            <div class="stuff pic-desc">
+                <img class="thumbnail" src="./pics/indoor_lidar.png">
+                <div class="text-box">
+                    <p>
+                        We used PointNet and PointNet++ to segment and classify LIDAR point clouds of indoor environments at various levels of detail.
+                        Since this was my first foray into research (hooray!), I manually classified the ground truth and created visualizations.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Experience (exp class) second -->
+        
+        <div class="content" style="padding-bottom:20px;">
+            <div class="tooltip">
+                <button class="option active" onclick="toggleDisplayed('exp')">Work</button>
+            </div>
+        </div> 
+
+        <!-- AT&T Labs -->
+        <div class="content exp" id="att-content">
+
+            <div class="stuff">
+                <a href="https://about.att.com/sites/labs">
+                    <img class="affiliation" src="./pics/ATTLabs_logo.png">
+                </a>
+                <h2>Research Software Engineer</h2>
+            </div>
+
+            <div class="stuff">
+                <p class="date-range">01/25 – 07/25</p>
+            </div>
+
+            <div class="stuff pic-desc">
+                <img class="thumbnail" src="./pics/att_raytracing.png">
+                <div class="text-box">
+                    <p>
+                        I worked on 3D mapping and geospatial machine learning to help deliver better 5G signals to AT&T customers.
+                        The image is from a 
+                        <a href="https://www.researchgate.net/publication/365677651_Playable_ray_tracing_for_real-time_exploration_of_radio_propagation_in_wireless_networks/figures?lo=1">paper published by the group</a> 
+                        before I joined.
+                    <br><br>
+                        I focused on frontend and geometry processing.
+                        Since I'm under NDA, that's all I have to say.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Apex -->
+        <div class="content normal exp" id="apex-content">
+
+            <div class="stuff" id="content-header">
+                <a href="https://www.apexcleanenergy.com/">
+                    <img class="affiliation" src="./pics/Apex_logo.png">
+                </a>
+                <h2>GIS Developer</h2>
+            </div>
+
+            <div class="stuff">
+                <p class="date-range">06/20 – 06/22</p>
+            </div>
+
+            <div class="stuff pic-desc">
+                <img class="thumbnail" src="./pics/apex-sitevisit.png">
+                <div class="text-box">
+                    <p>
+                        For over two years, my job was to figure out where to build utility-scale
+                            renewable (primarily wind and solar) projects for 
+                            <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a>.
+                        Most of my work consisted of data engineering and automated geospatial analysis.
+                        My role supported the people who would actually talk to landowners to lease parcels.
+                        We developed and maintained a web app hosting tools for hundreds of unique analyses 
+                            that could be generated on the fly to streamline the site selection process.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Kelp -->
+        <div class="content normal exp" id="kelp-content">
+
+            <div class="stuff">
+                <a href="https://www.geog.ucsb.edu/">
+                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                </a>
+                <h2>
+                    <a href="./pics/Regional_Federal.png">Aquaculture</a>
+                </h2>
+            </div>
+
+            <div class="stuff">
+                <p class="date-range">06/18 – 03/19</p>
+            </div>
+
+            <div class="stuff pic-desc">
+                <img class="thumbnail" src="./pics/kelp-screenshot.png">
+                <div class="text-box">
+                    <p>
+                        <a href="http://www.primaryocean.com">Primary Ocean Producers</a> is a 
+                            startup aiming to cultivate <i>Macrocystis pyrifera</i> in the deep 
+                            ocean, in partnership with Catalina Sea Ranch.
+                        We were funded by a grant from 
+                            <a href="https://arpa-e.energy.gov/technologies/programs/mariner">ARPA-E</a> 
+                            to grow giant kelp en masse in order to produce carbon-neutral biofuel.
+                    <br><br>
+                        My role was to site the pilot facilities off the coast of California.
+                        Along with two aquatic biologists, I developed a hierarchical suitability 
+                            model for giant kelp cultivation.
+                        Among other factors, we looked at chemical availability (for nutrients), 
+                            geophysical phenomena (so the kelp would be safe), and legal 
+                            restrictions (in order to actually build the facility).
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Projects (proj class) third -->
+
+        <div class="content" style="padding-bottom:20px;">
+            <div class="tooltip">
+                <button class="option active" onclick="toggleDisplayed('proj')">Projects</button>
+            </div>
+        </div>
+
         <!-- Neurochory -->
-        <div class="content" id="neurochory-content">
+        <div class="content proj" id="neurochory-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -166,7 +418,7 @@
                 <h2><a href="https://github.com/joelsalzman/neurochory-s24">Neurochoric Radiance Fields</a></h2>
             </div>
 
-            <div class="stuff">
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/hotdog.png">
                 <div class="text-box">
                     <p>
@@ -189,7 +441,7 @@
         </div>
 
         <!-- Refleconstruction -->
-        <div class="content" id="refleconstruction-content">
+        <div class="content proj" id="refleconstruction-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -198,7 +450,7 @@
                 <h2><a href="https://github.com/joelsalzman/refleconstruction">Refleconstruction</a></h2>
             </div>
 
-            <div class="stuff">
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/refleconstruction.png">
                 <div class="text-box">
                     <p>
@@ -220,7 +472,7 @@
         </div>
 
         <!-- LocalAIze -->
-        <div class="content" id="localaize-content">
+        <div class="content proj" id="localaize-content">
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
@@ -229,7 +481,7 @@
                 <h2><a href="https://github.com/cgauchey/deeplearningfinalproj">LocalAIze</a></h2>
             </div>
 
-            <div class="stuff">
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="https://github.com/cgauchey/deeplearningfinalproj/blob/main/data/processedImages/frame_2139_71277.png?raw=true">
                 <div class="text-box">
                     <p>
@@ -246,34 +498,8 @@
 
         </div>
 
-        <!-- Apex -->
-        <div class="content normal" id="apex-content">
-
-            <div class="stuff" id="content-header">
-                <a href="https://www.apexcleanenergy.com/">
-                    <img class="affiliation" src="./pics/Apex_logo.png">
-                </a>
-                <h2>GIS Developer</h2>
-            </div>
-
-            <div class="stuff">
-                <img class="thumbnail" src="./pics/apex-sitevisit.png">
-                <div class="text-box">
-                    <p>
-                        For over two years, my job was to figure out where to build utility-scale
-                            renewable (primarily wind and solar) projects for 
-                            <a href="https://www.apexcleanenergy.com/">Apex Clean Energy</a>.
-                        Most of my work consisted of data engineering and automated geospatial analysis.
-                        My deliverables remain proprietary but I will happily explain what I did and what I
-                            learned if asked.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
         <!-- GDVP -->
-        <div class="content normal" id="gdvp-content">
+        <div class="content normal proj" id="gdvp-content">
 
             <div class="stuff">
                 <a href="https://www.geog.ucsb.edu/">
@@ -284,53 +510,18 @@
                 </h2>
             </div>
 
-            <div class="stuff">
+            <div class="stuff pic-desc">
                 <img class="thumbnail" src="./pics/176c-screenshot.png">
                 <div class="text-box">
                     <p>
                         Where do votes matter most? 
                         A project for my last GIS class in college under 
-                        <a href="https://www.geog.ucsb.edu/people/faculty/krzysztof-janowicz">Krzysztof Janowicz</a> 
+                        <a href="https://ml.ucsb.edu/people/faculty/krzysztof-janowicz">Krzysztof Janowicz</a> 
                         that ended up as an interactive web map.
                         See the project page for (many) details.
                     <br><br>
                         Working on this project is a big part of why I decided to go back to school for
                             Computer Science.
-                    </p>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Kelp -->
-        <div class="content normal" id="kelp-content">
-
-            <div class="stuff">
-                <a href="https://www.geog.ucsb.edu/">
-                    <img class="affiliation" src="./pics/UCSB_logo.png">
-                </a>
-                <h2>
-                    <a href="./pics/Regional_Federal.png">Aquaculture</a>
-                </h2>
-            </div>
-
-            <div class="stuff">
-                <img class="thumbnail" src="./pics/kelp-screenshot.png">
-                <div class="text-box">
-                    <p>
-                        <a href="http://www.primaryocean.com">Primary Ocean Producers</a> is a 
-                            startup aiming to cultivate <i>Macrocystis pyrifera</i> in the deep 
-                            ocean, in partnership with Catalina Sea Ranch.
-                        We were funded by a grant from 
-                            <a href="https://arpa-e.energy.gov/technologies/programs/mariner">ARPA-E</a> 
-                            to grow giant kelp en masse in order to produce carbon-neutral biofuel.
-                    <br><br>
-                        My role was to site the pilot facilities off the coast of California.
-                        Along with two aquatic biologists, I developed a hierarchical suitability 
-                            model for giant kelp cultivation.
-                        Among other factors, we looked at chemical availability (for nutrients), 
-                            geophysical phenomena (so the kelp would be safe), and legal 
-                            restrictions (so we could build the facility).
                     </p>
                 </div>
             </div>

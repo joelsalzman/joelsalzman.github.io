@@ -243,7 +243,7 @@ async function scrollFuncs() {
 }
 
 function sizeDivs() {
-    $(".content").width($(".core").width() - $("#button-div").width() - 80);
+    $(".content").css('width', `${$(".core").width()*.965 - $("#button-div").width()}px`);
 }
 
 var currentAnchor = null;
@@ -269,5 +269,133 @@ window.onresize = function() {
 
 };
 
+// Update PhD year
+function yearsSinceAug2025ToOrdinal() {
+  const years = Math.floor((new Date() - new Date(2025, 7)) / (1000 * 60 * 60 * 24 * 365.25));
+  const ordinals = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth'];
+  return ordinals[Math.max(0, Math.min(years, 9))];
+}
+
+function updateYearText() {
+  const ordinal = yearsSinceAug2025ToOrdinal();
+  const p = document.querySelector('#initial-about');
+  if (p) {
+    const idx = p.textContent.indexOf('PhD');
+    if (idx !== -1) {
+      const rest = p.innerHTML.substring(idx);
+      p.innerHTML = `I'm a ${ordinal}-year ${rest}`;
+    }
+  }
+}
+
+updateYearText();
+
+// Connect toggles
+function toggleDisplayed(str) {
+    var elements = document.getElementsByClassName(str);
+    var button = event.target;
+    
+    var isCurrentlyCollapsed = elements.length > 0 && elements[0].classList.contains('collapsed');
+    
+    for (var i = 0; i < elements.length; i++) {
+        if (isCurrentlyCollapsed) {
+            elements[i].classList.remove('collapsed');
+        } else {
+            elements[i].classList.add('collapsed');
+        }
+    }
+    
+    button.classList.toggle('active');
+}
+window.toggleDisplayed = toggleDisplayed;
+
+// Initialize buttons
+function initializeButtons() {
+   var tooltip = document.querySelector('.tooltip');
+   var buttons = tooltip.querySelectorAll('.option[onclick*="toggleDisplayed"]');
+   
+   buttons.forEach(function(button) {
+       var onclickAttr = button.getAttribute('onclick');
+       var className = onclickAttr.match(/toggleDisplayed\('([^']+)'\)/)[1];
+       if (!button.classList.contains('active')) {
+           var elements = document.getElementsByClassName(className);
+           for (var i = 0; i < elements.length; i++) {
+               elements[i].classList.add('collapsed');
+           }
+       }
+   });
+}
+document.addEventListener('DOMContentLoaded', initializeButtons);
+
 window.addEventListener("scroll", scrollFuncs);
 scrollFuncs();
+
+// Email popup
+function showEmailPopup() {
+    const container = document.getElementById("email-container");
+    const popup = document.getElementById("email-popup");
+    
+    container.style.display = "block";
+    
+    // Reset button state
+    const copyButton = document.getElementById("copy-button");
+    copyButton.textContent = "Copy to Clipboard";
+    copyButton.classList.remove("copied");
+}
+
+function hideEmailPopup() {
+    const container = document.getElementById("email-container");
+    container.style.display = "none";
+}
+
+async function copyEmailToClipboard() {
+    const email = document.getElementById("email-display").textContent
+        .replace(' [underscore] ', '_').replace(' [at] ', '@').replace(' [dot] ', '.');
+    const copyButton = document.getElementById("copy-button");
+    
+    try {
+        await navigator.clipboard.writeText(email);
+        copyButton.classList.add("copied");
+        
+        // Reset button after 2 seconds
+        setTimeout(() => {
+            copyButton.textContent = "Copy to Clipboard";
+            copyButton.classList.remove("copied");
+        }, 2000);
+    } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            document.execCommand('copy');
+            copyButton.textContent = "Copied!";
+            copyButton.classList.add("copied");
+            
+            setTimeout(() => {
+                copyButton.textContent = "Copy to Clipboard";
+                copyButton.classList.remove("copied");
+            }, 2000);
+        } catch (err) {
+            copyButton.textContent = "Copy failed";
+            setTimeout(() => {
+                copyButton.textContent = "Copy to Clipboard";
+            }, 2000);
+        }
+        
+        document.body.removeChild(textArea);
+    }
+}
+window.showEmailPopup = showEmailPopup;
+window.hideEmailPopup = hideEmailPopup;
+window.copyEmailToClipboard = copyEmailToClipboard;
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        hideEmailPopup();
+    }
+});

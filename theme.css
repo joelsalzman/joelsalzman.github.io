@@ -17,11 +17,6 @@ body {
     border: none;
 }
 
-#top {
-    display: flex;
-    flex-direction: column;
-}
-
 h1 {
     color: white;
     text-align: left;
@@ -117,8 +112,11 @@ svg {
     position: relative;
     float: right;
     height: 90%;
-    width: 70px;
+    width: 100px;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .button {
@@ -216,17 +214,16 @@ svg {
     z-index: 4;
     align-items: left;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 .stuff {
     display: flex;
     max-width: 100%;
     height: fit-content;
-    /*position: relative;
-    display: flex;
     flex-direction: row;
-    */
 }
 .stuff p {
     padding-left: 10px;
@@ -234,6 +231,10 @@ svg {
 }
 .stuff a {
     display: inline-flex;
+}
+
+.pic-desc {
+    margin-top: 7px;
 }
 
 .container {
@@ -252,11 +253,12 @@ h2 {
     position: inherit;
     flex-wrap: wrap;
     padding: 0px;
-    margin: 10px;
+    margin: 3px 10px 3px 10px;
 }
 h2 a {
     text-decoration-thickness: 1px;
     text-decoration-style: wavy;
+    text-decoration: none;
 }
 
 img {
@@ -283,4 +285,294 @@ img {
     max-width: 250px;
     max-height: 250px;
     object-fit: contain;
+    flex-shrink: 0;    /* Key: prevents shrinking */
+}
+
+#top {
+   display: flex;
+   flex-direction: column;
+}
+
+/* Header area with name and image */
+.top-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-start;
+   width: 100%;
+   margin-bottom: 30px;
+   margin-right: 100px;
+}
+
+.name-section {
+    flex: 1;
+    text-align: left; /* Left align text */
+}
+
+.name-section h1 {
+    color: white;
+    font-size: clamp(36px, 8vw, 60px);
+    margin: 0 0 15px 0;
+    line-height: 1.1;
+    text-align: left;
+}
+
+.name-section h3 {
+    color: white;
+    font-size: clamp(14px, 2vw, 16px);
+    margin: 0 0 12px 0;
+    font-style: italic;
+    font-weight: normal;
+    text-align: left;
+}
+
+/* Square profile picture on the right */
+.profile-section {
+    flex-shrink: 0;
+    margin-left: 30px;
+}
+
+#prof-pic {
+    width: 350px;
+    height: 350px;
+    object-fit: cover;
+    border: 3px solid white;
+    display: block;
+}
+
+/* About section - left aligned */
+.about-section {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.about-section h2 {
+    color: white;
+    font-size: clamp(24px, 4vw, 32px);
+    margin: 0 0 15px 0;
+    text-align: left;
+}
+
+.about-section p {
+    color: white;
+    font-size: clamp(14px, 1.5vw, 16px);
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+}
+
+.date-range {
+    color:#999;
+    padding-left: 0 !important;
+    font-style: italic;
+}
+
+.citation {
+    padding-left: 0 !important;
+    color:#999;
+    font-size: 12px;
+}
+.citation a {
+    color:#999;
+    text-decoration: none;
+}
+.citation a:hover {
+    color: rgb(83, 83, 255);
+    transition-duration: 0.5s;
+}
+.citation-indent {
+    display: block;
+    padding-left: 1em;
+    color: #999;
+    font-size: 12px;;
+}
+.citation i, b {
+    color: #ccc;
+}
+
+/* ONLY the tooltip is center-aligned */
+.tooltip {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.option {
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border: 2px solid white;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-family: Verdana;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.option:hover {
+    border-color: rgb(83, 83, 255);
+}
+
+.option.active {
+    background-color: rgb(53, 53, 53);
+}
+
+.option:not(.active)::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        to bottom left,
+        transparent 47%,
+        white 47%,
+        white 53%,
+        transparent 53%
+    );
+    pointer-events: none;
+}
+
+.option:not(.active):hover::after {
+    background: linear-gradient(
+        to bottom left,
+        transparent 47%,
+        rgb(83, 83, 255) 47%,
+        rgb(83, 83, 255) 53%,
+        transparent 53%
+    );
+}
+
+.pub, .exp, .edu, .proj {
+    max-height: 1000px; /* Set higher than content will ever be */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.pub.collapsed, .exp.collapsed, .edu.collapsed, .proj.collapsed {
+    max-height: 0;
+    margin: 0; /* Remove margins when collapsed */
+    padding: 0; /* Remove padding when collapsed */
+}
+
+/* Email popup */
+.popup-container {
+    display: none;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.barrier {
+    height: 100vh;
+    width: 100vw;
+    z-index: 1001;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.85);
+    cursor: pointer;
+}
+
+.popup-main {
+    position: fixed;
+    z-index: 1002;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(53, 53, 53);
+    color: black;
+    border-radius: 10px;
+    border: 2px solid white;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: zoom 0.3s ease-out;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+@keyframes zoom {
+    from { transform: translate(-50%, -50%) scale(0); }
+    to { transform: translate(-50%, -50%) scale(1); }
+}
+
+.popup-main h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.popup-main p {
+    color: #666;
+    font-size: 16px;
+    margin: 15px 0;
+}
+
+.email-display {
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    /* font-family: monospace; */
+    font-size: 18px;
+    color: #333;
+    margin: 20px 0;
+    word-break: break-all;
+}
+
+.copy-button {
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border: 2px solid white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.copy-button:hover {
+    border-color: rgb(83, 83, 255);
+}
+
+.copy-button.copied {
+    background-color: rgb(83, 83, 255);
+    color: white;
+    border-color: rgb(83, 83, 255);
+}
+
+.close-button {
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border: 2px solid white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.close-button:hover {
+    border-color: rgb(83, 83, 255);
+}
+
+.demo-section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+}
+
+.demo-section h3 {
+    color: white;
+    margin-top: 0;
 }
