@@ -375,6 +375,7 @@ img {
 .citation a {
     color:#999;
     text-decoration: none;
+    font-size: 12px !important; /* Add explicit font-size */
 }
 .citation a:hover {
     color: rgb(83, 83, 255);
@@ -384,10 +385,11 @@ img {
     display: block;
     padding-left: 1em;
     color: #999;
-    font-size: 12px;;
+    font-size: 12px !important;
 }
 .citation i, b {
     color: #ccc;
+    font-size: 12px !important;
 }
 
 /* ONLY the tooltip is center-aligned */
