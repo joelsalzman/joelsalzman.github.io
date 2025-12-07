@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caustics are the Locus of Wavefront Centers of Curvature</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 1px solid #333;
+        }
+        .info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 350px;
+        }
+        .legend-item {
+            margin: 5px 0;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: white;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        button {
+            background: #333;
+            color: white;
+            border: 1px solid #666;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+    
+    <div class="info">
+        <div style="font-size: 16px; margin-bottom: 10px;"><strong>Caustics are the Locus of Wavefront Centers of Curvature</strong></div>
+        <div class="legend-item" style="color: #ff6666;"><strong>●</strong> Light source</div>
+        <div class="legend-item" style="color: #888;"><strong>━</strong> Rays from source</div>
+        <div class="legend-item" style="color: #00ffff;"><strong>━━</strong> Reflector surface</div>
+        <div style="margin-top: 10px; margin-bottom: 5px; font-weight: bold;">Toggle Elements:</div>
+        <div class="legend-item"><label><input type="checkbox" id="toggleWavefront"> <span style="color: #00ff00;">Current wavefront</span></label></div>
+        <div class="legend-item"><label><input type="checkbox" id="toggleCenters"> <span style="color: #ffaa00;">Centers of curvature</span></label></div>
+        <div class="legend-item"><label><input type="checkbox" id="toggleTracked"> <span style="color: #ff3333;">Tracked osculating circle</span></label></div>
+        <div style="margin-top: 10px; font-size: 12px; color: #aaa;">
+            Watch how the centers of curvature (orange) form the caustic pattern as the wavefront propagates!
+        </div>
+    </div>
+
+    <div class="controls">
+        <button id="restartBtn">Restart Animation</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="continueBtn" style="display: none;">Continue to Frame 275</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        const width = canvas.width;
+        const height = canvas.height;
+        
+        // Configuration
+        const sourcePoint = { x: 600, y: 650 };
+        const numRays = 600;
+        const numRaysForCurvature = 4000;
+        let time = 0;
+        let isPaused = false;
+        let pausedAtFrame139 = false;
+        let stopAddingCenters = false;
+        let hideTrackedCircle = false;
+        
+        // Toggle states (all off by default)
+        let showWavefront = false;
+        let showCenters = false;
+        let showTracked = false;
+        const pauseFrame = 220;
+        const maxTime = 275;
+        
+        // Define the reflecting curved surface (rotated 90 degrees counterclockwise)
+        function reflectingSurface(t) {
+            // Original: x = 700 + 250*cos(t*PI), y = 400 + 300*sin(t*PI) + 50*sin(2*t*PI)
+            // Rotate 90° CCW: (x,y) -> (-y, x) relative to center
+            const centerX = 600;
+            const centerY = 400;
+            
+            // Compute original coordinates relative to center
+            const origX = 250 * Math.cos(t * Math.PI);
+            const origY = 300 * Math.sin(t * Math.PI) + 50 * Math.sin(2 * t * Math.PI);
+            
+            // Rotate 90° CCW: (x,y) -> (-y, x)
+            const x = centerX - origY;
+            const y = centerY + origX;
+            
+            return { x, y };
+        }
+        
+        function surfaceNormal(t) {
+            const dt = 0.001;
+            const p1 = reflectingSurface(t - dt);
+            const p2 = reflectingSurface(t + dt);
+            const tangent = {
+                x: p2.x - p1.x,
+                y: p2.y - p1.y
+            };
+            const len = Math.sqrt(tangent.x * tangent.x + tangent.y * tangent.y);
+            // Normal is perpendicular to tangent, pointing inward
+            return {
+                x: -tangent.y / len,
+                y: tangent.x / len
+            };
+        }
+        
+        // Ray class
+        class Ray {
+            constructor(angle) {
+                this.angle = angle;
+                this.dir = {
+                    x: Math.cos(angle),
+                    y: Math.sin(angle)
+                };
+                this.reflected = false;
+                this.reflectionPoint = null;
+                this.reflectedDir = null;
+            }
+            
+            findReflection() {
+                if (this.reflected) return;
+                
+                // Use optimization to find the point on the surface closest to the ray
+                let bestT = 0.5;  // Start in the middle
+                let bestDist = Infinity;
+                
+                // First, do a quick scan to find a good starting point
+                for (let t = 0; t <= 1; t += 0.05) {
+                    const surfPoint = reflectingSurface(t);
+                    const toSurf = {
+                        x: surfPoint.x - sourcePoint.x,
+                        y: surfPoint.y - sourcePoint.y
+                    };
+                    
+                    const dot = toSurf.x * this.dir.x + toSurf.y * this.dir.y;
+                    if (dot > 0) {
+                        const perpDist = Math.abs(toSurf.x * this.dir.y - toSurf.y * this.dir.x);
+                        if (perpDist < bestDist) {
+                            bestDist = perpDist;
+                            bestT = t;
+                        }
+                    }
+                }
+                
+                // Now use gradient descent / Newton-like refinement
+                for (let iter = 0; iter < 20; iter++) {
+                    const dt = 0.0001;
+                    
+                    const p0 = reflectingSurface(bestT);
+                    const pPlus = reflectingSurface(Math.min(1, bestT + dt));
+                    const pMinus = reflectingSurface(Math.max(0, bestT - dt));
+                    
+                    // Perpendicular distance from ray to surface point
+                    const toSurf = {
+                        x: p0.x - sourcePoint.x,
+                        y: p0.y - sourcePoint.y
+                    };
+                    const perpDist = toSurf.x * this.dir.y - toSurf.y * this.dir.x;
+                    
+                    // Gradient of perpendicular distance with respect to t
+                    const toSurfPlus = {
+                        x: pPlus.x - sourcePoint.x,
+                        y: pPlus.y - sourcePoint.y
+                    };
+                    const toSurfMinus = {
+                        x: pMinus.x - sourcePoint.x,
+                        y: pMinus.y - sourcePoint.y
+                    };
+                    
+                    const perpDistPlus = toSurfPlus.x * this.dir.y - toSurfPlus.y * this.dir.x;
+                    const perpDistMinus = toSurfMinus.x * this.dir.y - toSurfMinus.y * this.dir.x;
+                    
+                    const gradient = (perpDistPlus - perpDistMinus) / (2 * dt);
+                    
+                    if (Math.abs(gradient) < 1e-10) break;
+                    
+                    // Newton step
+                    const step = -perpDist / gradient;
+                    bestT = Math.max(0, Math.min(1, bestT + step * 0.5));  // Damped step
+                    
+                    if (Math.abs(step) < 1e-8) break;  // Converged
+                }
+                
+                // Verify this is actually on the ray (not behind source)
+                const finalPoint = reflectingSurface(bestT);
+                const toFinal = {
+                    x: finalPoint.x - sourcePoint.x,
+                    y: finalPoint.y - sourcePoint.y
+                };
+                const dot = toFinal.x * this.dir.x + toFinal.y * this.dir.y;
+                
+                if (dot > 0) {
+                    this.reflected = true;
+                    this.reflectionPoint = finalPoint;
+                    this.reflectionT = bestT;
+                    
+                    const normal = this.surfaceNormalAnalytic(bestT);
+                    const dotNormal = this.dir.x * normal.x + this.dir.y * normal.y;
+                    this.reflectedDir = {
+                        x: this.dir.x - 2 * dotNormal * normal.x,
+                        y: this.dir.y - 2 * dotNormal * normal.y
+                    };
+                }
+            }
+
+            surfaceNormalAnalytic(t) {
+                const pi = Math.PI;
+                const dx = -300 * pi * Math.cos(t * pi) - 100 * pi * Math.cos(2 * t * pi);
+                const dy = -250 * pi * Math.sin(t * pi);
+                const len = Math.sqrt(dx * dx + dy * dy);
+                return {
+                    x: -dy / len,
+                    y: dx / len
+                };
+            }
+            
+            getPoint(distance) {
+                if (!this.reflected || distance < this.getReflectionDistance()) {
+                    return {
+                        x: sourcePoint.x + this.dir.x * distance,
+                        y: sourcePoint.y + this.dir.y * distance
+                    };
+                } else {
+                    const excess = distance - this.getReflectionDistance();
+                    return {
+                        x: this.reflectionPoint.x + this.reflectedDir.x * excess,
+                        y: this.reflectionPoint.y + this.reflectedDir.y * excess
+                    };
+                }
+            }
+            
+            getReflectionDistance() {
+                if (!this.reflected) return Infinity;
+                const dx = this.reflectionPoint.x - sourcePoint.x;
+                const dy = this.reflectionPoint.y - sourcePoint.y;
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+        }
+        
+        // Create rays (only left half)
+        const rays = [];
+        for (let i = 0; i < numRays; i++) {
+            // Only create rays for the left half of the original range
+            const angle = -Math.PI * 0.85 + (Math.PI * 0.22 * i) / (numRays - 1);
+            // const angle = -Math.PI * 0.85 + (Math.PI * 0.34 * i) / (numRays - 1);
+            const ray = new Ray(angle);
+            ray.findReflection();
+            rays.push(ray);
+        }
+
+        // Create MANY more rays just for curvature calculation (don't render these)
+        const raysForCurvature = [];
+        for (let i = 0; i < numRaysForCurvature; i++) {
+            const angle = -Math.PI * 0.85 + (Math.PI * 0.22 * i) / (numRaysForCurvature - 1);
+            const ray = new Ray(angle);
+            ray.findReflection();
+            raysForCurvature.push(ray);
+        }
+        
+        // Compute wavefront points
+        function getWavefrontPoints(dist) {
+            const points = [];
+            for (const ray of rays) {
+                points.push(ray.getPoint(dist));
+            }
+            return points;
+        }
+        function getWavefrontPointsHighRes(dist) {
+            const points = [];
+            for (const ray of raysForCurvature) {
+                points.push(ray.getPoint(dist));
+            }
+            return points;
+        }
+        
+        // Compute center of curvature for wavefront
+        function computeCentersOfCurvature(points) {
+            const centers = [];
+            
+            // Use 5-point stencil for more accurate derivatives
+            for (let i = 2; i < points.length - 2; i++) {
+                const p_minus2 = points[i - 2];
+                const p_minus1 = points[i - 1];
+                const p = points[i];
+                const p_plus1 = points[i + 1];
+                const p_plus2 = points[i + 2];
+                
+                // 5-point central difference for first derivative (more accurate)
+                const dx1 = (p_minus2.x - 8*p_minus1.x + 8*p_plus1.x - p_plus2.x) / 12;
+                const dy1 = (p_minus2.y - 8*p_minus1.y + 8*p_plus1.y - p_plus2.y) / 12;
+                
+                // 5-point central difference for second derivative
+                const dx2 = (-p_minus2.x + 16*p_minus1.x - 30*p.x + 16*p_plus1.x - p_plus2.x) / 12;
+                const dy2 = (-p_minus2.y + 16*p_minus1.y - 30*p.y + 16*p_plus1.y - p_plus2.y) / 12;
+                
+                // Curvature: κ = (x'y'' - y'x'') / (x'² + y'²)^(3/2)
+                const numerator = dx1 * dy2 - dy1 * dx2;
+                const denominator = Math.pow(dx1*dx1 + dy1*dy1, 1.5);
+                
+                if (Math.abs(denominator) > 1e-10 && Math.abs(numerator) > 1e-6) {
+                    const kappa = numerator / denominator;
+                    
+                    // Filter out unreasonable curvatures
+                    if (Math.abs(kappa) > 1e-5 && Math.abs(kappa) < 0.5) {
+                        const radius = 1 / kappa;
+                        
+                        // Normal vector (perpendicular to tangent)
+                        const tangentLength = Math.sqrt(dx1*dx1 + dy1*dy1);
+                        const normalX = -dy1 / tangentLength;
+                        const normalY = dx1 / tangentLength;
+                        
+                        const center = {
+                            x: p.x + normalX * radius,
+                            y: p.y + normalY * radius,
+                            radius: Math.abs(radius),
+                            wavefrontPoint: p
+                        };
+                        
+                        centers.push(center);
+                    }
+                }
+            }
+            
+            return centers;
+        }
+        
+        // Store all centers for caustic
+        const allCenters = [];
+        const centersByFrame = []; // Track which frame each center was added
+        let frameCounter = 0;
+        
+        // Function to check if a center has nearby neighbors
+        function hasNearbyNeighbors(center, allCenters, threshold = 25) {
+            let nearbyCount = 0;
+            for (const other of allCenters) {
+                if (other !== center) {
+                    const dx = center.x - other.x;
+                    const dy = center.y - other.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < threshold) {
+                        nearbyCount++;
+                        if (nearbyCount >= 3) return true; // Need at least 3 neighbors
+                    }
+                }
+            }
+            return false;
+        }
+        
+        // Function to clean up isolated centers
+        function cleanupIsolatedCenters() {
+            const centersToKeep = [];
+            const framesToKeep = [];
+            
+            for (let i = 0; i < allCenters.length; i++) {
+                const center = allCenters[i];
+                const centerFrame = centersByFrame[i];
+                
+                // If center is less than 5 frames old, keep it (give it time to find neighbors)
+                if (frameCounter - centerFrame < 5) {
+                    centersToKeep.push(center);
+                    framesToKeep.push(centerFrame);
+                } else {
+                    // Check if it has nearby neighbors
+                    if (hasNearbyNeighbors(center, allCenters)) {
+                        centersToKeep.push(center);
+                        framesToKeep.push(centerFrame);
+                    }
+                    // Otherwise, discard it (don't add to centersToKeep)
+                }
+            }
+            
+            allCenters.length = 0;
+            allCenters.push(...centersToKeep);
+            centersByFrame.length = 0;
+            centersByFrame.push(...framesToKeep);
+        }
+        
+        // Animation
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Draw reflecting surface
+            ctx.strokeStyle = '#00ffff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            for (let t = 0; t <= 1; t += 0.01) {
+                const p = reflectingSurface(t);
+                if (t === 0) {
+                    ctx.moveTo(p.x, p.y);
+                } else {
+                    ctx.lineTo(p.x, p.y);
+                }
+            }
+            ctx.stroke();
+            
+            // Current propagation distance
+            const distance = time * 3;
+            
+            // Draw rays
+            ctx.globalAlpha = 0.05;
+            for (const ray of rays) {
+                ctx.strokeStyle = '#ffff00';
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(sourcePoint.x, sourcePoint.y);
+                
+                if (ray.reflected) {
+                    const reflectionDist = ray.getReflectionDistance();
+                    
+                    if (distance < reflectionDist) {
+                        // Only draw up to current distance before reflection
+                        const endPoint = ray.getPoint(distance);
+                        ctx.lineTo(endPoint.x, endPoint.y);
+                    } else {
+                        // Draw to reflection point and beyond up to current distance
+                        ctx.lineTo(ray.reflectionPoint.x, ray.reflectionPoint.y);
+                        const endPoint = ray.getPoint(distance);
+                        ctx.lineTo(endPoint.x, endPoint.y);
+                    }
+                } else {
+                    // Ray doesn't reflect, just draw up to current distance
+                    const endPoint = ray.getPoint(distance);
+                    ctx.lineTo(endPoint.x, endPoint.y);
+                }
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1.0;
+            
+            // Draw current wavefront
+            if (distance > 10) {
+                const wavefrontPoints = getWavefrontPoints(distance);
+                
+                if (showWavefront) {
+                    ctx.strokeStyle = '#00ff00';
+                    ctx.lineWidth = 4;
+                    ctx.shadowBlur = 15;
+                    ctx.shadowColor = '#00ff00';
+                    ctx.beginPath();
+                    
+                    for (let i = 0; i < wavefrontPoints.length; i++) {
+                        const p = wavefrontPoints[i];
+                        if (i === 0) {
+                            ctx.moveTo(p.x, p.y);
+                        } else {
+                            ctx.lineTo(p.x, p.y);
+                        }
+                    }
+                    ctx.stroke();
+                    ctx.shadowBlur = 0;
+                }
+                
+                // Compute centers using HIGH RESOLUTION points
+                const wavefrontPointsHighRes = getWavefrontPointsHighRes(distance);
+                const centers = computeCentersOfCurvature(wavefrontPointsHighRes);
+                
+                // Only keep every Nth center to avoid clutter
+                const centersFiltered = centers.filter((_, index) => index % 5 === 0);
+                
+                if (centersFiltered.length > 0 && !stopAddingCenters) {
+                    // Only store centers for points on reflected rays
+                    for (let i = 0; i < centersFiltered.length; i++) {
+                        const centerIndex = i * 5; // Map back to original index
+                        if (centerIndex < raysForCurvature.length) {
+                            const ray = raysForCurvature[centerIndex];
+                            if (ray.reflected && distance > ray.getReflectionDistance()) {
+                                allCenters.push(centersFiltered[i]);
+                                centersByFrame.push(frameCounter);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Clean up isolated centers every frame (only if still adding centers)
+            if (!stopAddingCenters) {
+                cleanupIsolatedCenters();
+            }
+            
+            // Draw ALL accumulated centers of curvature from all frames
+            if (allCenters.length > 0 && showCenters) {
+                ctx.fillStyle = '#ffaa00';
+                ctx.shadowBlur = 1;
+                ctx.shadowColor = '#ffaa00';
+                
+                for (const center of allCenters) {
+                    ctx.beginPath();
+                    ctx.arc(center.x, center.y, 4, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+            }
+            
+            // Draw the tracked osculating circle and center (on top of everything else)
+            if (distance > 10 && !hideTrackedCircle && showTracked) {
+                const wavefrontPoints = getWavefrontPoints(distance);
+                const centers = computeCentersOfCurvature(wavefrontPoints);
+                
+                if (centers.length > 0) {
+                    const trackedIndex = Math.floor(centers.length * 0.2);
+                    if (trackedIndex >= 0 && trackedIndex < centers.length) {
+                        const trackedCenter = centers[trackedIndex];
+                        
+                        // Draw the tracked osculating circle
+                        ctx.strokeStyle = 'rgba(255, 50, 50, 0.6)';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.arc(trackedCenter.x, trackedCenter.y, trackedCenter.radius, 0, 2 * Math.PI);
+                        ctx.stroke();
+                        
+                        // Highlight the tracked center
+                        ctx.fillStyle = '#ff3333';
+                        ctx.shadowBlur = 12;
+                        ctx.shadowColor = '#ff3333';
+                        ctx.beginPath();
+                        ctx.arc(trackedCenter.x, trackedCenter.y, 6, 0, 2 * Math.PI);
+                        ctx.fill();
+                        ctx.shadowBlur = 0;
+                        
+                        // Draw red dot on the wavefront at the tracked point
+                        if (trackedCenter.wavefrontPoint) {
+                            ctx.fillStyle = '#ff3333';
+                            ctx.shadowBlur = 10;
+                            ctx.shadowColor = '#ff3333';
+                            ctx.beginPath();
+                            ctx.arc(trackedCenter.wavefrontPoint.x, trackedCenter.wavefrontPoint.y, 5, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.shadowBlur = 0;
+                        }
+                    }
+                }
+            }
+            
+            // Draw source point
+            ctx.fillStyle = '#ff6666';
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#ff6666';
+            ctx.beginPath();
+            ctx.arc(sourcePoint.x, sourcePoint.y, 6, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            
+            // Update time
+            if (!isPaused) {
+                time++;
+                frameCounter++;
+                
+                // Always stop adding centers at frame 139
+                if (time === pauseFrame && !pausedAtFrame139) {
+                    stopAddingCenters = true;
+                    cleanupIsolatedCenters(); // Clean up at this point
+                    
+                    // Only pause if tracking is enabled
+                    if (showTracked) {
+                        isPaused = true;
+                        document.getElementById('continueBtn').style.display = 'inline-block';
+                    }
+                    pausedAtFrame139 = true;
+                }
+                
+                if (time > maxTime) {
+                    time = maxTime; // Hold at end
+                }
+            }
+            
+            requestAnimationFrame(draw);
+        }
+        
+        // Controls
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            time = 0;
+            frameCounter = 0;
+            allCenters.length = 0;
+            centersByFrame.length = 0;
+            isPaused = false;
+            pausedAtFrame139 = false;
+            stopAddingCenters = false;
+            hideTrackedCircle = false;
+            document.getElementById('continueBtn').style.display = 'none';
+        });
+        
+        document.getElementById('pauseBtn').addEventListener('click', () => {
+            isPaused = !isPaused;
+            document.getElementById('pauseBtn').textContent = isPaused ? 'Resume' : 'Pause';
+        });
+        
+        document.getElementById('continueBtn').addEventListener('click', () => {
+            isPaused = false;
+            hideTrackedCircle = true; // Hide red osculating circle after continuing
+            document.getElementById('continueBtn').style.display = 'none';
+            document.getElementById('pauseBtn').textContent = 'Pause';
+        });
+        
+        // Toggle checkboxes
+        document.getElementById('toggleWavefront').addEventListener('change', (e) => {
+            showWavefront = e.target.checked;
+        });
+        
+        document.getElementById('toggleCenters').addEventListener('change', (e) => {
+            showCenters = e.target.checked;
+        });
+        
+        document.getElementById('toggleTracked').addEventListener('change', (e) => {
+            showTracked = e.target.checked;
+        });
+        
+        // Start animation
+        draw();
+    </script>
+</body>
+</html>
