@@ -8,6 +8,14 @@
         <title>Joel Salzman</title>
 
         <link rel="stylesheet" type="text/css" href="theme.css">
+
+        <!-- Preload hover images -->
+        <link rel="preload" href="./pics/GitHub_hover.png" as="image">
+        <link rel="preload" href="./pics/GoogleScholar_hover.png" as="image">
+        <link rel="preload" href="./pics/LinkedIn_hover.png" as="image">
+        <link rel="preload" href="./pics/Email_hover.png" as="image">
+        <link rel="preload" href="./pics/Caret_hover.png" as="image">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script type="module" src="./index.js"></script>
 
@@ -63,7 +71,7 @@
                     </div>
                 </div>
                 <div class="profile-section">
-                    <img id="prof-pic" src="./pics/me/linkedin2024_square.jpg" alt="Profile Picture">
+                    <img id="prof-pic" src="./pics/me/linkedin2024_square.jpg" alt="Profile Picture" width="350" height="350">
                 </div>
             </div>
                 
@@ -81,7 +89,7 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://gbake-official.github.io/">GBake</a></h2>
             </div>
@@ -99,7 +107,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/gbake.png">
+                <img class="thumbnail" src="./pics/gbake.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         A tool to bake reflection probes from 3D Gaussian splatting scenes to relight meshes in Unity.
@@ -119,7 +127,7 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://github.com/ColumbiaCGUI/VHard">VHard</a></h2>
             </div>
@@ -139,7 +147,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/vhard.png">
+                <img class="thumbnail" src="./pics/vhard.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         An XR rock climbing app for kinesthetic rehearsal. 
@@ -164,7 +172,7 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://pgg.ldeo.columbia.edu/projects/VISER">VISER</a></h2>
             </div>
@@ -235,7 +243,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/polxr-screenshot.png">
+                <img class="thumbnail" src="./pics/polxr-screenshot.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         An XR glaciology app. 
@@ -257,7 +265,7 @@
 
             <div class="stuff">
                 <a href="https://www.geog.ucsb.edu/">
-                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                    <img class="affiliation" src="./pics/UCSB_logo.png" width="40" height="40">
                 </a>
                 <h2>Indoor Mapping</h2>
             </div>
@@ -280,7 +288,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/indoor_lidar.png">
+                <img class="thumbnail" src="./pics/indoor_lidar.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         We used PointNet and PointNet++ to segment and classify LIDAR point clouds of indoor environments at various levels of detail.
@@ -304,7 +312,7 @@
 
             <div class="stuff">
                 <a href="https://about.att.com/sites/labs">
-                    <img class="affiliation" src="./pics/ATTLabs_logo.png">
+                    <img class="affiliation" src="./pics/ATTLabs_logo.png" width="40" height="40">
                 </a>
                 <h2>Research Software Engineer</h2>
             </div>
@@ -314,7 +322,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/att_raytracing.png">
+                <img class="thumbnail" src="./pics/att_raytracing.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         I worked on 3D mapping and geospatial machine learning to help deliver better 5G signals to AT&T customers.
@@ -335,7 +343,7 @@
 
             <div class="stuff" id="content-header">
                 <a href="https://www.apexcleanenergy.com/">
-                    <img class="affiliation" src="./pics/Apex_logo.png">
+                    <img class="affiliation" src="./pics/Apex_logo.png" width="40" height="40">
                 </a>
                 <h2>GIS Developer</h2>
             </div>
@@ -345,7 +353,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/apex-sitevisit.png">
+                <img class="thumbnail" src="./pics/apex-sitevisit.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         For over two years, my job was to figure out where to build utility-scale
@@ -366,7 +374,7 @@
 
             <div class="stuff">
                 <a href="https://www.geog.ucsb.edu/">
-                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                    <img class="affiliation" src="./pics/UCSB_logo.png" width="40" height="40">
                 </a>
                 <h2>
                     <a href="./pics/Regional_Federal.png">Aquaculture</a>
@@ -378,7 +386,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/kelp-screenshot.png">
+                <img class="thumbnail" src="./pics/kelp-screenshot.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         <a href="http://www.primaryocean.com">Primary Ocean Producers</a> is a 
@@ -413,13 +421,13 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://github.com/joelsalzman/neurochory-s24">Neurochoric Radiance Fields</a></h2>
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/hotdog.png">
+                <img class="thumbnail" src="./pics/hotdog.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         A combination of Gaussian Splatting and Zip-NeRF.
@@ -445,13 +453,13 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://github.com/joelsalzman/refleconstruction">Refleconstruction</a></h2>
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/refleconstruction.png">
+                <img class="thumbnail" src="./pics/refleconstruction.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         3D reconstruction of objects that are partially seen through reflections.
@@ -476,13 +484,13 @@
 
             <div class="stuff">
                 <a href="https://www.cs.columbia.edu/">
-                    <img class="affiliation" src="./pics/Columbia_logo.png">
+                    <img class="affiliation" src="./pics/Columbia_logo.png" width="40" height="40">
                 </a>
                 <h2><a href="https://github.com/cgauchey/deeplearningfinalproj">LocalAIze</a></h2>
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="https://github.com/cgauchey/deeplearningfinalproj/blob/main/data/processedImages/frame_2139_71277.png?raw=true">
+                <img class="thumbnail" src="https://github.com/cgauchey/deeplearningfinalproj/blob/main/data/processedImages/frame_2139_71277.png?raw=true" width="250" height="250">
                 <div class="text-box">
                     <p>
                         Camera pose estimation for an indoor video using a deep neural network.
@@ -503,7 +511,7 @@
 
             <div class="stuff">
                 <a href="https://www.geog.ucsb.edu/">
-                    <img class="affiliation" src="./pics/UCSB_logo.png">
+                    <img class="affiliation" src="./pics/UCSB_logo.png" width="40" height="40">
                 </a>
                 <h2>
                     <a href="gdvp">Voting Power</a>
@@ -511,7 +519,7 @@
             </div>
 
             <div class="stuff pic-desc">
-                <img class="thumbnail" src="./pics/176c-screenshot.png">
+                <img class="thumbnail" src="./pics/176c-screenshot.png" width="250" height="250">
                 <div class="text-box">
                     <p>
                         Where do votes matter most? 

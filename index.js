@@ -46,9 +46,10 @@ function loadDelaunay(step, multiplier) {
 
     // fill rest of page with random points
     let x, y = null;
-    let numPoints = Math.min(parseInt((vh * vw) / (step * 50)), 500);
+    let visibleWidth = vw/6;
+    let numPoints = Math.min(parseInt((vh * visibleWidth) / (step * 10)), 2500);
     for (let i = 0; i < numPoints; i += 1) {
-        x = parseInt(Math.random() * vw/6);
+        x = parseInt(Math.random() * visibleWidth);
         y = parseInt(Math.random() * vh);
         coords.push([x, y]);
     };
@@ -106,7 +107,7 @@ function insertScrollPaths(delaunay, voronoi) {
         var px = (u1 * u2x - u3x * u4) / d;
         var py = (u1 * u2y - u3y * u4) / d;
 
-        if (px < 0 || py < 0 || px > vw || py > vh) return [];
+        if (px < 0 || py < 0 || px > vw/6 || py > vh) return [];
         var p = [parseInt(px), parseInt(py)];
 
         return p;
@@ -242,9 +243,6 @@ async function scrollFuncs() {
 
 }
 
-function sizeDivs() {
-    $(".content").css('width', `${$(".core").width()*.965 - $("#button-div").width()}px`);
-}
 
 var currentAnchor = null;
 
@@ -252,22 +250,6 @@ var currentAnchor = null;
 var delaunay = loadDelaunay(300, 4);
 var voronoi = loadVoronoi(delaunay);
 var pathLengths = insertScrollPaths(delaunay, voronoi);
-
-sizeDivs();
-
-window.onresize = function() {
-
-    vw = $(window).width();
-    vh = $(window).height();
-    bb = [0, 0, vw, vh];
-
-    delaunay = loadDelaunay(300, 4);
-    voronoi = loadVoronoi(delaunay);
-    pathLengths = insertScrollPaths(delaunay, voronoi);
-
-    sizeDivs();
-
-};
 
 // Update PhD year
 function yearsSinceAug2025ToOrdinal() {
